@@ -1,8 +1,8 @@
-/db/mongo/data/
-/db/mysql/data
-/coreapp-node/node_modules
-/coreapp-react/node_modules
-/comment-service/node_modules
-/attribute-service/node_modules
-/post-service/node_modules
-/.idea
+/db/mongo/data/**
+/db/mysql/data/**
+/coreapp-node/node_modules/**
+/coreapp-react/node_modules/**
+/comment-service/node_modules/**
+/attribute-service/node_modules/**
+/post-service/node_modules/**
+/.idea/**
