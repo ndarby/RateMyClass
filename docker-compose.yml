@@ -3,11 +3,11 @@ services:
 
     coreapp-react:
         image: "node:latest"
-        user: "node"
         working_dir: /home/node/app
         environment:
         - NODE_ENV=development
         volumes:
+        - /home/node/app/node_modules
         - ./coreapp-react:/home/node/app
         ports:
         - "8080:3000"
@@ -18,11 +18,11 @@ services:
 
     coreapp-node:
         image: "node:latest"
-        user: "node"
         working_dir: /home/node/app
         environment:
         - NODE_ENV=development
         volumes:
+        - /home/node/app/node_modules
         - ./coreapp-node:/home/node/app
         ports:
         - "8081:5000"
@@ -33,11 +33,11 @@ services:
 
     post-service:
         image: "node:latest"
-        user: "node"
         working_dir: /home/node/app
         environment:
         - NODE_ENV=development
         volumes:
+        - /home/node/app/node_modules
         - ./post-service:/home/node/app
         ports:
         - "8001:8081"
@@ -48,11 +48,11 @@ services:
 
     comment-service:
         image: "node:latest"
-        user: "node"
         working_dir: /home/node/app
         environment:
         - NODE_ENV=development
         volumes:
+        - /home/node/app/node_modules
         - ./comment-service:/home/node/app
         ports:
         - "8002:8081"
@@ -63,11 +63,11 @@ services:
 
     attribute-service:
         image: "node:latest"
-        user: "node"
         working_dir: /home/node/app
         environment:
         - NODE_ENV=development
         volumes:
+        - /home/node/app/node_modules
         - ./attribute-service:/home/node/app
         ports:
         - "8003:8081"
@@ -83,7 +83,7 @@ services:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: root
         volumes:
-            - ./db/mongo/data:/data/db
+            - /data/db
         ports:
             - "8100:27017"
         networks: 
@@ -111,7 +111,7 @@ services:
             MYSQL_USER: root
             MYSQL_PASS: root
         volumes:
-            - ./db/mysql/data:/var/lib/mysql
+            - /var/lib/mysql
         ports:
             - "8200:3306"
         networks: 
