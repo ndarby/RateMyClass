@@ -32,9 +32,3 @@ render((
     </BrowserRouter>
     </div>
 ), document.getElementById('root'));
-
-
- 
-/// <Button justifyContent="center" alignItems="center" variant="contained" color="primary" margin-left="auto" margin-right="auto" display="block">
-		// RATE MY CLASS
-		// </Button>
