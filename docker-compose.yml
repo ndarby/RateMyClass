@@ -1,122 +1,107 @@
 version: "3.7"
 services: 
-
     coreapp-react:
         image: "node:latest"
         working_dir: /home/node/app
-        environment:
-        - NODE_ENV=development
+        env_file: .env
         volumes:
         - /home/node/app/node_modules
         - ./coreapp-react:/home/node/app
         ports:
-        - "8080:3000"
+        - 8080:3000
         command: "npm start"
         networks: 
             RateMyClass:
-                ipv4_address: 10.10.4.0
+                ipv4_address: "${coreapp_react_IP}"
 
     coreapp-node:
         image: "node:latest"
         working_dir: /home/node/app
-        environment:
-        - NODE_ENV=development
+        env_file: .env
         volumes:
         - /home/node/app/node_modules
         - ./coreapp-node:/home/node/app
         ports:
-        - "8081:5000"
+        - 8081:5000
         command: "npm start"
         networks: 
             RateMyClass:
-                ipv4_address: 10.10.4.1
+                ipv4_address: "${coreapp_node_IP}"
 
     post-service:
         image: "node:latest"
         working_dir: /home/node/app
-        environment:
-        - NODE_ENV=development
+        env_file: .env
         volumes:
         - /home/node/app/node_modules
         - ./post-service:/home/node/app
         ports:
-        - "8001:8081"
+        - 8001:8081
         command: "npm start"
         networks: 
             RateMyClass:
-                ipv4_address: 10.10.1.0
+                ipv4_address: ${post_service_IP}
 
     comment-service:
         image: "node:latest"
         working_dir: /home/node/app
-        environment:
-        - NODE_ENV=development
+        env_file: .env
         volumes:
         - /home/node/app/node_modules
         - ./comment-service:/home/node/app
         ports:
-        - "8002:8081"
+        - 8002:8081
         command: "npm start"
         networks: 
             RateMyClass:
-                ipv4_address: 10.10.2.0
+                ipv4_address: "${comment_service_IP}"
 
     attribute-service:
         image: "node:latest"
         working_dir: /home/node/app
-        environment:
-        - NODE_ENV=development
+        env_file: .env
         volumes:
         - /home/node/app/node_modules
         - ./attribute-service:/home/node/app
         ports:
-        - "8003:8081"
+        - 8003:8081
         command: "npm start"
         networks: 
             RateMyClass:
-                ipv4_address: 10.10.3.0
+                ipv4_address: "${attribute_service_IP}"
 
     mongo:
         image: mongo
         restart: always
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: root
-            MONGO_INITDB_ROOT_PASSWORD: root
+        env_file: .env
         volumes:
             - /data/db
         ports:
-            - "8100:27017"
+            - 8100:27017
         networks: 
             RateMyClass:
-                ipv4_address: 10.10.5.0
+                ipv4_address: "${MONGO_IP}"
             
     mongo-express:
         image: mongo-express
         restart: always
+        env_file: .env
         ports:
-            - "8004:8081"
-        environment:
-            ME_CONFIG_MONGODB_ADMINUSERNAME: root
-            ME_CONFIG_MONGODB_ADMINPASSWORD: root
-            ME_CONFIG_MONGODB_PORT: 27017
-            ME_CONFIG_MONGODB_SERVER: 10.10.5.0
+            - 8004:8081
         networks: 
             RateMyClass:
-                ipv4_address: 10.10.6.0
+                ipv4_address: "${MONGO_EXPRESS_IP}"
 
     mysql-development:
         image: mysql:8.0.17
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_USER: root
-            MYSQL_PASS: root
+        env_file: .env
         volumes:
             - /var/lib/mysql
         ports:
-            - "8200:3306"
+            - 8200:3306
         networks: 
             RateMyClass:
-                ipv4_address: 10.10.7.0            
+                ipv4_address: "${SQL_IP}"         
 
 networks:
     RateMyClass:

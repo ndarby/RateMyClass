@@ -6,3 +6,4 @@
 /attribute-service/node_modules/**
 /post-service/node_modules/**
 /.idea/**
+/.env
