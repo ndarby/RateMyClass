@@ -1,21 +1,15 @@
 const express = require('express');
-const path = require('path');
 
 const app = express();
 
-// Serve the static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+//include the API routes
+// see ./routes/index.js
+app.use("/api/", require("./routes"));
 
-// An api endpoint that returns a short list of items
-app.get('/api/getList', (req, res) => {
-    var list = ["item1", "item2", "item3"];
-    res.json(list);
-    console.log('Sent list of items');
-});
-
-// Handles any requests that don't match the ones above
+// Handles any requests that don't match the ones above ie 404
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+    res.status(404);
+    res.send("Not found");
 });
 
 const port = process.env.PORT || 5000;
