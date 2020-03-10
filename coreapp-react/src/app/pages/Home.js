@@ -14,7 +14,7 @@ class Home extends Component {
                 {/* Link to List.js */}
                 <Link to={'./list'}>
                     <Button variant="contained" color="p">
-                        My List
+                        Button
                     </Button>
                 </Link>
             </div>
