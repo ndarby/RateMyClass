@@ -17,6 +17,11 @@ class Home extends Component {
                         My List
                     </Button>
                 </Link>
+                <Link to={'./dashboard'}>
+                    <Button variant="contained" color ="p">
+                        Dashboard
+                    </Button>
+                </Link>
             </div>
         );
     }
