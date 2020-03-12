@@ -1,34 +1,26 @@
-import React from 'react';
-import {render} from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
-import Button from '@material-ui/core/Button';	
-import blue from '@material-ui/core/colors/blue';
-import blueGrey from '@material-ui/core/colors/blueGrey';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import ReactDOM from "react-dom";
+import { createBrowserHistory } from "history";
+import { Router, Route, Switch } from "react-router-dom";
 
-import './index.css';
-import App from './app/App';
+import "assets/scss/material-kit-react.scss?v=1.8.0";
 
-const primary = blueGrey['900'];
-const secondary = blue['A700'];
+// pages for this product
+import Components from "views/Components/Components.js";
+import LandingPage from "views/LandingPage/LandingPage.js";
+import ProfilePage from "views/ProfilePage/ProfilePage.js";
+import LoginPage from "views/LoginPage/LoginPage.js";
 
-render((
-	<div>
-	<AppBar position="static">
-  	<Toolbar variant="dense">
-    <IconButton edge="start" color="inherit" aria-label="menu">
-    	
-    </IconButton>
-    	<Typography variant="h6" color="inherit">
-    	  RateMyClass
-    	</Typography>
-  	</Toolbar>
-	</AppBar>
-	<BrowserRouter>
-        <App/>
-    </BrowserRouter>
-    </div>
-), document.getElementById('root'));
+var hist = createBrowserHistory();
+
+ReactDOM.render(
+  <Router history={hist}>
+    <Switch>
+      <Route path="/landing-page" component={LandingPage} />
+      <Route path="/profile-page" component={ProfilePage} />
+      <Route path="/login-page" component={LoginPage} />
+      <Route path="/" component={Components} />
+    </Switch>
+  </Router>,
+  document.getElementById("root")
+);
