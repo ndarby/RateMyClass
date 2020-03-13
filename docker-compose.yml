@@ -1,5 +1,19 @@
 version: "3.7"
-services: 
+services:
+    rabbitmq:
+        image: 'bitnami/rabbitmq:3.8'
+        env_file: .env
+        ports:
+            - '4369:4369'
+            - '5672:5672'
+            - '25672:25672'
+            - '15672:15672'
+        volumes:
+            - /bitnami
+        restart: always
+        networks:
+            RateMyClass:
+                ipv4_address: "${RMQ_IP}"
     coreapp-react:
         image: "node:latest"
         working_dir: /home/node/app
@@ -10,6 +24,7 @@ services:
         ports:
         - 8080:3000
         command: "npm start"
+        restart: always
         networks: 
             RateMyClass:
                 ipv4_address: "${coreapp_react_IP}"
@@ -24,6 +39,7 @@ services:
         ports:
         - 8081:5000
         command: "npm start"
+        restart: always
         networks: 
             RateMyClass:
                 ipv4_address: "${coreapp_node_IP}"
@@ -38,6 +54,7 @@ services:
         ports:
         - 8001:8081
         command: "npm start"
+        restart: always
         networks: 
             RateMyClass:
                 ipv4_address: ${post_service_IP}
@@ -52,6 +69,7 @@ services:
         ports:
         - 8002:8081
         command: "npm start"
+        restart: always
         networks: 
             RateMyClass:
                 ipv4_address: "${comment_service_IP}"
@@ -66,6 +84,7 @@ services:
         ports:
         - 8003:8081
         command: "npm start"
+        restart: always
         networks: 
             RateMyClass:
                 ipv4_address: "${attribute_service_IP}"
@@ -84,8 +103,8 @@ services:
             
     mongo-express:
         image: mongo-express
-        restart: always
         env_file: .env
+        restart: always
         ports:
             - 8004:8081
         networks: 
@@ -99,10 +118,10 @@ services:
             - /var/lib/mysql
         ports:
             - 8200:3306
+        restart: always
         networks: 
             RateMyClass:
-                ipv4_address: "${SQL_IP}"         
-
+                ipv4_address: "${SQL_IP}"
 networks:
     RateMyClass:
         driver: bridge
