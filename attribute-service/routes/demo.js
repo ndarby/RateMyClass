@@ -7,9 +7,12 @@ const demo_routes = express.Router();
 // An api endpoint that returns a short list of items
 // Responds to /api/demo/whoami
 demo_routes.get('/whoami', (req, res) => {
+    // "chief of assassinations"
     var list = ["this is the attribute service"];
     res.json(list);
 });
+
+
 
 
 module.exports = demo_routes;

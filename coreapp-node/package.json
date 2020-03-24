@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/ndarby/RateMyClass#readme",
   "dependencies": {
+    "amqplib": "^0.5.5",
+    "eventstore": "^1.15.2",
     "express": "^4.17.1",
     "nodemon": "^2.0.2"
   }

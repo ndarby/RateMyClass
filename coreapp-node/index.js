@@ -1,5 +1,5 @@
+global.PROJECT = '/home/node/app'
 const express = require('express');
-
 const app = express();
 
 //include the API routes
