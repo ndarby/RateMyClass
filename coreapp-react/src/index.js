@@ -10,16 +10,22 @@ import Components from "views/Components/Components.js";
 import LandingPage from "views/LandingPage/LandingPage.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
+import CompanyPage from "views/CompanyPage/CompanyPage.js";
+import SettingsPage from "views/SettingsPage/SettingsPage.js";
+import ScrollToTop from "./ScrollToTop";
 
 var hist = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={hist}>
-    <Switch>
-      <Route path="/landing-page" component={LandingPage} />
-      <Route path="/profile-page" component={ProfilePage} />
-      <Route path="/login-page" component={LoginPage} />
-      <Route path="/" component={Components} />
+      <ScrollToTop />
+        <Switch>
+            <Route path="/landing-page" component={LandingPage} />
+            <Route path="/profile-page" component={ProfilePage} />
+            <Route path="/company-page" component={CompanyPage} />
+            <Route path="/settings-page" component={SettingsPage} />
+            <Route path="/component" component={Components} />
+            <Route path="/" component={LoginPage} />
     </Switch>
   </Router>,
   document.getElementById("root")

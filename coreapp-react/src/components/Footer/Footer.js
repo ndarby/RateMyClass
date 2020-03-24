@@ -13,6 +13,9 @@ import Favorite from "@material-ui/icons/Favorite";
 
 import styles from "assets/jss/material-kit-react/components/footerStyle.js";
 
+import RMCLogo from "assets/img/RMC/RMC-Logo.png";
+import {Link} from 'react-router-dom';
+
 const useStyles = makeStyles(styles);
 
 export default function Footer(props) {
@@ -72,6 +75,18 @@ export default function Footer(props) {
           </List>
         </div>
         */}
+
+        <div className={classes.left}>
+          <List className={classes.list}>
+            <ListItem className={classes.inlineBlock}>
+                <li>
+                  <Link to = "/landing-page">
+                    <img src={RMCLogo}  alt={"RateMyClass"} width={"200"} height={"50"} />
+                  </Link>
+                </li>
+            </ListItem>
+          </List>
+        </div>
         <div className={classes.right}>
           &copy; {1900 + new Date().getYear()} , made with{" "}
           <Favorite className={classes.icon} /> by{" "}
