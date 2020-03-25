@@ -1,7 +1,7 @@
-const es = require(global.PROJECT+'/model/es')
+const es = require(global.PROJECT + '/model/es');
 
 module.exports.eventSourceInput = {
-    createNewAccount: function(accountID) {
+    createNewAccount: function (accountID) {
         es.getEventStream({
             aggregateId: 'SAMPLE_BANK_EVENTS',
             context: 'ACCOUNT',
@@ -12,13 +12,12 @@ module.exports.eventSourceInput = {
                 data: {
                     account_id: accountID
                 }
-            })
+            });
             stream.commit()
-        //    heyyuo
         })
     },
 
-    addMoneyToAccount: function(accountID, amount) {
+    addMoneyToAccount: function (accountID, amount) {
         es.getEventStream({
             aggregateId: 'SAMPLE_BANK_EVENTS',
             context: 'ACCOUNT',
@@ -29,38 +28,38 @@ module.exports.eventSourceInput = {
                 data: {
                     amount: amount
                 }
-            })
+            });
             stream.commit()
         })
     }
-}
+};
 
 module.exports.eventSourceOutput = {
-    getEventStream: function(accountID) {
+    getEventStream: function (accountID) {
         let json = {};
         es.getEvents({
             aggregateId: 'SAMPLE_BANK_EVENTS',
             context: 'ACCOUNT',
             aggregate: accountID
-        }, function(err, events) {
+        }, function (err, events) {
             json = events;
-        })
+        });
         return json;
     },
 
-    getEventView: function(events) {
-        const Account = require(global.PROJECT+'/model/demo_money/account_class');
-        let account = null
-        for(let event of events) {
-            switch(event.payload.action) {
+    getEventView: function (events) {
+        const Account = require(global.PROJECT + '/model/demo_money/account_class');
+        let account = null;
+        for (let event of events) {
+            switch (event.payload.action) {
                 case "new_account":
-                    account = new Account(event.payload.data.account_id)
+                    account = new Account(event.payload.data.account_id);
                     break;
                 case "transfer":
-                    if(account === null) {
+                    if (account === null) {
                         throw("ACCOUNT DOES NOT EXIST")
                     }
-                    account.addMoney(event.payload.data.amount)
+                    account.addMoney(event.payload.data.amount);
                     break;
                 default:
                     throw("ACTION NOT IMPLEMENTED!!!! FIX THIS")
@@ -68,4 +67,4 @@ module.exports.eventSourceOutput = {
         }
         return account
     }
-}
+};

@@ -10,7 +10,7 @@ let amqpConn = null;
 module.exports.start = function start(onEvent) {
     amqp.connect('amqp://'+process.env.RMQ_USER+':'+process.env.RMQ_PASSWORD+'@'+process.env.RMQ_IP+'/', function(err, conn) {
         if (err) {
-            console.error("[AMQP]", err.message)
+            console.error("[AMQP]", err.message);
             return setTimeout(start, 1000)
         }
         conn.on("error", function(err) {
@@ -19,23 +19,23 @@ module.exports.start = function start(onEvent) {
             }
         });
         conn.on("close", function() {
-            console.error("[AMQP] reconnecting")
+            console.error("[AMQP] reconnecting");
             return setTimeout(start, 1000)
         });
 
-        console.log("[AMQP] connected")
-        amqpConn = conn
+        console.log("[AMQP] connected");
+        amqpConn = conn;
 
         whenConnected(onEvent)
     })
-}
+};
 
 function whenConnected(onEvent) {
     amqpConn.createChannel(function(error1, channel) {
         if (error1) {
             throw error1
         }
-        const exchange = process.env.RMQ_EXCHANGE
+        const exchange = process.env.RMQ_EXCHANGE;
 
         channel.assertExchange(exchange, 'direct', {
             durable: false
@@ -48,7 +48,7 @@ function whenConnected(onEvent) {
                 throw error2
             }
             // CHANGE THIS TO CHANGE PUB SUB SUBSCRIPTION
-            channel.bindQueue(q.queue, exchange, process.env.RMQ_EVENT_REVIEW)
+            channel.bindQueue(q.queue, exchange, process.env.RMQ_EVENT_REVIEW);
 
             channel.consume(q.queue, onEvent, {
                 noAck: true

@@ -10,5 +10,7 @@ const api_routes = express.Router();
     This line makes all routes in the ./demo.js file respond to /api/demo/...
  */
 api_routes.use("/demo/", require("./demo"));
+api_routes.use("/reviews/", require("./producing/review_events"));
+api_routes.use("/comments/", require("./producing/comment_events"));
 
 module.exports = api_routes;
