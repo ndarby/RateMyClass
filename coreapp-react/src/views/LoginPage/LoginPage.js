@@ -21,7 +21,8 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
-import image from "assets/img/bg7.jpg";
+import image from "assets/img/RMC/login.jpg";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
@@ -34,75 +35,53 @@ export default function LoginPage(props) {
   const { ...rest } = props;
   return (
     <div>
-      <Header
-        absolute
-        color="transparent"
-        brand="Material Kit React"
-        rightLinks={<HeaderLinks />}
-        {...rest}
-      />
       <div
         className={classes.pageHeader}
         style={{
           backgroundImage: "url(" + image + ")",
           backgroundSize: "cover",
-          backgroundPosition: "top center"
+          backgroundPosition: "top center",
         }}
       >
         <div className={classes.container}>
-          <GridContainer justify="center">
+          <GridContainer  justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
-                <form className={classes.form}>
-                  <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Login</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
+                <form className={classes.form} >
+                  <CardHeader color="info" className={classes.cardHeader}>
+                    <h3><b>RateMyClass</b></h3>
+                    {/*<div className={classes.socialLine}>*/}
+                    {/*  <Button*/}
+                    {/*    justIcon*/}
+                    {/*    href="#pablo"*/}
+                    {/*    target="_blank"*/}
+                    {/*    color="transparent"*/}
+                    {/*    onClick={e => e.preventDefault()}*/}
+                    {/*  >*/}
+                    {/*    <i className={"fab fa-twitter"} />*/}
+                    {/*  </Button>*/}
+                    {/*  <Button*/}
+                    {/*    justIcon*/}
+                    {/*    href="#pablo"*/}
+                    {/*    target="_blank"*/}
+                    {/*    color="transparent"*/}
+                    {/*    onClick={e => e.preventDefault()}*/}
+                    {/*  >*/}
+                    {/*    <i className={"fab fa-facebook"} />*/}
+                    {/*  </Button>*/}
+                    {/*  <Button*/}
+                    {/*    justIcon*/}
+                    {/*    href="#pablo"*/}
+                    {/*    target="_blank"*/}
+                    {/*    color="transparent"*/}
+                    {/*    onClick={e => e.preventDefault()}*/}
+                    {/*  >*/}
+                    {/*    <i className={"fab fa-google-plus-g"} />*/}
+                    {/*  </Button>*/}
+                    {/*</div>*/}
                   </CardHeader>
-                  <p className={classes.divider}>Or Be Classical</p>
+                  <h4 className={classes.divider}><b>Login</b></h4>
                   <CardBody>
-                    <CustomInput
-                      labelText="First Name..."
-                      id="first"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "text",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
                     <CustomInput
                       labelText="Email..."
                       id="email"
@@ -136,10 +115,34 @@ export default function LoginPage(props) {
                         autoComplete: "off"
                       }}
                     />
+                    <br>
+                    </br>
+                    <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center"
+                        }}
+                    >
+                      <Button
+                          variant="contained"
+                          color="info"
+                          size={"lg"}
+                          className={classes.button}
+                          endIcon={<Icon>send</Icon>}
+                      >
+                        Get Started
+                      </Button>
+                    </div>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
-                      Get started
+                          <Link to = "/sign-up-page">
+                              <Button simple color="info" size="lg">
+                                  Sign Up
+                              </Button>
+                          </Link>
+                    <Button simple color="info" size="lg">
+                      Continue as Guest
                     </Button>
                   </CardFooter>
                 </form>
@@ -147,7 +150,6 @@ export default function LoginPage(props) {
             </GridItem>
           </GridContainer>
         </div>
-        <Footer whiteFont />
       </div>
     </div>
   );
