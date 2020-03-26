@@ -14,6 +14,7 @@ import CompanyPage from "views/CompanyPage/CompanyPage.js";
 import SettingsPage from "views/SettingsPage/SettingsPage.js";
 import ScrollToTop from "./ScrollToTop";
 import SignUpPage from "./views/LoginPage/SignUpPage";
+import ClassPage from "./views/LandingPage/ClassPage.js";
 
 var hist = createBrowserHistory();
 
@@ -22,6 +23,7 @@ ReactDOM.render(
       <ScrollToTop />
         <Switch>
             <Route path="/landing-page" component={LandingPage} />
+            <Route path="/class-page" component={ClassPage} />
             <Route path="/sign-up-page" component={SignUpPage} />
             <Route path="/profile-page" component={ProfilePage} />
             <Route path="/company-page" component={CompanyPage} />

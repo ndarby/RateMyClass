@@ -48,14 +48,14 @@ export default function ProductSection() {
           <GridItem xs={12} sm={12} md={4}>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <li>
-                  <Link to = "/landing-page">
+                  <Link to = "/class-page">
                   <img src={course1} alt="..." className={imageClasses} height={"300px"} width={"300px"} />
                   </Link>
                 </li>
               </GridItem>
               <GridItem xs={12} sm={12} md={11}>
                 <li>
-                  <Link to = "/landing-page">
+                  <Link to = "/class-page">
                   <h4 className={classes.title}>
                     SENG 401
                   </h4>
