@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -21,12 +21,43 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
+
 import image from "assets/img/RMC/login.jpg";
 import {Link} from "react-router-dom";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Redirect from "react-router-dom/es/Redirect";
+import Check from "@material-ui/icons/Check";
+import {Renderer as checked} from "jss";
+import themeSelector from "../SettingsPage/ThemeSelector";
 
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
+    const [mail, setMail] = useState(undefined);
+    const [word, setWord] = useState(undefined);
+
+
+    const isEnabled = mail !== undefined && word !== undefined && mail !== '' && word !== '';
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        alert(`Submitting Email: ${mail}`);
+        alert(`Submitting Password: ${word}`);
+        themeSelector.someProp = 'light';
+        props.history.push('/landing-page');
+    };
+
+    const themeLight = (evt) => {
+        evt.preventDefault();
+        themeSelector.someProp = 'light';
+        props.history.push('/landing-page');
+    };
+
+
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function() {
     setCardAnimation("");
@@ -47,104 +78,74 @@ export default function LoginPage(props) {
           <GridContainer  justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
-                <form className={classes.form} >
-                  <CardHeader color="info" className={classes.cardHeader}>
-                    <h3><b>RateMyClass</b></h3>
-                    {/*<div className={classes.socialLine}>*/}
-                    {/*  <Button*/}
-                    {/*    justIcon*/}
-                    {/*    href="#pablo"*/}
-                    {/*    target="_blank"*/}
-                    {/*    color="transparent"*/}
-                    {/*    onClick={e => e.preventDefault()}*/}
-                    {/*  >*/}
-                    {/*    <i className={"fab fa-twitter"} />*/}
-                    {/*  </Button>*/}
-                    {/*  <Button*/}
-                    {/*    justIcon*/}
-                    {/*    href="#pablo"*/}
-                    {/*    target="_blank"*/}
-                    {/*    color="transparent"*/}
-                    {/*    onClick={e => e.preventDefault()}*/}
-                    {/*  >*/}
-                    {/*    <i className={"fab fa-facebook"} />*/}
-                    {/*  </Button>*/}
-                    {/*  <Button*/}
-                    {/*    justIcon*/}
-                    {/*    href="#pablo"*/}
-                    {/*    target="_blank"*/}
-                    {/*    color="transparent"*/}
-                    {/*    onClick={e => e.preventDefault()}*/}
-                    {/*  >*/}
-                    {/*    <i className={"fab fa-google-plus-g"} />*/}
-                    {/*  </Button>*/}
-                    {/*</div>*/}
-                  </CardHeader>
-                  <h4 className={classes.divider}><b>Login</b></h4>
-                  <CardBody>
-                    <CustomInput
-                      labelText="Email..."
-                      id="email"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "email",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
+                <form className={classes.form} noValidate onSubmit={handleSubmit} >
+                    <CardHeader color="info" className={classes.cardHeader}>
+                        <h3><b>RateMyClass</b></h3>
+                    </CardHeader>
+                    <h4 className={classes.divider}><b>Login</b></h4>
+                    <CardBody>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        value={mail}
+                        onChange={(e) => setMail(e.target.value)}
+                        autoFocus
                     />
-                    <CustomInput
-                      labelText="Password"
-                      id="pass"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "password",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: "off"
-                      }}
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        value={word}
+                        onChange={(e) => setWord(e.target.value)}
+                        autoComplete="current-password"
                     />
-                    <br>
-                    </br>
-                    <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center"
-                        }}
+
+                    <Button
+                        disabled={!isEnabled}
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="info"
+                        className={classes.submit}
                     >
-                      <Button
-                          variant="contained"
-                          color="info"
-                          size={"lg"}
-                          className={classes.button}
-                          endIcon={<Icon>send</Icon>}
-                      >
                         Get Started
-                      </Button>
-                    </div>
-                  </CardBody>
-                  <CardFooter className={classes.cardFooter}>
-                          <Link to = "/sign-up-page">
-                              <Button simple color="info" size="lg">
-                                  Sign Up
-                              </Button>
-                          </Link>
-                    <Button simple color="info" size="lg">
-                      Continue as Guest
                     </Button>
-                  </CardFooter>
+
+                    </CardBody>
+                    <CardFooter className={classes.cardFooter}>
+                    <Grid container>
+                        <Grid item xs>
+                            {/*<Link to = "/landing-page" variant="body2">*/}
+                                <Button
+                                    simple color="info"
+                                    size="sm"
+                                    variant="contained"
+                                    onClick={themeLight}
+                                >
+                                    Continue as Guest
+                                </Button>
+                            {/*</Link>*/}
+                        </Grid>
+                        <Grid item>
+                            <Link to = "/sign-up-page" variant="body2">
+                                <Button simple color="info" size="sm" variant="contained">
+                                    {"Don't have an account? Sign Up"}
+                                </Button>
+                            </Link>
+                        </Grid>
+                    </Grid>
+                    </CardFooter>
                 </form>
               </Card>
             </GridItem>

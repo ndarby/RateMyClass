@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -23,10 +23,32 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "assets/img/RMC/login.jpg";
 import {Link} from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Check from "@material-ui/icons/Check";
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage(props) {
+export default function SignUpPage(props) {
+    const [first, setFirst] = useState(undefined);
+    const [last, setLast] = useState(undefined);
+    const [mail, setMail] = useState(undefined);
+    const [word, setWord] = useState(undefined);
+
+    const isEnabled = mail !== undefined && word !== undefined && first !== undefined && last !== undefined && mail !== '' && word !== '' && first !== '' && last !== '';
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        alert(`Submitting First Name: ${first}`);
+        alert(`Submitting Last Name: ${last}`);
+        alert(`Submitting Email: ${mail}`);
+        alert(`Submitting Password: ${word}`);
+        props.history.push('/');
+    };
+
+
     const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
     setTimeout(function() {
         setCardAnimation("");
@@ -47,127 +69,93 @@ export default function LoginPage(props) {
                     <GridContainer  justify="center">
                         <GridItem xs={12} sm={12} md={4}>
                             <Card className={classes[cardAnimaton]}>
-                                <form className={classes.form}>
+                                <form className={classes.form} noValidate onSubmit={handleSubmit}>
                                     <CardHeader color="info" className={classes.cardHeader}>
                                         <h3><b>RateMyClass</b></h3>
-                                        {/*<div className={classes.socialLine}>*/}
-                                        {/*  <Button*/}
-                                        {/*    justIcon*/}
-                                        {/*    href="#pablo"*/}
-                                        {/*    target="_blank"*/}
-                                        {/*    color="transparent"*/}
-                                        {/*    onClick={e => e.preventDefault()}*/}
-                                        {/*  >*/}
-                                        {/*    <i className={"fab fa-twitter"} />*/}
-                                        {/*  </Button>*/}
-                                        {/*  <Button*/}
-                                        {/*    justIcon*/}
-                                        {/*    href="#pablo"*/}
-                                        {/*    target="_blank"*/}
-                                        {/*    color="transparent"*/}
-                                        {/*    onClick={e => e.preventDefault()}*/}
-                                        {/*  >*/}
-                                        {/*    <i className={"fab fa-facebook"} />*/}
-                                        {/*  </Button>*/}
-                                        {/*  <Button*/}
-                                        {/*    justIcon*/}
-                                        {/*    href="#pablo"*/}
-                                        {/*    target="_blank"*/}
-                                        {/*    color="transparent"*/}
-                                        {/*    onClick={e => e.preventDefault()}*/}
-                                        {/*  >*/}
-                                        {/*    <i className={"fab fa-google-plus-g"} />*/}
-                                        {/*  </Button>*/}
-                                        {/*</div>*/}
                                     </CardHeader>
                                     <h4 className={classes.divider}><b>Sign Up</b></h4>
                                     <CardBody>
-                                        <CustomInput
-                                            labelText="First Name..."
-                                            id="first"
-                                            formControlProps={{
-                                                fullWidth: true
-                                            }}
-                                            inputProps={{
-                                                type: "text",
-                                                endAdornment: (
-                                                    <InputAdornment position="end">
-                                                        <People className={classes.inputIconsColor} />
-                                                    </InputAdornment>
-                                                )
-                                            }}
-                                        />
-                                        <CustomInput
-                                            labelText="Last Name..."
-                                            id="last"
-                                            formControlProps={{
-                                                fullWidth: true
-                                            }}
-                                            inputProps={{
-                                                type: "text",
-                                                endAdornment: (
-                                                    <InputAdornment position="end">
-                                                        <People className={classes.inputIconsColor} />
-                                                    </InputAdornment>
-                                                )
-                                            }}
-                                        />
-                                        <CustomInput
-                                            labelText="Email..."
-                                            id="email"
-                                            formControlProps={{
-                                                fullWidth: true
-                                            }}
-                                            inputProps={{
-                                                type: "email",
-                                                endAdornment: (
-                                                    <InputAdornment position="end">
-                                                        <Email className={classes.inputIconsColor} />
-                                                    </InputAdornment>
-                                                )
-                                            }}
-                                        />
-                                        <CustomInput
-                                            labelText="Password"
-                                            id="pass"
-                                            formControlProps={{
-                                                fullWidth: true
-                                            }}
-                                            inputProps={{
-                                                type: "password",
-                                                endAdornment: (
-                                                    <InputAdornment position="end">
-                                                        <Icon className={classes.inputIconsColor}>
-                                                            lock_outline
-                                                        </Icon>
-                                                    </InputAdornment>
-                                                ),
-                                                autoComplete: "off"
-                                            }}
-                                        />
-                                        <br>
-                                        </br>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                autoComplete="fname"
+                                                name="firstName"
+                                                variant="outlined"
+                                                required
+                                                fullWidth
+                                                id="firstName"
+                                                label="First Name"
+                                                value={first}
+                                                onChange={(e) => setFirst(e.target.value)}
+                                                autoFocus
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                variant="outlined"
+                                                required
+                                                fullWidth
+                                                id="lastName"
+                                                label="Last Name"
+                                                name="lastName"
+                                                value={last}
+                                                onChange={(e) => setLast(e.target.value)}
+                                                autoComplete="lname"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                variant="outlined"
+                                                required
+                                                fullWidth
+                                                id="email"
+                                                label="Email Address"
+                                                name="email"
+                                                value={mail}
+                                                onChange={(e) => setMail(e.target.value)}
+                                                autoComplete="email"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                variant="outlined"
+                                                required
+                                                fullWidth
+                                                name="password"
+                                                label="Password"
+                                                type="password"
+                                                id="password"
+                                                value={word}
+                                                onChange={(e) => setWord(e.target.value)}
+                                                autoComplete="current-password"
+                                            />
+                                        </Grid>
+                                    </Grid>
+
+                                    <div> <br></br></div>
+
+                                    <Button
+                                        disabled={!isEnabled}
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        color="info"
+                                        className={classes.submit}
+                                    >
+                                        Sign Up
+                                    </Button>
+
                                     </CardBody>
                                     <CardFooter className={classes.cardFooter}>
-                                        <div
-                                            style={{
-                                                display: "flex",
-                                                justifyContent: "center",
-                                                alignItems: "center"
-                                            }}
-                                        >
-                                            <Link to = "/">
-                                                <Button
-                                                    variant="contained"
-                                                    color="info"
-                                                    size={"lg"}
-                                                    className={classes.button}
-                                                    endIcon={<Icon>send</Icon>}
-                                                >
-                                                    Register Now
+                                    <Grid container justify="flex-end">
+                                        <Grid item>
+                                            <Link to = "/" variant="body2">
+                                                <Button simple color="info" size="sm" variant="contained">
+                                                    Already have an account? Log In
                                                 </Button>
                                             </Link>
-                                        </div>
+                                        </Grid>
+                                    </Grid>
                                     </CardFooter>
                                 </form>
                             </Card>

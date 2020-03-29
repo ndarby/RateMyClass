@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -17,7 +17,8 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 
-import profile from "assets/img/faces/kendall.jpg";
+import basicProfile from "assets/img/RMC/accountLogo.png";
+import katProfile from "assets/img/faces/kendall.jpg";
 
 import studio1 from "assets/img/examples/studio-1.jpg";
 import studio2 from "assets/img/examples/studio-2.jpg";
@@ -31,6 +32,9 @@ import work4 from "assets/img/examples/mariya-georgieva.jpg";
 import work5 from "assets/img/examples/clem-onojegaw.jpg";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
+import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProfilePage.js";
+import memeStyles from "assets/jss/material-kit-react/views/RMC/memeProfilePage.js";
+
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import {green} from "@material-ui/core/colors";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -50,16 +54,64 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Dialog from "@material-ui/core/Dialog";
 import Transition from "react-transition-group/Transition";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Check from "@material-ui/icons/Check";
+import themeSelector from "../SettingsPage/ThemeSelector";
+import backgroundLight from "assets/img/RMC/lightAccount.jpg";
+import backgroundMeme from "assets/img/RMC/memeAccount.png";
+import backgroundDark from "assets/img/RMC/darkAccount.jpg";
+import lightFiller from "assets/img/RMC/lightBackground.jpg";
+import darkFiller from "assets/img/RMC/darkBackground.jpg";
+import memeFiller from "assets/img/RMC/memeBackground.jpg";
 
 const useStyles = makeStyles(styles);
+const useDarkStyles = makeStyles(darkStyles);
+const useMemeStyles = makeStyles(memeStyles);
+
+const accFirst = 'Katrina';
+const accLast = 'Chanco';
+const accMail = 'filler@email.ca';
+const accWord = 'fillerpassword';
 
 export default function ProfilePage(props) {
+
+    const [first, setFirst] = useState(accFirst);
+    const [last, setLast] = useState(accLast);
+    const [mail, setMail] = useState(accMail);
+    const [word, setWord] = useState(accWord);
+
+    const isEnabled = mail !== '' && word !== '' && first !== '' && last !== '';
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        alert(`Submitting First Name: ${first}`);
+        alert(`Submitting Last Name: ${last}`);
+        alert(`Submitting Email: ${mail}`);
+        alert(`Submitting Password: ${word}`);
+        props.history.push('/profile-page');
+    };
+
   const classes = useStyles();
+  const darkClasses = useDarkStyles();
+  const memeClasses = useMemeStyles();
+
+    let backgroundURL;
+    {themeSelector.someProp === 'dark'?
+        backgroundURL = darkFiller :
+        themeSelector.someProp === 'meme'?
+            backgroundURL = memeFiller :
+            backgroundURL = lightFiller
+    }
+
   const [classicModal, setClassicModal] = React.useState(false);
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
     setTimeout(function() {
         setCardAnimation("");
     }, 700);
+
   const { ...rest } = props;
   const imageClasses = classNames(
     classes.imgRaised,
@@ -69,313 +121,286 @@ export default function ProfilePage(props) {
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
     <div>
-      <Header
-        color="transparent"
-        rightLinks={<HeaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 200,
-          color: "dark"
-        }}
-        {...rest}
-      />
-      <Parallax small filter image={require("assets/img/RMC/account.jpg")} />
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <div>
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={8}>
-                <div className={classes.profile}>
-                  <div>
-                    <img src={profile} alt="..." className={imageClasses} />
-                  </div>
-                  <div className={classes.name}>
-                    <h3 className={classes.title}>Katrina Chanco&nbsp;</h3>
-                    {/*<Button justIcon link className={classes.margin5}>*/}
-                    {/*  <i className={VerifiedUser} />*/}
-                    {/*</Button>*/}
-                    <VerifiedUser style={{ color: green[500] }} />
-                  </div>
-                </div>
-              </GridItem>
-            </GridContainer>
-            {/*<div className={classes.description}>*/}
-            {/*  <p>*/}
-            {/*      <b>*/}
-            {/*          My Biography{" "}*/}
-            {/*      </b>*/}
-            {/*  </p>*/}
-            {/*</div>*/}
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-                <NavPills
-                  alignCenter
-                  color="rose"
-                  tabs={[
-                    {
-                      tabButton: "Account Information",
-                      tabIcon: Camera,
-                      tabContent: (
-                        <GridContainer justify="center">
-                            <GridItem xs={12} sm={12} md={8}>
-                                <Card className={classes[cardAnimaton]}>
-                                    <form className={classes.form}>
-                                        <CardHeader color="info" className={classes.cardHeader}>
-                                            <h3><b>Account Settings</b></h3>
-                                        </CardHeader>
-                                        <CardBody>
-                                            <CustomInput
-                                                labelText="Katrina"
-                                                id="first"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    type: "text",
-                                                    endAdornment: (
-                                                        <InputAdornment position="end">
-                                                            <People className={classes.inputIconsColor} />
-                                                        </InputAdornment>
-                                                    )
-                                                }}
-                                            />
-                                            <CustomInput
-                                                labelText="Chanco"
-                                                id="last"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    type: "text",
-                                                    endAdornment: (
-                                                        <InputAdornment position="end">
-                                                            <People className={classes.inputIconsColor} />
-                                                        </InputAdornment>
-                                                    )
-                                                }}
-                                            />
-                                            <CustomInput
-                                                labelText="Email"
-                                                id="email"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    type: "email",
-                                                    endAdornment: (
-                                                        <InputAdornment position="end">
-                                                            <Email className={classes.inputIconsColor} />
-                                                        </InputAdornment>
-                                                    )
-                                                }}
-                                            />
-                                            <CustomInput
-                                                labelText="Password"
-                                                id="pass"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    type: "password",
-                                                    endAdornment: (
-                                                        <InputAdornment position="end">
-                                                            <Icon className={classes.inputIconsColor}>
-                                                                lock_outline
-                                                            </Icon>
-                                                        </InputAdornment>
-                                                    ),
-                                                    autoComplete: "off"
-                                                }}
-                                            />
-                                            <br>
-                                            </br>
-                                            <div
-                                                style={{
-                                                    display: "flex",
-                                                    justifyContent: "center",
-                                                    alignItems: "center"
-                                                }}
-                                            >
+        {themeSelector.someProp === 'dark'?
+            <Header
+                color="transparent"
+                rightLinks={<HeaderLinks />}
+                fixed
+                changeColorOnScroll={{
+                    height: 200,
+                    color: "dark"
+                }}
+                {...rest}
+            /> :
+            themeSelector.someProp === 'meme'?
+                <Header
+                    color="transparent"
+                    rightLinks={<HeaderLinks />}
+                    fixed
+                    changeColorOnScroll={{
+                        height: 200,
+                        color: "primary"
+                    }}
+                    {...rest}
+                /> :
+                <Header
+                    color="transparent"
+                    rightLinks={<HeaderLinks />}
+                    fixed
+                    changeColorOnScroll={{
+                        height: 200,
+                        color: "info"
+                    }}
+                    {...rest}
+                />
+        }
+
+        <div
+            className={classes.pageHeader}
+            style={{
+                backgroundImage: "url(" + backgroundURL + ")",
+                backgroundSize: "cover",
+                backgroundPosition: "top center",
+            }}
+        >
+            <Parallax small filter image=
+                {themeSelector.someProp === 'dark'? backgroundDark : themeSelector.someProp === 'meme'?  backgroundMeme : backgroundLight}
+            />
+          <div className=
+                   {themeSelector.someProp === 'dark'? classNames(darkClasses.main, classes.mainRaised) : themeSelector.someProp === 'meme'? classNames(memeClasses.main, classes.mainRaised) : classNames(classes.main, classes.mainRaised)}>
+            <div>
+              <div className={classes.container}>
+                <GridContainer justify="center">
+                  <GridItem xs={12} sm={12} md={8}>
+                    <div className={classes.profile}>
+                      <div>
+                          <img src={basicProfile} alt="..." className={imageClasses} />
+                          {/*{first === 'Katrina' && last === 'Chanco'? <img src={katProfile} alt="..." className={imageClasses} /> : <img src={basicProfile} alt="..." className={imageClasses} />}*/}
+                      </div>
+                      <div className={classes.name}>
+                        <h3 className=
+                                {themeSelector.someProp === 'dark'? darkClasses.title : themeSelector.someProp === 'meme'? memeClasses.title : classes.title}>
+
+                            {first}&nbsp;{last}&nbsp;
+                        </h3>
+                        {/*<Button justIcon link className={classes.margin5}>*/}
+                        {/*  <i className={VerifiedUser} />*/}
+                        {/*</Button>*/}
+                        {/*{first === 'Katrina' && last === 'Chanco'? <VerifiedUser style={{ color: green[500] }} /> : ''}*/}
+                      </div>
+                    </div>
+                  </GridItem>
+                </GridContainer>
+                {/*<div className={classes.description}>*/}
+                {/*  <p>*/}
+                {/*      <b>*/}
+                {/*          My Biography{" "}*/}
+                {/*      </b>*/}
+                {/*  </p>*/}
+                {/*</div>*/}
+                <GridContainer justify="center">
+                  <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+                    <NavPills
+                      alignCenter
+                      color="rose"
+                      tabs={[
+                        {
+                          tabButton: "Account Information",
+                          tabIcon: Camera,
+                          tabContent: (
+                            <GridContainer justify="center">
+                                <GridItem xs={12} sm={12} md={8}>
+                                    <Card className={classes[cardAnimaton]}>
+                                        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                                            <CardHeader color="info" className={classes.cardHeader}>
+                                                <h3><b>RateMyClass</b></h3>
+                                            </CardHeader>
+                                            <CardBody>
+                                                <Grid container spacing={2}>
+                                                    <Grid item xs={12}>
+                                                        <TextField
+                                                            autoComplete="fname"
+                                                            name="firstName"
+                                                            variant="outlined"
+                                                            required
+                                                            fullWidth
+                                                            id="firstName"
+                                                            label="First Name"
+                                                            value={first}
+                                                            onChange={(e) => setFirst(e.target.value)}
+                                                            autoFocus
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={12}>
+                                                        <TextField
+                                                            variant="outlined"
+                                                            required
+                                                            fullWidth
+                                                            id="lastName"
+                                                            label="Last Name"
+                                                            name="lastName"
+                                                            value={last}
+                                                            onChange={(e) => setLast(e.target.value)}
+                                                            autoComplete="lname"
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={12}>
+                                                        <TextField
+                                                            variant="outlined"
+                                                            required
+                                                            fullWidth
+                                                            id="email"
+                                                            label="Email Address"
+                                                            name="email"
+                                                            value={mail}
+                                                            onChange={(e) => setMail(e.target.value)}
+                                                            autoComplete="email"
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={12}>
+                                                        <TextField
+                                                            variant="outlined"
+                                                            required
+                                                            fullWidth
+                                                            name="password"
+                                                            label="Password"
+                                                            type="password"
+                                                            id="password"
+                                                            value={word}
+                                                            onChange={(e) => setWord(e.target.value)}
+                                                            autoComplete="current-password"
+                                                        />
+                                                    </Grid>
+                                                </Grid>
+                                                <div> <br></br></div>
+
                                                 <Button
+                                                    disabled={!isEnabled}
+                                                    type="submit"
+                                                    fullWidth
                                                     variant="contained"
                                                     color="info"
-                                                    size={"lg"}
-                                                    className={classes.button}
-                                                    endIcon={<Icon>send</Icon>}
-                                                    onClick={() => setClassicModal(true)}
+                                                    className={classes.submit}
                                                 >
                                                     Update
                                                 </Button>
-                                                <Dialog
-                                                    classes={{
-                                                        root: classes.center,
-                                                        paper: classes.modal
-                                                    }}
-                                                    open={classicModal}
-                                                    TransitionComponent={Transition}
-                                                    keepMounted
-                                                    onClose={() => setClassicModal(false)}
-                                                    aria-labelledby="classic-modal-slide-title"
-                                                    aria-describedby="classic-modal-slide-description"
-                                                >
-                                                    <DialogTitle
-                                                        id="classic-modal-slide-title"
-                                                        disableTypography
-                                                        className={classes.modalHeader}
-                                                    >
-                                                        <IconButton
-                                                            className={classes.modalCloseButton}
-                                                            key="close"
-                                                            aria-label="Close"
-                                                            color="inherit"
-                                                            onClick={() => setClassicModal(false)}
-                                                        >
-                                                            <Close className={classes.modalClose} />
-                                                        </IconButton>
-                                                        <h4 className={classes.modalTitle}>Dear Account-ee,</h4>
-                                                    </DialogTitle>
-                                                    <DialogContent
-                                                        id="classic-modal-slide-description"
-                                                        className={classes.modalBody}
-                                                    >
-                                                        <p>
-                                                            Please note you are about to MODIFY AND UPDATE your account information. By clicking 'Accept'
-                                                            you are hereby agreeing to forever change this account... FOREVER
-                                                        </p>
-                                                    </DialogContent>
-                                                    <DialogActions className={classes.modalFooter}>
-                                                            <Button
-                                                                onClick={() => setClassicModal(false)}
-                                                                color="transparent"
-                                                                simple>
-                                                                Accept
-                                                            </Button>
-                                                        <Button
-                                                            onClick={() => setClassicModal(false)}
-                                                            color="danger"
-                                                            simple
-                                                        >
-                                                            Decline
-                                                        </Button>
-                                                    </DialogActions>
-                                                </Dialog>
-                                            </div>
-                                        </CardBody>
-                                    </form>
-                                </Card>
-                            </GridItem>
+                                            </CardBody>
+                                        </form>
+                                    </Card>
+                                </GridItem>
 
 
 
-                          {/*<GridItem xs={12} sm={12} md={4}>*/}
-                          {/*  <img*/}
-                          {/*    alt="..."*/}
-                          {/*    src={studio1}*/}
-                          {/*    className={navImageClasses}*/}
-                          {/*  />*/}
-                          {/*  <img*/}
-                          {/*    alt="..."*/}
-                          {/*    src={studio2}*/}
-                          {/*    className={navImageClasses}*/}
-                          {/*  />*/}
-                          {/*</GridItem>*/}
-                          {/*<GridItem xs={12} sm={12} md={4}>*/}
-                          {/*  <img*/}
-                          {/*    alt="..."*/}
-                          {/*    src={studio5}*/}
-                          {/*    className={navImageClasses}*/}
-                          {/*  />*/}
-                          {/*  <img*/}
-                          {/*    alt="..."*/}
-                          {/*    src={studio4}*/}
-                          {/*    className={navImageClasses}*/}
-                          {/*  />*/}
-                          {/*</GridItem>*/}
-                        </GridContainer>
-                      )
-                    },
-                    // {
-                    //   tabButton: "Social Media Links",
-                    //   tabIcon: Palette,
-                    //   tabContent: (
-                    //     <GridContainer justify="center">
-                    //       <GridItem xs={12} sm={12} md={4}>
-                    //         <img
-                    //           alt="..."
-                    //           src={work1}
-                    //           className={navImageClasses}
-                    //         />
-                    //         <img
-                    //           alt="..."
-                    //           src={work2}
-                    //           className={navImageClasses}
-                    //         />
-                    //         <img
-                    //           alt="..."
-                    //           src={work3}
-                    //           className={navImageClasses}
-                    //         />
-                    //       </GridItem>
-                    //       <GridItem xs={12} sm={12} md={4}>
-                    //         <img
-                    //           alt="..."
-                    //           src={work4}
-                    //           className={navImageClasses}
-                    //         />
-                    //         <img
-                    //           alt="..."
-                    //           src={work5}
-                    //           className={navImageClasses}
-                    //         />
-                    //       </GridItem>
-                    //     </GridContainer>
-                    //   )
-                    // },
-                    // {
-                    //   tabButton: "Profile Picture",
-                    //   tabIcon: Favorite,
-                    //   tabContent: (
-                    //     <GridContainer justify="center">
-                    //       <GridItem xs={12} sm={12} md={4}>
-                    //         <img
-                    //           alt="..."
-                    //           src={work4}
-                    //           className={navImageClasses}
-                    //         />
-                    //         <img
-                    //           alt="..."
-                    //           src={studio3}
-                    //           className={navImageClasses}
-                    //         />
-                    //       </GridItem>
-                    //       <GridItem xs={12} sm={12} md={4}>
-                    //         <img
-                    //           alt="..."
-                    //           src={work2}
-                    //           className={navImageClasses}
-                    //         />
-                    //         <img
-                    //           alt="..."
-                    //           src={work1}
-                    //           className={navImageClasses}
-                    //         />
-                    //         <img
-                    //           alt="..."
-                    //           src={studio1}
-                    //           className={navImageClasses}
-                    //         />
-                    //       </GridItem>
-                    //     </GridContainer>
-                    //   )
-                    // }
-                  ]}
-                />
-              </GridItem>
-            </GridContainer>
+                              {/*<GridItem xs={12} sm={12} md={4}>*/}
+                              {/*  <img*/}
+                              {/*    alt="..."*/}
+                              {/*    src={studio1}*/}
+                              {/*    className={navImageClasses}*/}
+                              {/*  />*/}
+                              {/*  <img*/}
+                              {/*    alt="..."*/}
+                              {/*    src={studio2}*/}
+                              {/*    className={navImageClasses}*/}
+                              {/*  />*/}
+                              {/*</GridItem>*/}
+                              {/*<GridItem xs={12} sm={12} md={4}>*/}
+                              {/*  <img*/}
+                              {/*    alt="..."*/}
+                              {/*    src={studio5}*/}
+                              {/*    className={navImageClasses}*/}
+                              {/*  />*/}
+                              {/*  <img*/}
+                              {/*    alt="..."*/}
+                              {/*    src={studio4}*/}
+                              {/*    className={navImageClasses}*/}
+                              {/*  />*/}
+                              {/*</GridItem>*/}
+                            </GridContainer>
+                          )
+                        },
+                        // {
+                        //   tabButton: "Social Media Links",
+                        //   tabIcon: Palette,
+                        //   tabContent: (
+                        //     <GridContainer justify="center">
+                        //       <GridItem xs={12} sm={12} md={4}>
+                        //         <img
+                        //           alt="..."
+                        //           src={work1}
+                        //           className={navImageClasses}
+                        //         />
+                        //         <img
+                        //           alt="..."
+                        //           src={work2}
+                        //           className={navImageClasses}
+                        //         />
+                        //         <img
+                        //           alt="..."
+                        //           src={work3}
+                        //           className={navImageClasses}
+                        //         />
+                        //       </GridItem>
+                        //       <GridItem xs={12} sm={12} md={4}>
+                        //         <img
+                        //           alt="..."
+                        //           src={work4}
+                        //           className={navImageClasses}
+                        //         />
+                        //         <img
+                        //           alt="..."
+                        //           src={work5}
+                        //           className={navImageClasses}
+                        //         />
+                        //       </GridItem>
+                        //     </GridContainer>
+                        //   )
+                        // },
+                        // {
+                        //   tabButton: "Profile Picture",
+                        //   tabIcon: Favorite,
+                        //   tabContent: (
+                        //     <GridContainer justify="center">
+                        //       <GridItem xs={12} sm={12} md={4}>
+                        //         <img
+                        //           alt="..."
+                        //           src={work4}
+                        //           className={navImageClasses}
+                        //         />
+                        //         <img
+                        //           alt="..."
+                        //           src={studio3}
+                        //           className={navImageClasses}
+                        //         />
+                        //       </GridItem>
+                        //       <GridItem xs={12} sm={12} md={4}>
+                        //         <img
+                        //           alt="..."
+                        //           src={work2}
+                        //           className={navImageClasses}
+                        //         />
+                        //         <img
+                        //           alt="..."
+                        //           src={work1}
+                        //           className={navImageClasses}
+                        //         />
+                        //         <img
+                        //           alt="..."
+                        //           src={studio1}
+                        //           className={navImageClasses}
+                        //         />
+                        //       </GridItem>
+                        //     </GridContainer>
+                        //   )
+                        // }
+                      ]}
+                    />
+                  </GridItem>
+                </GridContainer>
+              </div>
+            </div>
           </div>
+          <Footer />
         </div>
-      </div>
-      <Footer />
     </div>
   );
 }
