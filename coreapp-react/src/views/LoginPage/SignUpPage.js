@@ -29,6 +29,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Check from "@material-ui/icons/Check";
 
+import accountInformation from "../AccountInformation";
+
 const useStyles = makeStyles(styles);
 
 export default function SignUpPage(props) {
@@ -41,10 +43,19 @@ export default function SignUpPage(props) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
+
         alert(`Submitting First Name: ${first}`);
+        accountInformation.first = first;
+
         alert(`Submitting Last Name: ${last}`);
+        accountInformation.last = last;
+
         alert(`Submitting Email: ${mail}`);
+        accountInformation.mail = mail;
+
         alert(`Submitting Password: ${word}`);
+        accountInformation.word = word;
+
         props.history.push('/');
     };
 

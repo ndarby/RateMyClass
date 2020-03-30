@@ -38,7 +38,7 @@ export default function ProductSection() {
                     </h4>
                     <p className=
                            {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
-                        Light and Upbeat... Not like my life
+                        Light Bright Quite Alright
                     </p>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
@@ -48,7 +48,7 @@ export default function ProductSection() {
                     </h4>
                     <p className=
                            {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
-                        The right way to view the world
+                        Welcome to the Dark Side
                     </p>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>

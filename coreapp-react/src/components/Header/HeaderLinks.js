@@ -19,6 +19,7 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+import viewSelector from "../../views/ViewSelector";
 
 const useStyles = makeStyles(styles);
 
@@ -27,33 +28,54 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
-        <CustomDropdown
-          noLiPadding
-          buttonText="Menu Options"
-          buttonProps={{
-            className: classes.navLink,
-            color: "transparent"
-          }}
-          buttonIcon={Apps}
-          dropdownList={[
-            <Link to="/company-page" className={classes.dropdownLink}>
-              About Us
-            </Link>,
-              <Link to="/landing-page" className={classes.dropdownLink}>
-                  Course Catalogue
-              </Link>,
-              <Link to="/settings-page" className={classes.dropdownLink}>
-                  Theme Settings
-              </Link>,
-              <Link to="/profile-page" className={classes.dropdownLink}>
-                  My Account
-              </Link>,
-              <Link to="/" className={classes.dropdownLink}>
-                  Logout
-              </Link>
-
-          ]}
-        />
+          {viewSelector.someProp === 'guest'?
+              <CustomDropdown
+                  noLiPadding
+                  buttonText="Menu Options"
+                  buttonProps={{
+                      className: classes.navLink,
+                      color: "transparent"
+                  }}
+                  buttonIcon={Apps}
+                  dropdownList={[
+                      <Link to="/company-page" className={classes.dropdownLink}>
+                          About Us
+                      </Link>,
+                      <Link to="/landing-page" className={classes.dropdownLink}>
+                          Course Catalogue
+                      </Link>,
+                      <Link to="/" className={classes.dropdownLink}>
+                          Leave Site
+                      </Link>
+                  ]}
+              /> :
+              <CustomDropdown
+                  noLiPadding
+                  buttonText="Menu Options"
+                  buttonProps={{
+                      className: classes.navLink,
+                      color: "transparent"
+                  }}
+                  buttonIcon={Apps}
+                  dropdownList={[
+                      <Link to="/company-page" className={classes.dropdownLink}>
+                          About Us
+                      </Link>,
+                      <Link to="/landing-page" className={classes.dropdownLink}>
+                          Course Catalogue
+                      </Link>,
+                      <Link to="/settings-page" className={classes.dropdownLink}>
+                          Theme Settings
+                      </Link>,
+                      <Link to="/profile-page" className={classes.dropdownLink}>
+                          My Account
+                      </Link>,
+                      <Link to="/" className={classes.dropdownLink}>
+                          Logout
+                      </Link>
+                  ]}
+              />
+          }
       </ListItem>
 
 

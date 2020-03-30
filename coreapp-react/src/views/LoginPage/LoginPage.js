@@ -33,6 +33,9 @@ import Redirect from "react-router-dom/es/Redirect";
 import Check from "@material-ui/icons/Check";
 import {Renderer as checked} from "jss";
 import themeSelector from "../SettingsPage/ThemeSelector";
+import viewSelector from "../ViewSelector";
+import loginInformation from "../LoginInformation";
+import accountInformation from "../AccountInformation";
 
 const useStyles = makeStyles(styles);
 
@@ -40,20 +43,30 @@ export default function LoginPage(props) {
     const [mail, setMail] = useState(undefined);
     const [word, setWord] = useState(undefined);
 
-
     const isEnabled = mail !== undefined && word !== undefined && mail !== '' && word !== '';
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
+
+        accountInformation.first = 'Default First';
+        accountInformation.last = 'Default Second';
+
         alert(`Submitting Email: ${mail}`);
+        loginInformation.mail = mail;
+        accountInformation.mail = mail;
         alert(`Submitting Password: ${word}`);
+        loginInformation.word = word;
+        accountInformation.word = word;
+
         themeSelector.someProp = 'light';
+        viewSelector.someProp = 'account';
         props.history.push('/landing-page');
     };
 
-    const themeLight = (evt) => {
+    const guestSubmit = (evt) => {
         evt.preventDefault();
         themeSelector.someProp = 'light';
+        viewSelector.someProp = 'guest';
         props.history.push('/landing-page');
     };
 
@@ -131,7 +144,7 @@ export default function LoginPage(props) {
                                     simple color="info"
                                     size="sm"
                                     variant="contained"
-                                    onClick={themeLight}
+                                    onClick={guestSubmit}
                                 >
                                     Continue as Guest
                                 </Button>

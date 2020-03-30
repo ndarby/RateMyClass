@@ -39,7 +39,7 @@ export default function ProductSection() {
                     </h2>
                     <h5 className=
                             {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
-                        Please select a theme you would like to use to browse this application with
+                        Select a theme you would like to use to browse this application with
                     </h5>
                 </GridItem>
             </GridContainer>

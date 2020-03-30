@@ -111,7 +111,7 @@ export default function SettingsPage(props) {
                             <GridItem xs={12} sm={12} md={6}>
                                 <h1 className={classes.title}>Settings</h1>
                                 <h4>
-                                    The place where it gets interesting...
+                                    The place where change is possible
                                 </h4>
                                 <br />
 

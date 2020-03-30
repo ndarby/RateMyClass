@@ -67,30 +67,41 @@ import lightFiller from "assets/img/RMC/lightBackground.jpg";
 import darkFiller from "assets/img/RMC/darkBackground.jpg";
 import memeFiller from "assets/img/RMC/memeBackground.jpg";
 
+import accountInformation from "../AccountInformation";
+
 const useStyles = makeStyles(styles);
 const useDarkStyles = makeStyles(darkStyles);
 const useMemeStyles = makeStyles(memeStyles);
 
-const accFirst = 'Katrina';
-const accLast = 'Chanco';
-const accMail = 'filler@email.ca';
-const accWord = 'fillerpassword';
+// const accFirst = 'Katrina';
+// const accLast = 'Chanco';
+// const accMail = 'kat@email.ca';
+// const accWord = 'fillerpassword';
 
 export default function ProfilePage(props) {
 
-    const [first, setFirst] = useState(accFirst);
-    const [last, setLast] = useState(accLast);
-    const [mail, setMail] = useState(accMail);
-    const [word, setWord] = useState(accWord);
+    const [first, setFirst] = useState(accountInformation.first);
+    const [last, setLast] = useState(accountInformation.last);
+    const [mail, setMail] = useState(accountInformation.mail);
+    const [word, setWord] = useState(accountInformation.word);
+
+    // const [first, setFirst] = useState(accFirst);
+    // const [last, setLast] = useState(accLast);
+    // const [mail, setMail] = useState(accMail);
+    // const [word, setWord] = useState(accWord);
 
     const isEnabled = mail !== '' && word !== '' && first !== '' && last !== '';
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
         alert(`Submitting First Name: ${first}`);
+        accountInformation.first = first;
         alert(`Submitting Last Name: ${last}`);
+        accountInformation.last = last;
         alert(`Submitting Email: ${mail}`);
+        accountInformation.mail = mail;
         alert(`Submitting Password: ${word}`);
+        accountInformation.word = word;
         props.history.push('/profile-page');
     };
 

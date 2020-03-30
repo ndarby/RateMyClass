@@ -39,7 +39,11 @@ export default function ProductSection() {
                     </h2>
                     <h5 className=
                             {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
-                        RateMyClass is a concept born from third year Software Engineering students who wanted to rant about their classes.
+                        RateMyClass is a concept born from third year Software Engineering students. Some who wanted to rant about courses they had poor experiences with.
+                        Others who want to recommend A+ classes to everyone and anyone. Don't trust the Course Outline?
+                        Get a good glimpse into what a course is like through the eyes of students who did the dirty work for you. Or pay it forward by helping those who
+                        come after you by telling them what they need to know. RateMyClass is a platform for everyone to speak their mind, type their feelings, and read
+                        the juicy gossip written by others.
                     </h5>
                 </GridItem>
             </GridContainer>
