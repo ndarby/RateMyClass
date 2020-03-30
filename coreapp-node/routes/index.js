@@ -12,5 +12,7 @@ const api_routes = express.Router();
 api_routes.use("/demo/", require("./demo"));
 api_routes.use("/reviews/", require("./producing/review_events"));
 api_routes.use("/comments/", require("./producing/comment_events"));
+api_routes.use("/accounts/", require("./accounts/account_validation"));
+api_routes.use("/courses/", require("./courses/courses_routes"));
 
 module.exports = api_routes;
