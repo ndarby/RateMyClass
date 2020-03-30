@@ -1,6 +1,6 @@
 class Account {
     constructor(account_id) {
-        this.id = account_id
+        this.id = account_id;
         this._amount = 0
     }
     set amount(amount) {
@@ -13,4 +13,4 @@ class Account {
        this._amount += amount
     }
 }
-module.exports = Account
+module.exports = Account;
