@@ -3,9 +3,9 @@ const Course = require('./course_class');
 const db = require('../db');
 
 module.exports = {
-    addNewCourse: function(name, num, desc) {
+    addNewCourse: function(name, num, desc, imgs) {
         return new Promise(function (resolve, reject) {
-            let course = new Course(name, num, desc);
+            let course = new Course(name, num, desc, imgs);
             db.addNewCourse(course).then(() => {resolve();}).catch(err => {reject(err);});
         });
     },
