@@ -15,11 +15,8 @@ projection_routes.get('/get/:course_id', (req, res) => {
         if (error) {
             res.status(500).json({err: 'unable to retrieve attribute'});
         } else {
-            console.log("body");
-            console.log(body);
             if(body === undefined) {
                 res.status(408).json({err: 'unable to retrieve attribute - timeout'});
-
             }
             res.json(JSON.parse(body));
         }
