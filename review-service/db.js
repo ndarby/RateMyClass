@@ -2,8 +2,9 @@ const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://' + process.env.MONGO_INITDB_ROOT_USERNAME + ':' + process.env.MONGO_INITDB_ROOT_PASSWORD + '@' + process.env.MONGO_IP + ':' + process.env.MONGO_port + '/';
 
 module.exports = {
-    getReviewByCourseId: function (course_id) {
+    getReviewsByCourseId: function (course_id) {
         return new Promise(function (resolve, reject) {
+            console.log(course_id);
             MongoClient.connect(url, function (err, db) {
                 if (err) {
                     reject(err);

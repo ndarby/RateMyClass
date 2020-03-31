@@ -3,7 +3,8 @@ const request_routes = express.Router();
 const review_handler = require('../model/review_handler');
 
 request_routes.get('/get/:course_id', (req, res) => {
-    review_handler.getReviewsByCourseId(req.params)
+    console.log("route" + req.params.course_id);
+    review_handler.getReviewsByCourseId(req.params.course_id)
         .then(result => {
             console.log(result);
             res.json(result)

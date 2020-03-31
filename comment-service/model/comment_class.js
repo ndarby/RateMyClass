@@ -1,10 +1,9 @@
 class Comments {
-    constructor(comment_id, course_id, review_id, user_id, reply_id, comment_body, date_posted) {
+    constructor(comment_id, review_id, user_id, parent_id, comment_body, date_posted) {
         this._comment_id = comment_id;
-        this._course_id = course_id;
         this._review_id = review_id;
         this._user_id = user_id;
-        this._reply_id = reply_id;
+        this._parent_id = parent_id;
         this._comment_body = comment_body;
         this._date_posted = date_posted;
     }
@@ -25,12 +24,12 @@ class Comments {
         this._user_id = value;
     }
 
-    get reply_id() {
-        return this._reply_id;
+    get parent_id() {
+        return this._parent_id;
     }
 
-    set reply_id(value) {
-        this._reply_id = value;
+    set parent_id(value) {
+        this._parent_id = value;
     }
 
     get comment_body() {

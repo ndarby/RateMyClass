@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
-//The url so that the module is able to find the database.
 const url = 'mongodb://' + process.env.MONGO_INITDB_ROOT_USERNAME + ':' + process.env.MONGO_INITDB_ROOT_PASSWORD + '@' + process.env.MONGO_IP + ':' + process.env.MONGO_port + '/';
+
 module.exports = {
     insertNewComment: function (comment) {
         MongoClient.connect(url, function (err, db) {
@@ -8,7 +8,7 @@ module.exports = {
                 throw err;
             }
             let dbo = db.db("RATE-MY-CLASS");
-            dbo.collection("COMMENT").insertOne(comment, function (err) {
+            dbo.collection("COMMENTS").insertOne(comment, function (err) {
                 if (err) {
                     throw err;
                 }
@@ -17,18 +17,18 @@ module.exports = {
             });
         });
     },
-    deleteComment: function (comment) {
+    deleteComment: function (comment_id) {
         MongoClient.connect(url, function (err, db) {
             if (err) {
                 throw err;
             }
             let dbo = db.db("RATE-MY-CLASS");
-            dbo.collection("COMMENT").deleteOne({_comment_id: comment_id}, function (err, res) {
+            dbo.collection("COMMENTS").deleteOne({_comment_id: comment_id}, function (err, res) {
                 if (err) {
                     throw err;
                 }
                 console.log("Deleted comment: ");
-                console.log("id: " + review_id);
+                console.log("id: " + comment_id);
                 db.close();
             });
         });
@@ -50,7 +50,7 @@ module.exports = {
             });
         });
     },
-    updateCommentById: function (review_id, new_comment_data) {
+    updateCommentById: function (comment_id, new_comment_data) {
         MongoClient.connect(url, function (err, db) {
             if (err) {
                 throw err;
@@ -65,6 +65,24 @@ module.exports = {
                 console.log("id: " + comment_id);
                 console.log(new_values);
                 db.close();
+            });
+        });
+    },
+
+    getCommentsByReviewId: function (review_id) {
+        return new Promise(function (resolve, reject) {
+            MongoClient.connect(url, function (err, db) {
+                if (err) {
+                    reject(err);
+                }
+                let dbo = db.db("RATE-MY-CLASS");
+                dbo.collection("COMMENTS").find({_review_id: review_id}).toArray(function (err, result) {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(result);
+                    db.close();
+                });
             });
         });
     }

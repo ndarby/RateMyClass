@@ -2,7 +2,7 @@ const es = require(global.PROJECT + '/model/es');
 const uuidv4 = require('uuid/v4');
 
 module.exports.commentEventStream = {
-    postNewComment: function (course_id, review_id, user_id, reply_id, comment_body) {
+    postNewComment: function (review_id, user_id, parent_id, comment_body) {
         return new Promise(function (resolve, reject) {
             const comment_id = uuidv4();
             es.getEventStream({
@@ -17,10 +17,9 @@ module.exports.commentEventStream = {
                     action: 'new_comment',
                     data: {
                         comment_id: comment_id,
-                        course_id: course_id,
                         review_id: review_id,
                         user_id: user_id,
-                        reply_id: reply_id,
+                        parent_id: parent_id,
                         comment_body: comment_body,
                         date_posted: new Date().toISOString()
                     }

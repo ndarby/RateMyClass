@@ -33,9 +33,9 @@ module.exports = {
         db.deleteReview(review_data.review_id);
     },
 
-    getReviewsByCourseId: function (review_data) {
+    getReviewsByCourseId: function (course_id) {
         return new Promise(function (resolve, reject) {
-            db.getReviewByCourseId(review_data.course_id)
+            db.getReviewsByCourseId(course_id)
                 .then(result => resolve(result))
                 .catch(err => reject(err))
         })
