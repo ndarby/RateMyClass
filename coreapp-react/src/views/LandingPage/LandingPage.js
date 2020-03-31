@@ -40,9 +40,11 @@ const useDarkStyles = makeStyles(darkStyles);
 const useMemeStyles = makeStyles(memeStyles);
 
 export default function LandingPage(props) {
+
   const classes = useStyles();
   const darkClasses = useDarkStyles();
   const memeClasses = useMemeStyles();
+
 
   let backgroundURL;
   {themeSelector.someProp === 'dark'?
