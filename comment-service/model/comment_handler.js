@@ -9,8 +9,8 @@ module.exports = {
         db.insertNewComment(comment);
     },
 
-    updateComment: function(new_comment_data){
-        db.updateComment(new_comment_data.comment_id, {_comment_body: new_comment_data.comment_body});
+    updateCommentBody: function(new_comment_data){
+        db.updateCommentById(new_comment_data.comment_id, {_comment_body: new_comment_data.comment_body});
     },
     
     deleteComment: function (comment_data) {

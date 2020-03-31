@@ -39,7 +39,7 @@ es.useEventPublisher(function (evt) {
 
 // show event context in payload
 es.defineEventMappings({
-    context: 'context',
+    context: 'context'
 });
 
 

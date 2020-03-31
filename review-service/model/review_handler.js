@@ -33,5 +33,12 @@ module.exports = {
         db.deleteReview(review_data.review_id);
     },
 
+    getReviewsByCourseId: function (review_data) {
+        return new Promise(function (resolve, reject) {
+            db.getReviewByCourseId(review_data.course_id)
+                .then(result => resolve(result))
+                .catch(err => reject(err))
+        })
+    }
 
 };
