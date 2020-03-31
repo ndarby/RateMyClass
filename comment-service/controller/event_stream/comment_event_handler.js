@@ -7,7 +7,8 @@ module.exports.handleOnEvent = function (event_data) {
 
     // json_data contains data sent - replace next line with code - should interact with projection_processing
     console.log("Received data: " + JSON.stringify(json_data))
-    const comment_handler = require('../model/comment_handler');
+    const comment_handler = require('../../model/comment_handler');
+    // Switch the event actions to handle
 
     const action = json_data.action;
     switch (action) {

@@ -1,6 +1,9 @@
+/**
+ * Routes for the micro service to respond to requests from core app
+ */
 const express = require('express');
 const request_routes = express.Router();
-const review_handler = require('../model/comment_handler');
+const review_handler = require('../../model/comment_handler');
 
 request_routes.get('/get/:review_id', (req, res) => {
     review_handler.getCommentsByReviewId(req.params.review_id)

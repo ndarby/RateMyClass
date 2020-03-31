@@ -1,3 +1,6 @@
+/**
+ * Model definition for Comments
+ */
 class Comments {
     constructor(comment_id, review_id, user_id, parent_id, comment_body, date_posted) {
         this._comment_id = comment_id;

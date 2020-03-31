@@ -1,3 +1,6 @@
+/**
+ * Model definition for Attributes
+ */
 const uuidv4 = require('uuid/v4');
 
 class Attributes {

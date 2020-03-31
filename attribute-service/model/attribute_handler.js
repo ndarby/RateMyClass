@@ -1,25 +1,29 @@
+/**
+ * Model implementation for handling the logic of model integration
+ */
 const Attribute = require('./attribute_class');
-const db = require('../db');
+const db_update = require('../model/db/update_projections');
+const db_retrieve = require('../model/db/retrieve_projections');
 
 module.exports = {
     updateRating: function(data) {
-        db.getAttributeByCourseId(data.course_id).then(attributes => {
+        db_retrieve.getAttributeByCourseId(data.course_id).then(attributes => {
             if(attributes === null) {
                 attributes = new Attribute(data.course_id, data.rating, data.tags);
 
-                db.insertNewAttributes(attributes);
+                db_update.insertNewAttributes(attributes);
             } else {
                 attributes._total++;
                 attributes._rating -= -1*data.rating;
                 attributes._tags = attributes._tags.concat(data.tags);
 
-                db.updateAttributeById(attributes._attribute_id, attributes);
+                db_update.updateAttributeById(attributes._attribute_id, attributes);
             }
         });
     },
     getAttributes: function(course_id) {
         return new Promise(function (resolve, reject) {
-            db.getAttributeByCourseId(course_id).then(attributes => {
+            db_retrieve.getAttributeByCourseId(course_id).then(attributes => {
                 resolve(attributes);
             }).catch(err => reject(err));
         });

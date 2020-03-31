@@ -1,8 +1,13 @@
-const attribute_handler = require('../model/attribute_handler');
+/**
+ * Routes for the micro service to respond to requests from core app
+ */
+const attribute_handler = require('../../model/attribute_handler');
 const express = require('express');
 const projection_routes = express.Router();
 
-
+/**
+ * Get the attributes for a course
+ */
 projection_routes.get('/get/:course_id', (req, res) => {
     attribute_handler.getAttributes(req.params.course_id).then(attributes => {
         console.log(attributes);
