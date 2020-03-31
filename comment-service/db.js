@@ -8,7 +8,7 @@ module.exports = {
                 throw err;
             }
             let dbo = db.db("RATE-MY-CLASS");
-            dbo.collection("COMMENT").insertOne(comment, function (err) {
+            dbo.collection("COMMENTS").insertOne(comment, function (err) {
                 if (err) {
                     throw err;
                 }
@@ -23,7 +23,7 @@ module.exports = {
                 throw err;
             }
             let dbo = db.db("RATE-MY-CLASS");
-            dbo.collection("COMMENT").deleteOne({_comment_id: comment_id}, function (err, res) {
+            dbo.collection("COMMENTS").deleteOne({_comment_id: comment_id}, function (err, res) {
                 if (err) {
                     throw err;
                 }
