@@ -14,7 +14,7 @@ module.exports.handleOnEvent = function (event_data) {
         case 'new_comment':
             comment_handler.generateNewComment(json_data.data);
             break;
-        case 'edit_comment':
+        case 'edit_comment_body':
             comment_handler.updateCommentBody(json_data.data);
             break;
         case 'delete_comment':

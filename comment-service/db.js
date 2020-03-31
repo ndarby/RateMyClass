@@ -17,7 +17,7 @@ module.exports = {
             });
         });
     },
-    deleteComment: function (comment) {
+    deleteComment: function (comment_id) {
         MongoClient.connect(url, function (err, db) {
             if (err) {
                 throw err;
@@ -28,7 +28,8 @@ module.exports = {
                     throw err;
                 }
                 console.log("Deleted comment: ");
-                console.log("id: " + review_id);
+                console.log("id: " + comment_id);
+                console.log("Comment has been deleted");
                 db.close();
             });
         });
@@ -50,13 +51,14 @@ module.exports = {
             });
         });
     },
-    updateCommentById: function (review_id, new_comment_data) {
+    updateCommentById: function (comment_id, new_comment_data) {
         MongoClient.connect(url, function (err, db) {
             if (err) {
                 throw err;
             }
             let dbo = db.db("RATE-MY-CLASS");
             const new_values = {$set: new_comment_data};
+
             dbo.collection("COMMENTS").updateOne({_comment_id: comment_id}, new_values, function (err, res) {
                 if (err) {
                     throw err;
@@ -64,6 +66,7 @@ module.exports = {
                 console.log("Updating comment: ");
                 console.log("id: " + comment_id);
                 console.log(new_values);
+                console.log('comment has been updated.')
                 db.close();
             });
         });
