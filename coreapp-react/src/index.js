@@ -12,7 +12,7 @@ import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import CompanyPage from "views/CompanyPage/CompanyPage.js";
 import SettingsPage from "views/SettingsPage/SettingsPage.js";
-import ScrollToTop from "./ScrollToTop";
+import ScrollToTop from "./views/ScrollToTop";
 import SignUpPage from "./views/LoginPage/SignUpPage";
 import ClassPage from "./views/LandingPage/ClassPage.js";
 

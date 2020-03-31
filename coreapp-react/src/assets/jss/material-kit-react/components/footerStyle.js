@@ -38,6 +38,16 @@ const footerStyle = {
       color: "#FFFFFF"
     }
   },
+  footerMemeFont: {
+    "&,&:hover,&:focus": {
+      color: "#006633"
+    }
+  },
+  footerLightFont: {
+    "&,&:hover,&:focus": {
+      color: "#0000ff"
+    }
+  },
   container,
   list: {
     marginBottom: "0",

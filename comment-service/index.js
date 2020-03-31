@@ -1,8 +1,8 @@
-global.PROJECT = '/home/node/app'
-const express = require('express')
-const es_receiver = require(global.PROJECT + '/event_stream/es_receiver')
-const app = express()
-const port = 8081
+global.PROJECT = '/home/node/app';
+const express = require('express');
+const es_receiver = require(global.PROJECT + '/event_stream/es_receiver');
+const app = express();
+const port = 8081;
 
 setTimeout(() => {
     es_receiver.start(require(global.PROJECT + '/event_stream/comment_event_handler').handleOnEvent)

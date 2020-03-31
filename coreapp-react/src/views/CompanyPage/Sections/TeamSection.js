@@ -15,6 +15,8 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
+import darkStyles from "assets/jss/material-kit-react/views/RMC/darkTeamStyle.js";
+import memeStyles from "assets/jss/material-kit-react/views/RMC/memeTeamStyle.js";
 
 import team1 from "assets/img/faces/avatar.jpg";
 import team2 from "assets/img/faces/christian.jpg";
@@ -22,12 +24,18 @@ import team3 from "assets/img/faces/kendall.jpg";
 import team4 from "assets/img/faces/L.jpg";
 import team5 from "assets/img/faces/Jen.jpg";
 import team6 from "assets/img/faces/Jor.jpg";
+import themeSelector from "../../SettingsPage/ThemeSelector";
 
 
 const useStyles = makeStyles(styles);
+const useDarkStyles = makeStyles(darkStyles);
+const useMemeStyles = makeStyles(memeStyles);
 
 export default function TeamSection() {
   const classes = useStyles();
+  const darkClasses = useDarkStyles();
+  const memeClasses = useMemeStyles();
+
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
@@ -35,7 +43,10 @@ export default function TeamSection() {
   );
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Here is Our Team</h2>
+      <h2 className=
+              {themeSelector.someProp === 'dark'? darkClasses.title : themeSelector.someProp === 'meme'? memeClasses.title : classes.title}>
+        Here is Our Team
+      </h2>
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
@@ -43,13 +54,15 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img src={team2} alt="..." className={imageClasses} />
               </GridItem>
-              <h4 className={classes.cardTitle}>
+              <h4 className=
+                      {themeSelector.someProp === 'dark'? darkClasses.cardTitle : themeSelector.someProp === 'meme'? memeClasses.cardTitle : classes.cardTitle}>
                 Nathan Darby
                 <br />
                 {/* <small className={classes.smallTitle}>Designer</small> */}
               </h4>
               <CardBody>
-                <p className={classes.description}>
+                <p className=
+                       {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
                   NHL was cancelled...
                 </p>
               </CardBody>
@@ -76,12 +89,14 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img src={team3} alt="..." className={imageClasses} />
               </GridItem>
-              <h4 className={classes.cardTitle}>
+              <h4 className=
+                      {themeSelector.someProp === 'dark'? darkClasses.cardTitle : themeSelector.someProp === 'meme'? memeClasses.cardTitle : classes.cardTitle}>
                 Katrina Chanco
                 <br />
               </h4>
               <CardBody>
-                <p className={classes.description}>
+                <p className=
+                       {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
                   Sometimes it be like that
                 </p>
               </CardBody>
@@ -110,12 +125,14 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img src={team1} alt="..." className={imageClasses} />
               </GridItem>
-              <h4 className={classes.cardTitle}>
+              <h4 className=
+                      {themeSelector.someProp === 'dark'? darkClasses.cardTitle : themeSelector.someProp === 'meme'? memeClasses.cardTitle : classes.cardTitle}>
                 Evan Krul
                 <br />
               </h4>
               <CardBody>
-                <p className={classes.description}>
+                <p className=
+                       {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
                   Why do you have to be so Krul
                 </p>
               </CardBody>
@@ -149,12 +166,14 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img src={team4} alt="..." className={imageClasses} />
               </GridItem>
-              <h4 className={classes.cardTitle}>
+              <h4 className=
+                      {themeSelector.someProp === 'dark'? darkClasses.cardTitle : themeSelector.someProp === 'meme'? memeClasses.cardTitle : classes.cardTitle}>
                 Layla Arab
                 <br />
               </h4>
               <CardBody>
-                <p className={classes.description}>
+                <p className=
+                       {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
                   Chief of Assassins
                 </p>
               </CardBody>
@@ -188,12 +207,14 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img src={team6} alt="..." className={imageClasses} />
               </GridItem>
-              <h4 className={classes.cardTitle}>
+              <h4 className=
+                      {themeSelector.someProp === 'dark'? darkClasses.cardTitle : themeSelector.someProp === 'meme'? memeClasses.cardTitle : classes.cardTitle}>
                 Jordon Chung
                 <br />
               </h4>
               <CardBody>
-                <p className={classes.description}>
+                <p className=
+                       {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
                   Wanna see a Magic Trick?
                 </p>
               </CardBody>
@@ -220,12 +241,14 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img src={team5} alt="..." className={imageClasses} />
               </GridItem>
-              <h4 className={classes.cardTitle}>
+              <h4 className=
+                      {themeSelector.someProp === 'dark'? darkClasses.cardTitle : themeSelector.someProp === 'meme'? memeClasses.cardTitle : classes.cardTitle}>
                 Jiaxuan Tong
                 <br />
               </h4>
               <CardBody>
-                <p className={classes.description}>
+                <p className=
+                       {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
                   Hows the weather today?
                 </p>
               </CardBody>

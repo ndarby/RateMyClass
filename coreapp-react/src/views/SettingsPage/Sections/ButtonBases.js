@@ -9,6 +9,9 @@ import theme3 from "assets/img/RMC/meme.jpg";
 import GridContainer from "../../../components/Grid/GridContainer";
 import GridItem from "../../../components/Grid/GridItem";
 import {Link} from "react-router-dom";
+import themeSelector from "../ThemeSelector";
+
+
 
 const image1 = [
     {
@@ -105,11 +108,24 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-
-
-export default function ButtonBases() {
+export default function ButtonBases(props) {
     const classes = useStyles();
+    const { ...rest } = props;
 
+    const themeLight = (evt) => {
+        evt.preventDefault();
+        themeSelector.someProp = 'light';
+    };
+
+    const themeDark = (evt) => {
+        evt.preventDefault();
+        themeSelector.someProp = 'dark';
+    };
+
+    const themeMeme = (evt) => {
+        evt.preventDefault();
+        themeSelector.someProp = 'meme';
+    };
 
     return (
         <div className={classes.section}>
@@ -123,31 +139,30 @@ export default function ButtonBases() {
                         style={{
                             width: image.width,
                         }}
+                        onClick={themeLight}
                     >
-                        <li>
-                            <Link to = "/settings-page">
-                                <span
-                                    className={classes.imageSrc}
-                                    style={{
-                                       backgroundImage: `url(${image.url})`,
-                                    }}
-                                />
-                                <span className={classes.imageBackdrop} />
+                        <Link to={ "/settings-page"}>
+                            <span
+                                className={classes.imageSrc}
+                                style={{
+                                   backgroundImage: `url(${image.url})`,
+                                }}
+                            />
+                            <span className={classes.imageBackdrop} />
 
-                                <span className={classes.imageButton}>
+                            <span className={classes.imageButton}>
 
-                                    <Typography
-                                        component="span"
-                                        variant="subtitle1"
-                                        color="inherit"
-                                        className={classes.imageTitle}
-                                    >
-                                    {image.title}
-                                    <span className={classes.imageMarked} />
-                                    </Typography>
-                                </span>
-                            </Link>
-                        </li>
+                                <Typography
+                                    component="span"
+                                    variant="subtitle1"
+                                    color="inherit"
+                                    className={classes.imageTitle}
+                                >
+                                {image.title}
+                                <span className={classes.imageMarked} />
+                                </Typography>
+                            </span>
+                        </Link>
                     </ButtonBase>
                 ))}
                 {image2.map(image => (
@@ -159,31 +174,30 @@ export default function ButtonBases() {
                         style={{
                             width: image.width,
                         }}
+                        onClick={themeDark}
                     >
-                        <li>
-                            <Link to = "/company-page">
-                                <span
-                                    className={classes.imageSrc}
-                                    style={{
-                                        backgroundImage: `url(${image.url})`,
-                                    }}
-                                />
-                                <span className={classes.imageBackdrop} />
+                        <Link to = "/settings-page">
+                            <span
+                                className={classes.imageSrc}
+                                style={{
+                                    backgroundImage: `url(${image.url})`,
+                                }}
+                            />
+                            <span className={classes.imageBackdrop} />
 
-                                <span className={classes.imageButton}>
+                            <span className={classes.imageButton}>
 
-                                    <Typography
-                                        component="span"
-                                        variant="subtitle1"
-                                        color="inherit"
-                                        className={classes.imageTitle}
-                                    >
-                                    {image.title}
-                                        <span className={classes.imageMarked} />
-                                    </Typography>
-                                </span>
-                            </Link>
-                        </li>
+                                <Typography
+                                    component="span"
+                                    variant="subtitle1"
+                                    color="inherit"
+                                    className={classes.imageTitle}
+                                >
+                                {image.title}
+                                    <span className={classes.imageMarked} />
+                                </Typography>
+                            </span>
+                        </Link>
                     </ButtonBase>
                 ))}
                 {image3.map(image => (
@@ -195,31 +209,30 @@ export default function ButtonBases() {
                         style={{
                             width: image.width,
                         }}
+                        onClick={themeMeme}
                     >
-                        <li>
-                            <Link to = "/landing-page">
-                                <span
-                                    className={classes.imageSrc}
-                                    style={{
-                                        backgroundImage: `url(${image.url})`,
-                                    }}
-                                />
-                                <span className={classes.imageBackdrop} />
+                        <Link to = "/settings-page">
+                            <span
+                                className={classes.imageSrc}
+                                style={{
+                                    backgroundImage: `url(${image.url})`,
+                                }}
+                            />
+                            <span className={classes.imageBackdrop} />
 
-                                <span className={classes.imageButton}>
+                            <span className={classes.imageButton}>
 
-                                    <Typography
-                                        component="span"
-                                        variant="subtitle1"
-                                        color="inherit"
-                                        className={classes.imageTitle}
-                                    >
-                                    {image.title}
-                                        <span className={classes.imageMarked} />
-                                    </Typography>
-                                </span>
-                            </Link>
-                        </li>
+                                <Typography
+                                    component="span"
+                                    variant="subtitle1"
+                                    color="inherit"
+                                    className={classes.imageTitle}
+                                >
+                                {image.title}
+                                    <span className={classes.imageMarked} />
+                                </Typography>
+                            </span>
+                        </Link>
                     </ButtonBase>
                 ))}
             </div>
