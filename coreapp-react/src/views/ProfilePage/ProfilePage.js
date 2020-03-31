@@ -79,11 +79,12 @@ const useMemeStyles = makeStyles(memeStyles);
 // const accWord = 'fillerpassword';
 
 export default function ProfilePage(props) {
+    const account = JSON.parse(localStorage.getItem('account'));
 
-    const [first, setFirst] = useState(accountInformation.first);
-    const [last, setLast] = useState(accountInformation.last);
-    const [mail, setMail] = useState(accountInformation.mail);
-    const [word, setWord] = useState(accountInformation.word);
+    const [first, setFirst] = useState(account._first_name);
+    const [last, setLast] = useState(account._last_name);
+    const [mail, setMail] = useState(account._email);
+    const [word, setWord] = useState('');
 
     // const [first, setFirst] = useState(accFirst);
     // const [last, setLast] = useState(accLast);
@@ -102,7 +103,39 @@ export default function ProfilePage(props) {
         accountInformation.mail = mail;
         alert(`Submitting Password: ${word}`);
         accountInformation.word = word;
-        props.history.push('/profile-page');
+        //TODO update
+        let body = {
+            account_id: account._account_id,
+            data: {
+                _first_name: first,
+                _last_name: last,
+                _email: mail,
+                _password_hash: word
+            }
+        };
+
+        account._first_name = first;
+        account._last_name = last;
+        account._email = mail;
+        account._password_hash = word;
+        localStorage.setItem('account', JSON.stringify(account));
+
+        fetch("/api/accounts/edit", {
+            "method": "POST",
+            "headers": {
+                "content-type": "application/json"
+            },
+            "body": JSON.stringify(body)
+        })
+            .then(response => {
+                console.log(response);
+                props.history.push('/profile-page');
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+
     };
 
   const classes = useStyles();

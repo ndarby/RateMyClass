@@ -40,6 +40,7 @@ import accountInformation from "../AccountInformation";
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
+    localStorage.removeItem('account');
     const [mail, setMail] = useState(undefined);
     const [word, setWord] = useState(undefined);
 
@@ -60,7 +61,35 @@ export default function LoginPage(props) {
 
         themeSelector.someProp = 'light';
         viewSelector.someProp = 'account';
-        props.history.push('/landing-page');
+
+        let body = {
+            mail: mail,
+            word: word
+        };
+
+        fetch("/api/accounts/authenticate", {
+            "method": "POST",
+            "headers": {
+                "content-type": "application/json"
+            },
+            "body": JSON.stringify(body)
+        })
+            .then(r =>  r.json().then(data => ({status: r.status, body: data})))
+            .then(response => {
+                if(response.status === 200) {
+                    console.log( response.body);
+                    localStorage.setItem("account", JSON.stringify(response.body));
+                    props.history.push('/landing-page');
+                } else {
+                    alert('Invalid Credentials!');
+                }
+            })
+            .catch(err => {
+                alert("Error!");
+                console.error(err);
+            });
+
+
     };
 
     const guestSubmit = (evt) => {

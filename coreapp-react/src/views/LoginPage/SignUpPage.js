@@ -56,7 +56,28 @@ export default function SignUpPage(props) {
         alert(`Submitting Password: ${word}`);
         accountInformation.word = word;
 
-        props.history.push('/');
+        let body = {
+            first: first,
+            last: last,
+            mail: mail,
+            word: word
+        };
+
+        fetch("/api/accounts/new", {
+            "method": "POST",
+            "headers": {
+                "content-type": "application/json"
+            },
+            "body": JSON.stringify(body)
+        })
+            .then(response => {
+                props.history.push('/');
+                console.log(response);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
     };
 
 
