@@ -14,5 +14,6 @@ api_routes.use("/reviews/", require("./producing/review_events"));
 api_routes.use("/comments/", require("./producing/comment_events"));
 api_routes.use("/accounts/", require("./accounts/account_validation"));
 api_routes.use("/courses/", require("./courses/courses_routes"));
+    api_routes.use("/attributes_get/", require("./requesting/attribute_projections"));
 
 module.exports = api_routes;
