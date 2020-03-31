@@ -78,17 +78,16 @@ export default function ProductSection() {
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-
-                  <Link to = "/landing-page">
+                  <Link to = "/class-page">
                   <img src=
                            { themeSelector.someProp === 'dark'? course1D : themeSelector.someProp === 'meme'? course1M : course1 }
                        alt="..." className={imageClasses} height={"300px"} width={"300px"} />
+
                   </Link>
 
               </GridItem>
               <GridItem xs={12} sm={12} md={11}>
-
-                  <Link to = "/landing-page">
+                  <Link to = "/class-page">
                   <h4 className=
                           {themeSelector.someProp === 'dark'? darkClasses.title : themeSelector.someProp === 'meme'? memeClasses.title : classes.title}>
                     SENG 401
