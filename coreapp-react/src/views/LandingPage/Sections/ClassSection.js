@@ -22,12 +22,37 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Rating from '@material-ui/lab/Rating';
 
-import course1 from "assets/img/RMC/sArchitecture.jpg";
-import course2 from "assets/img/RMC/sRequirements.jpg";
-import course3 from "assets/img/RMC/sTesting.jpg";
-import course4 from "assets/img/RMC/s511.png";
-import course5 from "assets/img/RMC/sDatabases.jpg";
-import course6 from "assets/img/RMC/sNetworks.jpg";
+// import course1 from "assets/img/RMC/sArchitecture.jpg";
+// import course2 from "assets/img/RMC/sRequirements.jpg";
+// import course3 from "assets/img/RMC/sTesting.jpg";
+// import course4 from "assets/img/RMC/s511.png";
+// import course5 from "assets/img/RMC/sDatabases.jpg";
+// import course6 from "assets/img/RMC/sNetworks.jpg";
+
+import course1 from "assets/img/RMC/lightArchitecture.jpg";
+import course1D from "assets/img/RMC/lightArchitecture.jpg";
+import course1M from "assets/img/RMC/memeArchitecture.jpg";
+
+import course2 from "assets/img/RMC/lightRequirements.jpg";
+import course2D from "assets/img/RMC/lightRequirements.jpg";
+import course2M from "assets/img/RMC/memeRequirements.jpg";
+
+import course3 from "assets/img/RMC/lightTesting.jpg";
+import course3D from "assets/img/RMC/lightTesting.jpg";
+import course3M from "assets/img/RMC/memeTesting.jpg";
+
+import course4 from "assets/img/RMC/light511.png";
+import course4D from "assets/img/RMC/light511.png";
+import course4M from "assets/img/RMC/meme511.jpg";
+
+import course5 from "assets/img/RMC/lightDatabases.jpg";
+import course5D from "assets/img/RMC/lightDatabases.jpg";
+import course5M from "assets/img/RMC/memeDatabases.jpg";
+
+import course6 from "assets/img/RMC/lightNetworks.jpg";
+import course6D from "assets/img/RMC/lightNetworks.jpg";
+import course6M from "assets/img/RMC/memeNetworks.jpg";
+
 import classNames from "classnames";
 import CardBody from "../../../components/Card/CardBody";
 import Card from "../../../components/Card/Card";
