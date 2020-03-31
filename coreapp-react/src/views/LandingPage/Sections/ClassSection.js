@@ -2,10 +2,6 @@ import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
-// @material-ui/icons
-import Chat from "@material-ui/icons/Chat";
-import VerifiedUser from "@material-ui/icons/VerifiedUser";
-import Fingerprint from "@material-ui/icons/Fingerprint";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -57,6 +53,7 @@ import classNames from "classnames";
 import CardBody from "../../../components/Card/CardBody";
 import Card from "../../../components/Card/Card";
 import {Link} from "react-router-dom";
+import Quote from "../../../components/Typography/Quote";
 
 const useStyles = makeStyles(styles);
 const customIcons = {
@@ -90,6 +87,9 @@ IconContainer.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
+// create function with a get request here to be used and displayed below
+
+
 export default function ProductSection() {
   const classes = useStyles();
   const imageClasses = classNames(
@@ -103,7 +103,7 @@ export default function ProductSection() {
         <GridItem xs={12} sm={12} md={8}>
           <h2 className={classes.title}>Course Information</h2>
           <h5 className={classes.description}>
-            View Current Ratings or Leave a Review Below
+            View Current Ratings or Leave a Review Below!
           </h5>
         </GridItem>
       </GridContainer>
@@ -117,145 +117,12 @@ export default function ProductSection() {
               defaultValue={2}
               getLabelText={value => customIcons[value].label}
               IconContainerComponent={IconContainer}
-          />
-        </Box>
-        <Box justify="left" component="fieldset" mb={3} borderColor="transparent">
-          <Typography component="legend">Custom icon set</Typography>
-          Course Name:
-          Overall Rating:
+          >Current Course Rating</Rating>
+
+          {/*display reviews and comments here*/}
 
         </Box>
 
-        {/*<GridContainer>*/}
-        {/*  <GridItem xs={12} sm={12} md={4}>*/}
-        {/*      <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>*/}
-        {/*        <li>*/}
-        {/*          <Link to = "/class-page">*/}
-        {/*          <img src={course1} alt="..." className={imageClasses} height={"300px"} width={"300px"} />*/}
-        {/*          </Link>*/}
-        {/*        </li>*/}
-        {/*      </GridItem>*/}
-        {/*      <GridItem xs={12} sm={12} md={11}>*/}
-        {/*        <li>*/}
-        {/*          <Link to = "/class-page">*/}
-        {/*          <h4 className={classes.title}>*/}
-        {/*            SENG 401*/}
-        {/*          </h4>*/}
-        {/*          </Link>*/}
-        {/*        </li>*/}
-        {/*        <p className={classes.description}>*/}
-        {/*          Software Architecture*/}
-        {/*        </p>*/}
-        {/*      </GridItem>*/}
-        {/*  </GridItem>*/}
-        {/*  <GridItem xs={12} sm={12} md={4}>*/}
-        {/*    <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>*/}
-        {/*      <li>*/}
-        {/*        <Link to = "/landing-page">*/}
-        {/*          <img src={course2} alt="..." className={imageClasses} height={"300px"} width={"300px"} />*/}
-        {/*        </Link>*/}
-        {/*      </li>*/}
-        {/*    </GridItem>*/}
-        {/*    <GridItem xs={12} sm={12} md={11}>*/}
-        {/*      <li>*/}
-        {/*        <Link to = "/landing-page">*/}
-        {/*          <h4 className={classes.title}>*/}
-        {/*            SENG 471*/}
-        {/*          </h4>*/}
-        {/*        </Link>*/}
-        {/*      </li>*/}
-        {/*      <p className={classes.description}>*/}
-        {/*        Software Requirements Engineering*/}
-        {/*      </p>*/}
-        {/*    </GridItem>*/}
-        {/*  </GridItem>*/}
-        {/*  <GridItem xs={12} sm={12} md={4}>*/}
-        {/*    <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>*/}
-        {/*      <li>*/}
-        {/*        <Link to = "/landing-page">*/}
-        {/*          <img src={course3} alt="..." className={imageClasses} height={"300px"} width={"300px"} />*/}
-        {/*        </Link>*/}
-        {/*      </li>*/}
-        {/*    </GridItem>*/}
-        {/*    <GridItem xs={12} sm={12} md={11}>*/}
-        {/*      <li>*/}
-        {/*        <Link to = "/landing-page">*/}
-        {/*          <h4 className={classes.title}>*/}
-        {/*            SENG 438*/}
-        {/*          </h4>*/}
-        {/*        </Link>*/}
-        {/*      </li>*/}
-        {/*      <p className={classes.description}>*/}
-        {/*        Software Testing, Reliability, and Quality*/}
-        {/*      </p>*/}
-        {/*    </GridItem>*/}
-        {/*  </GridItem>*/}
-        {/*</GridContainer>*/}
-        {/*<GridContainer>*/}
-        {/*  <GridItem xs={12} sm={12} md={4}>*/}
-        {/*    <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>*/}
-        {/*      <li>*/}
-        {/*        <Link to = "/landing-page">*/}
-        {/*          <img src={course4} alt="..." className={imageClasses} height={"300px"} width={"300px"} />*/}
-        {/*        </Link>*/}
-        {/*      </li>*/}
-        {/*    </GridItem>*/}
-        {/*    <GridItem xs={12} sm={12} md={11}>*/}
-        {/*      <li>*/}
-        {/*        <Link to = "/landing-page">*/}
-        {/*          <h4 className={classes.title}>*/}
-        {/*            ENCM 511*/}
-        {/*          </h4>*/}
-        {/*        </Link>*/}
-        {/*      </li>*/}
-        {/*      <p className={classes.description}>*/}
-        {/*        Embedded System Interfacing*/}
-        {/*      </p>*/}
-        {/*    </GridItem>*/}
-        {/*  </GridItem>*/}
-        {/*  <GridItem xs={12} sm={12} md={4}>*/}
-        {/*    <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>*/}
-        {/*      <li>*/}
-        {/*        <Link to = "/landing-page">*/}
-        {/*          <img src={course5} alt="..." className={imageClasses} height={"300px"} width={"300px"} />*/}
-        {/*        </Link>*/}
-        {/*      </li>*/}
-        {/*    </GridItem>*/}
-        {/*    <GridItem xs={12} sm={12} md={11}>*/}
-        {/*      <li>*/}
-        {/*        <Link to = "/landing-page">*/}
-        {/*          <h4 className={classes.title}>*/}
-        {/*            CPSC 457*/}
-        {/*          </h4>*/}
-        {/*        </Link>*/}
-        {/*      </li>*/}
-        {/*      <p className={classes.description}>*/}
-        {/*        Principles of Operating Systems*/}
-        {/*      </p>*/}
-        {/*    </GridItem>*/}
-        {/*  </GridItem>*/}
-        {/*  <GridItem xs={12} sm={12} md={4}>*/}
-        {/*    <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>*/}
-        {/*      <li>*/}
-        {/*        <Link to = "/landing-page">*/}
-        {/*          <img src={course6} alt="..." className={imageClasses} height={"300px"} width={"300px"} />*/}
-        {/*        </Link>*/}
-        {/*      </li>*/}
-        {/*    </GridItem>*/}
-        {/*    <GridItem xs={12} sm={12} md={11}>*/}
-        {/*      <li>*/}
-        {/*        <Link to = "/landing-page">*/}
-        {/*          <h4 className={classes.title}>*/}
-        {/*            CPSC 441*/}
-        {/*          </h4>*/}
-        {/*        </Link>*/}
-        {/*      </li>*/}
-        {/*      <p className={classes.description}>*/}
-        {/*        Computer Networks*/}
-        {/*      </p>*/}
-        {/*    </GridItem>*/}
-        {/*  </GridItem>*/}
-        {/*</GridContainer>*/}
       </div>
     </div>
   );
