@@ -1,8 +1,11 @@
+const uuidv4 = require('uuid/v4');
+
 class Attributes {
-    constructor(attribute_id, course_id, rating, tags) {
-        this._attribute_id = attribute_id;
+    constructor(course_id, rating, tags) {
+        this._attribute_id = uuidv4();
         this._course_id = course_id;
         this._rating = rating;
+        this._total = 1;
         this._tags = tags;
     }
 
@@ -20,6 +23,15 @@ class Attributes {
 
     get tags() {
         return this._tags;
+    }
+
+
+    set rating(value) {
+        this._rating = value;
+    }
+
+    set tags(value) {
+        this._tags = value;
     }
 }
 

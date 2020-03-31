@@ -5,7 +5,7 @@ const app = express();
 const port = 8081;
 
 setTimeout(() => {
-    es_receiver.start(require(global.PROJECT + '/event_stream/review_event_handler').handleOnEvent)
+    es_receiver.start(require(global.PROJECT + '/event_stream/attribute_event_handler').handleOnEvent)
 }, 5000);
 
 //include the API routes
