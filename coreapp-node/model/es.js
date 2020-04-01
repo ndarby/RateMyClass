@@ -2,9 +2,17 @@
 const eventstore = require('eventstore');
 const amqp = require('amqplib/callback_api');
 
+const url = 'mongodb://' + process.env.MONGO_INITDB_ROOT_USERNAME + ':' + process.env.MONGO_INITDB_ROOT_PASSWORD + '@' + process.env.MONGO_IP + ':' + process.env.MONGO_port+ '/RATE-MY-CLASS?authSource=admin';
+const es = require('eventstore')({
+    type: 'mongodb',
+    url: url,     // optional
+    timeout: 10000
+});
 
-const es = eventstore();
-es.init(); // callback is optional
+es.init(function (err) {
+
+});
+
 
 //TODO do we need this
 es.on('connect', function () {
