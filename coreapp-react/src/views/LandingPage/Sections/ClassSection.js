@@ -21,13 +21,6 @@ import classNames from "classnames";
 import ReviewSection from "./ReviewSection.js";
 
 
-// import course1 from "assets/img/RMC/sArchitecture.jpg";
-// import course2 from "assets/img/RMC/sRequirements.jpg";
-// import course3 from "assets/img/RMC/sTesting.jpg";
-// import course4 from "assets/img/RMC/s511.png";
-// import course5 from "assets/img/RMC/sDatabases.jpg";
-// import course6 from "assets/img/RMC/sNetworks.jpg";
-
 const useStyles = makeStyles(styles);
 const customIcons = {
     1: {
@@ -102,11 +95,8 @@ export default function ProductSection() {
                         getLabelText={value => customIcons[value].label}
                         IconContainerComponent={IconContainer}
                     >Current Course Rating</Rating>
-
-                    {/*display reviews*/}
-
-
                 </Box>
+                {/*reviews displayed here*/}
                 <ReviewSection/>
 
             </div>

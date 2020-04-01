@@ -47,9 +47,9 @@ export default function LandingPage(props) {
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>SENG 401</h1>
+              <h1 className={classes.title}>INSERT COURSE NAME HERE</h1>
               <h4>
-                Software Architecture
+                INSERT COURSE TITLE HERE
               </h4>
               <br />
 
