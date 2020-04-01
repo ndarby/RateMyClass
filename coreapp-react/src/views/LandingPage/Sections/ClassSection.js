@@ -68,6 +68,15 @@ IconContainer.propTypes = {
     value: PropTypes.number.isRequired,
 };
 
+const StyledRating = makeStyles({
+    iconFilled: {
+        color: '#ffe600',
+    },
+    iconHover: {
+        color: '#ffe600',
+    },
+})(Rating);
+
 // create function with a get request here to be used and displayed below
 
 export default function ProductSection() {
@@ -97,7 +106,7 @@ export default function ProductSection() {
                     <Typography component="legend">Custom icon set</Typography>
                     <Rating
                         name="customized-icons"
-                        defaultValue={2}
+                        defaultValue={3} //CHANGE VALUE TO VALUE FROM BACK END HERE
                         getLabelText={value => customIcons[value].label}
                         IconContainerComponent={IconContainer}
                     >Current Course Rating</Rating>
