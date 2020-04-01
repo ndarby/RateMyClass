@@ -37,8 +37,6 @@ import lightFiller from "assets/img/RMC/lightBackground.jpg";
 import darkFiller from "assets/img/RMC/darkBackground.jpg";
 import memeFiller from "assets/img/RMC/memeBackground.jpg";
 
-import accountInformation from "../AccountInformation";
-
 const useStyles = makeStyles(styles);
 const useDarkStyles = makeStyles(darkStyles);
 const useMemeStyles = makeStyles(memeStyles);
@@ -56,12 +54,6 @@ export default function ProfilePage(props) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-
-        accountInformation.first = first;
-        accountInformation.last = last;
-        accountInformation.mail = mail;
-        accountInformation.word = word;
-        //TODO update
         let body = {
             account_id: account._account_id,
             data: {

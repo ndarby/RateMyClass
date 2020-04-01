@@ -21,8 +21,6 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import themeSelector from "../SettingsPage/ThemeSelector";
 import viewSelector from "../ViewSelector";
-import loginInformation from "../LoginInformation";
-import accountInformation from "../AccountInformation";
 
 const useStyles = makeStyles(styles);
 
@@ -35,15 +33,6 @@ export default function LoginPage(props) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-
-        accountInformation.first = 'Default First';
-        accountInformation.last = 'Default Second';
-
-        loginInformation.mail = mail;
-        accountInformation.mail = mail;
-
-        loginInformation.word = word;
-        accountInformation.word = word;
 
         themeSelector.someProp = 'light';
         viewSelector.someProp = 'account';

@@ -18,8 +18,6 @@ import {Link} from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 
-import accountInformation from "../AccountInformation";
-
 const useStyles = makeStyles(styles);
 
 export default function SignUpPage(props) {
@@ -32,11 +30,6 @@ export default function SignUpPage(props) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-
-        accountInformation.first = first;
-        accountInformation.last = last;
-        accountInformation.mail = mail;
-        accountInformation.word = word;
 
         let body = {
             first: first,
