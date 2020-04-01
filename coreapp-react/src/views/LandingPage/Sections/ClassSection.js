@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from 'react';
+import { useParams } from "react-router";
+
 // @material-ui/core components
 import {makeStyles} from "@material-ui/core/styles";
 // core components
@@ -18,12 +20,8 @@ import Rating from '@material-ui/lab/Rating';
 
 import classNames from "classnames";
 
-// import course1 from "assets/img/RMC/sArchitecture.jpg";
-// import course2 from "assets/img/RMC/sRequirements.jpg";
-// import course3 from "assets/img/RMC/sTesting.jpg";
-// import course4 from "assets/img/RMC/s511.png";
-// import course5 from "assets/img/RMC/sDatabases.jpg";
-// import course6 from "assets/img/RMC/sNetworks.jpg";
+import ReviewSection from "./ReviewSection.js";
+
 
 const useStyles = makeStyles(styles);
 const customIcons = {
@@ -79,6 +77,10 @@ export default function ProductSection() {
         classes.imgRounded,
         classes.imgFluid
     );
+    // console.log(this.props.match.params.course_id);
+    let { course_id } = useParams();
+    console.log(course_id);
+
     return (
         <div className={classes.section}>
             <GridContainer justify="center">
@@ -99,10 +101,9 @@ export default function ProductSection() {
                         getLabelText={value => customIcons[value].label}
                         IconContainerComponent={IconContainer}
                     >Current Course Rating</Rating>
-
-                    {/*display reviews and comments here*/}
-
                 </Box>
+                {/*reviews displayed here*/}
+                <ReviewSection/>
 
             </div>
         </div>

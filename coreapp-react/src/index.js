@@ -23,7 +23,7 @@ ReactDOM.render(
       <ScrollToTop />
         <Switch>
             <Route path="/landing-page" component={LandingPage} />
-            <Route path="/class-page" component={ClassPage} />
+            <Route path="/class-page/:course_id" component={ClassPage} />
             <Route path="/sign-up-page" component={SignUpPage} />
             <Route path="/profile-page" component={ProfilePage} />
             <Route path="/company-page" component={CompanyPage} />
