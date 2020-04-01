@@ -16,12 +16,12 @@ import styles from "assets/jss/material-kit-react/views/landingPageSections/team
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkTeamStyle.js";
 import memeStyles from "assets/jss/material-kit-react/views/RMC/memeTeamStyle.js";
 
-import team1 from "assets/img/faces/evan.jpg";
-import team2 from "assets/img/faces/nathan.jpg";
-import team3 from "assets/img/faces/katrina.jpg";
-import team4 from "assets/img/faces/layla.jpg";
-import team5 from "assets/img/faces/jiaxuan.jpg";
-import team6 from "assets/img/faces/jordon.jpg";
+import team1 from "assets/img/RMC/evan.jpg";
+import team2 from "assets/img/RMC/nathan.png";
+import team3 from "assets/img/RMC/katrina.jpg";
+import team4 from "assets/img/RMC/layla.jpg";
+import team5 from "assets/img/RMC/jiaxuan.png";
+import team6 from "assets/img/RMC/jordon.png";
 import themeSelector from "../../SettingsPage/ThemeSelector";
 
 
@@ -60,7 +60,7 @@ export default function TeamSection() {
               <CardBody>
                 <p className=
                        {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
-                  NHL was cancelled...
+                  Burgers make any day better
                 </p>
               </CardBody>
             </Card>
@@ -114,7 +114,7 @@ export default function TeamSection() {
               <CardBody>
                 <p className=
                        {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
-                  Chief of Assassins
+                  Coffee grind
                 </p>
               </CardBody>
             </Card>
@@ -132,7 +132,7 @@ export default function TeamSection() {
               <CardBody>
                 <p className=
                        {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
-                  Wanna see a Magic Trick?
+                  Want to see a magic trick?
                 </p>
               </CardBody>
             </Card>
@@ -150,7 +150,7 @@ export default function TeamSection() {
               <CardBody>
                 <p className=
                        {themeSelector.someProp === 'dark'? darkClasses.description : themeSelector.someProp === 'meme'? memeClasses.description : classes.description}>
-                  Hows the weather today?
+                  Good vibes only
                 </p>
               </CardBody>
             </Card>
