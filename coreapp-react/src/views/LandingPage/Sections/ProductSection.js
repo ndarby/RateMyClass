@@ -1,15 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
-// @material-ui/icons
-import Chat from "@material-ui/icons/Chat";
-import VerifiedUser from "@material-ui/icons/VerifiedUser";
-import Fingerprint from "@material-ui/icons/Fingerprint";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import InfoArea from "components/InfoArea/InfoArea.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProductStyle.js";
@@ -40,8 +35,7 @@ import course6D from "assets/img/RMC/lightNetworks.jpg";
 import course6M from "assets/img/RMC/memeNetworks.jpg";
 
 import classNames from "classnames";
-import CardBody from "../../../components/Card/CardBody";
-import Card from "../../../components/Card/Card";
+
 import {Link} from "react-router-dom";
 import themeSelector from "../../SettingsPage/ThemeSelector";
 
@@ -59,10 +53,11 @@ export default function ProductSection() {
       classes.imgRounded,
       classes.imgFluid
   );
+
   return (
     <div className={classes.section}>
       <GridContainer justify="center">
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={12} md={4}>
           <h2 className=
                   {themeSelector.someProp === 'dark'? darkClasses.title : themeSelector.someProp === 'meme'? memeClasses.title : classes.title}>
               Course Catalogue

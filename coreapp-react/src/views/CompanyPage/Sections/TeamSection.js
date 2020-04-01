@@ -9,21 +9,19 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkTeamStyle.js";
 import memeStyles from "assets/jss/material-kit-react/views/RMC/memeTeamStyle.js";
 
-import team1 from "assets/img/faces/avatar.jpg";
-import team2 from "assets/img/faces/christian.jpg";
-import team3 from "assets/img/faces/kendall.jpg";
-import team4 from "assets/img/faces/L.jpg";
-import team5 from "assets/img/faces/Jen.jpg";
-import team6 from "assets/img/faces/Jor.jpg";
+import team1 from "assets/img/faces/evan.jpg";
+import team2 from "assets/img/faces/nathan.jpg";
+import team3 from "assets/img/faces/katrina.jpg";
+import team4 from "assets/img/faces/layla.jpg";
+import team5 from "assets/img/faces/jiaxuan.jpg";
+import team6 from "assets/img/faces/jordon.jpg";
 import themeSelector from "../../SettingsPage/ThemeSelector";
 
 
@@ -58,7 +56,6 @@ export default function TeamSection() {
                       {themeSelector.someProp === 'dark'? darkClasses.cardTitle : themeSelector.someProp === 'meme'? memeClasses.cardTitle : classes.cardTitle}>
                 Nathan Darby
                 <br />
-                {/* <small className={classes.smallTitle}>Designer</small> */}
               </h4>
               <CardBody>
                 <p className=
@@ -66,22 +63,6 @@ export default function TeamSection() {
                   NHL was cancelled...
                 </p>
               </CardBody>
-              <CardFooter className={classes.justifyCenter}>
-                <Button
-                  justIcon
-                  color="transparent"
-                  className={classes.margin5}
-                >
-                  <i className={classes.socials + " fab fa-facebook"} />
-                </Button>
-                <Button
-                  justIcon
-                  color="transparent"
-                  className={classes.margin5}
-                >
-                  <i className={classes.socials + " fab fa-linkedin"} />
-                </Button>
-              </CardFooter>
             </Card>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
@@ -100,24 +81,6 @@ export default function TeamSection() {
                   Sometimes it be like that
                 </p>
               </CardBody>
-              <CardFooter className={classes.justifyCenter}>
-                <Button
-                  justIcon
-                  color="transparent"
-                  className={classes.margin5}
-                  onClick={ () => alert('kat_chanco')}
-                >
-                  <i className={classes.socials + " fab fa-instagram"} />
-                </Button>
-                <Button
-                  justIcon
-                  color="transparent"
-                  className={classes.margin5}
-                  onClick={ () => alert('https://www.facebook.com/katchanco')}
-                >
-                  <i className={classes.socials + " fab fa-facebook"} />
-                </Button>
-              </CardFooter>
             </Card>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
@@ -136,29 +99,6 @@ export default function TeamSection() {
                   Why do you have to be so Krul
                 </p>
               </CardBody>
-              <CardFooter className={classes.justifyCenter}>
-                <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                >
-                  <i className={classes.socials + " fab fa-instagram"} />
-                </Button>
-                <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                >
-                  <i className={classes.socials + " fab fa-facebook"} />
-                </Button>
-                <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                >
-                  <i className={classes.socials + " fab fa-linkedin"} />
-                </Button>
-              </CardFooter>
             </Card>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
@@ -177,29 +117,6 @@ export default function TeamSection() {
                   Chief of Assassins
                 </p>
               </CardBody>
-              <CardFooter className={classes.justifyCenter}>
-                <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                >
-                  <i className={classes.socials + " fab fa-instagram"} />
-                </Button>
-                <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                >
-                  <i className={classes.socials + " fab fa-facebook"} />
-                </Button>
-                <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                >
-                  <i className={classes.socials + " fab fa-linkedin"} />
-                </Button>
-              </CardFooter>
             </Card>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
@@ -218,22 +135,6 @@ export default function TeamSection() {
                   Wanna see a Magic Trick?
                 </p>
               </CardBody>
-              <CardFooter className={classes.justifyCenter}>
-                <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                >
-                  <i className={classes.socials + " fab fa-facebook"} />
-                </Button>
-                <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                >
-                  <i className={classes.socials + " fab fa-linkedin"} />
-                </Button>
-              </CardFooter>
             </Card>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
@@ -252,22 +153,6 @@ export default function TeamSection() {
                   Hows the weather today?
                 </p>
               </CardBody>
-              <CardFooter className={classes.justifyCenter}>
-                <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                >
-                  <i className={classes.socials + " fab fa-facebook"} />
-                </Button>
-                <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                >
-                  <i className={classes.socials + " fab fa-linkedin"} />
-                </Button>
-              </CardFooter>
             </Card>
           </GridItem>
         </GridContainer>

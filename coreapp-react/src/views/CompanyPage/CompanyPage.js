@@ -21,9 +21,6 @@ import memeStyles from "assets/jss/material-kit-react/views/RMC/memeLandingPage.
 
 
 // Sections for this page
-import ProductSection from "../LandingPage/Sections/ProductSection.js";
-import TeamSection from "./Sections/TeamSection.js";
-import WorkSection from "./Sections/WorkSection.js";
 import AboutUs from "./Sections/AboutUs";
 import themeSelector from "../SettingsPage/ThemeSelector";
 import backgroundLight from "assets/img/RMC/lightCompany.jpg";

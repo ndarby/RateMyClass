@@ -1,15 +1,9 @@
 import React, {useState} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
-// @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
+
 // core components
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
-import Footer from "components/Footer/Footer.js";
+
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
@@ -17,21 +11,14 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-
 
 import image from "assets/img/RMC/login.jpg";
 import {Link} from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Redirect from "react-router-dom/es/Redirect";
-import Check from "@material-ui/icons/Check";
-import {Renderer as checked} from "jss";
 import themeSelector from "../SettingsPage/ThemeSelector";
 import viewSelector from "../ViewSelector";
 import loginInformation from "../LoginInformation";
@@ -52,10 +39,9 @@ export default function LoginPage(props) {
         accountInformation.first = 'Default First';
         accountInformation.last = 'Default Second';
 
-        alert(`Submitting Email: ${mail}`);
         loginInformation.mail = mail;
         accountInformation.mail = mail;
-        alert(`Submitting Password: ${word}`);
+
         loginInformation.word = word;
         accountInformation.word = word;
 
@@ -168,16 +154,14 @@ export default function LoginPage(props) {
                     <CardFooter className={classes.cardFooter}>
                     <Grid container>
                         <Grid item xs>
-                            {/*<Link to = "/landing-page" variant="body2">*/}
-                                <Button
-                                    simple color="info"
-                                    size="sm"
-                                    variant="contained"
-                                    onClick={guestSubmit}
-                                >
-                                    Continue as Guest
-                                </Button>
-                            {/*</Link>*/}
+                            <Button
+                                simple color="info"
+                                size="sm"
+                                variant="contained"
+                                onClick={guestSubmit}
+                            >
+                                Continue as Guest
+                            </Button>
                         </Grid>
                         <Grid item>
                             <Link to = "/sign-up-page" variant="body2">
