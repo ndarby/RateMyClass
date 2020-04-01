@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 
 // @material-ui/core components
 import {makeStyles} from "@material-ui/core/styles";
+import {withStyles} from "@material-ui/core/styles";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -68,7 +69,7 @@ IconContainer.propTypes = {
     value: PropTypes.number.isRequired,
 };
 
-const StyledRating = makeStyles({
+const StyledRating = withStyles({
     iconFilled: {
         color: '#ffe600',
     },
