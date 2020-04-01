@@ -1,4 +1,4 @@
-const review_handler = require('../model/review_handler');
+const review_handler = require('../../model/review_handler');
 /**
  *  This is the base place to handle requesting events. This method is called on each new event received
  */
