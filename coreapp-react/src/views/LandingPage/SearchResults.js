@@ -210,7 +210,7 @@ export default function SearchResultsPage(props) {
                                         {courses.map(course =>
                                             <GridItem xs={12} sm={12} md={8}>
 
-                                                {searchInformation.searchInfo === course._course_name ?
+                                                {searchInformation.searchInfo === course._course_num ?
                                                     <Link to={"/class-page/" + course._course_id}>
                                                         <Button
                                                             fullWidth
@@ -222,13 +222,14 @@ export default function SearchResultsPage(props) {
 
                                                         </Button>
                                                     </Link>:
-                                                    <Button
-                                                        disabled
-                                                        fullWidth
-                                                        variant="contained"
-                                                    >
-                                                        {course._course_num}&nbsp;{course._course_name}&nbsp;-&nbsp;{course._course_description}
-                                                    </Button>
+                                                    <br/>
+                                                    // <Button
+                                                    //     disabled
+                                                    //     fullWidth
+                                                    //     variant="contained"
+                                                    // >
+                                                    //     {course._course_num}&nbsp;{course._course_name}&nbsp;-&nbsp;{course._course_description}
+                                                    // </Button>
                                                 }
                                             </GridItem>
                                         )}
