@@ -9,14 +9,12 @@ import Fingerprint from "@material-ui/icons/Fingerprint";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import InfoArea from "components/InfoArea/InfoArea.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProductStyle.js";
 import memeStyles from "assets/jss/material-kit-react/views/RMC/memeProductStyle.js";
 
 import classNames from "classnames";
-import ThemeOptions from "../../SettingsPage/Sections/ThemeOptionsTop";
 import TeamSection from "./TeamSection";
 import themeSelector from "../../SettingsPage/ThemeSelector";
 

@@ -4,8 +4,6 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
-// @material-ui/icons
-
 // core components
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -20,9 +18,6 @@ import darkStyles from "assets/jss/material-kit-react/views/RMC/darkLandingPage.
 import memeStyles from "assets/jss/material-kit-react/views/RMC/memeLandingPage.js";
 
 // Sections for this page
-import ProductSection from "../LandingPage/Sections/ProductSection.js";
-import TeamSection from "../CompanyPage/Sections/TeamSection.js";
-import WorkSection from "../CompanyPage/Sections/WorkSection.js";
 import ThemeOptionsTop from "./Sections/ThemeOptionsTop";
 import ButtonBases from "./Sections/ButtonBases";
 import ThemeOptionsBottom from "./Sections/ThemeOptionsBottom";
@@ -34,9 +29,6 @@ import backgroundDark from "assets/img/RMC/darkSettings.jpg";
 import lightFiller from "assets/img/RMC/lightBackground.jpg";
 import darkFiller from "assets/img/RMC/darkBackground.jpg";
 import memeFiller from "assets/img/RMC/memeBackground.jpg";
-
-// themeSelector.someProp = 'light';
-//Object.freeze(themeSelector);
 
 const dashboardRoutes = [];
 const useStyles = makeStyles(styles);
@@ -114,20 +106,6 @@ export default function SettingsPage(props) {
                                     The place where change is possible
                                 </h4>
                                 <br />
-
-                                {/*
-                  <Button
-                    color="danger"
-                    size="lg"
-                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fas fa-play" />
-                    Watch video
-                  </Button>
-                  */}
-
                             </GridItem>
                         </GridContainer>
                     </div>

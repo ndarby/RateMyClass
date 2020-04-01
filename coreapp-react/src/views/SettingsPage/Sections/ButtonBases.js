@@ -6,11 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import theme1 from "assets/img/RMC/light.jpg";
 import theme2 from "assets/img/RMC/dark.jpg";
 import theme3 from "assets/img/RMC/meme.jpg";
-import GridContainer from "../../../components/Grid/GridContainer";
-import GridItem from "../../../components/Grid/GridItem";
+
 import {Link} from "react-router-dom";
 import themeSelector from "../ThemeSelector";
-
 
 
 const image1 = [
@@ -46,7 +44,7 @@ const useStyles = makeStyles(theme => ({
         position: 'relative',
         height: 200,
         [theme.breakpoints.down('xs')]: {
-            width: '100% !important', // Overrides inline-style
+            width: '100% !important',
             height: 100,
         },
         '&:hover, &$focusVisible': {
