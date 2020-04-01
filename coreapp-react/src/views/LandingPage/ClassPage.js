@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from 'react';
+import { useParams } from "react-router";
+
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -30,30 +32,60 @@ const useStyles = makeStyles(styles);
 export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
-  return (
-    <div>
-      <Header
-        color="transparent"
-        routes={dashboardRoutes}
-        rightLinks={<HeaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 400,
-          color: "info"
-        }}
-        {...rest}
-      />
-      <Parallax filter image={require("assets/img/RMC/lightArchitecture.jpg")}>
-        <div className={classes.container}>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>INSERT COURSE NAME HERE</h1>
-              <h4>
-                INSERT COURSE TITLE HERE
-              </h4>
-              <br />
 
-              {/*
+    const [course, setCourse] = useState({});
+    const [isLoaded, setIsLoaded] = useState(false);
+    let { course_id } = useParams();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            fetch("/api/courses/get/"+course_id, {
+                "method": "GET",
+                "headers": {}
+            }).then(response => response.json())
+                .then(response => {
+                    setIsLoaded(true);
+                    setCourse(response);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+
+        };
+        fetchData();
+    }, []);
+
+    if(!isLoaded) {
+        return (
+            <h1></h1>
+        );
+    } else {
+
+
+        return (
+            <div>
+                <Header
+                    color="transparent"
+                    routes={dashboardRoutes}
+                    rightLinks={<HeaderLinks/>}
+                    fixed
+                    changeColorOnScroll={{
+                        height: 400,
+                        color: "info"
+                    }}
+                    {...rest}
+                />
+                <Parallax filter image={require("assets/img/RMC/lightArchitecture.jpg")}>
+                    <div className={classes.container}>
+                        <GridContainer>
+                            <GridItem xs={12} sm={12} md={6}>
+                                <h1 className={classes.title}>{course._course_name} {course._course_num}</h1>
+                                <h4>
+                                    {course._course_description}
+                                </h4>
+                                <br/>
+
+                                {/*
               <Button
                 color="danger"
                 size="lg"
@@ -66,16 +98,17 @@ export default function LandingPage(props) {
               </Button>
               */}
 
-            </GridItem>
-          </GridContainer>
-        </div>
-      </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
-          <ClassSection />
-        </div>
-      </div>
-      <Footer />
-    </div>
-  );
+                            </GridItem>
+                        </GridContainer>
+                    </div>
+                </Parallax>
+                <div className={classNames(classes.main, classes.mainRaised)}>
+                    <div className={classes.container}>
+                        <ClassSection/>
+                    </div>
+                </div>
+                <Footer/>
+            </div>
+        );
+    }
 }
