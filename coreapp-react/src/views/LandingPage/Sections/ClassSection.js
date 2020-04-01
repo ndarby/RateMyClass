@@ -1,4 +1,6 @@
 import React from "react";
+import { useParams } from "react-router";
+
 // @material-ui/core components
 import {makeStyles} from "@material-ui/core/styles";
 // core components
@@ -82,6 +84,10 @@ export default function ProductSection() {
         classes.imgRounded,
         classes.imgFluid
     );
+    // console.log(this.props.match.params.course_id);
+    let { course_id } = useParams();
+    console.log(course_id);
+
     return (
         <div className={classes.section}>
             <GridContainer justify="center">
