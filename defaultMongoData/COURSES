@@ -1,0 +1,4 @@
+{"_id":{"$oid":"5e840687b863770032726934"},"_course_id":"a53cbbc5-0b6a-4c78-9c9b-060f4ed03160","_course_num":"SENG","_course_name":"401","_course_description":"Software Architure","_course_img":{"light":"...","dark":"...","meme":"..."}}
+{"_id":{"$oid":"5e84068bb863770032726935"},"_course_id":"7ad59885-4f58-4707-a640-91469612e658","_course_num":"ENCM","_course_name":"511","_course_description":"Embedded System Interfacing","_course_img":{"light":"...","dark":"...","meme":"..."}}
+{"_id":{"$oid":"5e84068db863770032726936"},"_course_id":"22dfbb4e-da28-46fb-886c-0d0ff4166f52","_course_num":"PSYC","_course_name":"203","_course_description":"Psychology for everyday life.","_course_img":{"light":"...","dark":"...","meme":"..."}}
+{"_id":{"$oid":"5e84068fb863770032726937"},"_course_id":"c6c10584-9580-4677-9308-494c9c6dfcb7","_course_num":"ENCM","_course_name":"514","_course_description":"Introduction to nanotechnology","_course_img":{"light":"...","dark":"...","meme":"..."}}
