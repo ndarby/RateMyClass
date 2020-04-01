@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+// import React, {useState} from "react";
+import React, {useState, useEffect} from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -34,6 +35,11 @@ import memeFiller from "assets/img/RMC/memeBackground.jpg";
 
 import {Search} from "@material-ui/icons";
 import Card from "../../components/Card/Card";
+import {Link} from "react-router-dom";
+import searchInformation from "../SearchInformation";
+// import course1D from "*.jpg";
+// import course1M from "*.jpg";
+// import course1 from "*.jpg";
 
 const useStyles = makeStyles(styles);
 const useDarkStyles = makeStyles(darkStyles);
@@ -42,22 +48,51 @@ const useProductStyles = makeStyles(productStyles);
 const useProductDarkStyles = makeStyles(productDarkStyles);
 const useProductMemeStyles = makeStyles(productMemeStyles);
 
-let cName = 'SENG';
-let cNum = '401';
-let cDescription = 'Software Architecture';
+// let cName = 'SENG';
+// let cNum = '401';
+// let cDescription = 'Software Architecture';
 
 export default function SearchPage(props) {
-    const [search, setSearch] = useState(undefined);
-    const isEnabled = search !== '' && search !== undefined;
+    // const search = localStorage.getItem('search');
 
-    const [courseName, setCourseName] = useState(cName);
-    const [courseNum, setCourseNum] = useState(cNum);
-    const [courseDescription, setCourseDescription] = useState(cDescription);
+    const [courses, setCourses] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            fetch("/api/courses/get", {
+                "method": "GET",
+                "headers": {}
+            }).then(response => response.json())
+                .then(response => {
+                    setIsLoaded(true);
+                    setCourses(response);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+
+        };
+        fetchData();
+    }, []);
+
+    const [searchNumber, setSearchNumber] = useState('');
+    const isEnabled = searchNumber !== '' && searchNumber !== undefined;
+
+    // const [courseName, setCourseName] = useState(cName);
+    // const [courseNum, setCourseNum] = useState(cNum);
+    // const [courseDescription, setCourseDescription] = useState(cDescription);
+
+    const [courseName, setCourseName] = useState('');
+    const [courseNum, setCourseNum] = useState('');
+    const [courseDescription, setCourseDescription] = useState('');
+
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        alert(`Submitting: ${search}`);
-        props.history.push('/search-page');
+        // localStorage.setItem("search", searchNumber);
+        searchInformation.searchInfo = searchNumber;
+        props.history.push('/search-results-page');
     };
 
     const classes = useStyles();
@@ -81,181 +116,258 @@ export default function SearchPage(props) {
     }, 700);
 
     const { ...rest } = props;
-    return (
-        <div>
-            {themeSelector.someProp === 'dark'?
-                <Header
-                    color="transparent"
-                    rightLinks={<HeaderLinks />}
-                    fixed
-                    changeColorOnScroll={{
-                        height: 200,
-                        color: "dark"
-                    }}
-                    {...rest}
-                /> :
-                themeSelector.someProp === 'meme'?
+    if(!isLoaded) {
+        return (
+            <GridContainer justify="center">
+                <GridItem xs={12} sm={12} md={8}>
+                    <h2 className=
+                            {themeSelector.someProp === 'dark' ? darkClasses.title : themeSelector.someProp === 'meme' ? memeClasses.title : classes.title}>
+                        Course Catalogue
+                    </h2>
+                    <h5 className=
+                            {themeSelector.someProp === 'dark' ? darkClasses.description : themeSelector.someProp === 'meme' ? memeClasses.description : classes.description}>
+                        Failure when loading courses.
+                    </h5>
+                    {/*>>>>>>> c767c1943bb73632be5548973933eef4c61756dc*/}
+                </GridItem>
+            </GridContainer>
+        );
+    } else {
+        return (
+            <div>
+                {themeSelector.someProp === 'dark' ?
                     <Header
                         color="transparent"
-                        rightLinks={<HeaderLinks />}
+                        rightLinks={<HeaderLinks/>}
                         fixed
                         changeColorOnScroll={{
                             height: 200,
-                            color: "primary"
+                            color: "dark"
                         }}
                         {...rest}
                     /> :
-                    <Header
-                        color="transparent"
-                        rightLinks={<HeaderLinks />}
-                        fixed
-                        changeColorOnScroll={{
-                            height: 200,
-                            color: "info"
-                        }}
-                        {...rest}
-                    />
-            }
+                    themeSelector.someProp === 'meme' ?
+                        <Header
+                            color="transparent"
+                            rightLinks={<HeaderLinks/>}
+                            fixed
+                            changeColorOnScroll={{
+                                height: 200,
+                                color: "primary"
+                            }}
+                            {...rest}
+                        /> :
+                        <Header
+                            color="transparent"
+                            rightLinks={<HeaderLinks/>}
+                            fixed
+                            changeColorOnScroll={{
+                                height: 200,
+                                color: "info"
+                            }}
+                            {...rest}
+                        />
+                }
 
-            <div
-                className={classes.pageHeader}
-                style={{
-                    backgroundImage: "url(" + backgroundURL + ")",
-                    backgroundSize: "cover",
-                    backgroundPosition: "top center",
-                }}
-            >
-                <Parallax filter image=
-                    {themeSelector.someProp === 'dark'? backgroundDark : themeSelector.someProp === 'meme'?  backgroundMeme : backgroundLight}
+                <div
+                    className={classes.pageHeader}
+                    style={{
+                        backgroundImage: "url(" + backgroundURL + ")",
+                        backgroundSize: "cover",
+                        backgroundPosition: "top center",
+                    }}
                 >
-                    <div className={classes.container}>
-                        <GridContainer>
-                            <GridItem xs={12} sm={12} md={6}>
-                                <h1 className={classes.title}>Search for Course</h1>
-                                <h4>
-                                    Find a Course in the Search Bar Below
-                                </h4>
-                                <br />
-                            </GridItem>
-                        </GridContainer>
-                    </div>
-                </Parallax>
-                <div className=
-                         {themeSelector.someProp === 'dark'? classNames(darkClasses.main, classes.mainRaised) : themeSelector.someProp === 'meme'? classNames(memeClasses.main, classes.mainRaised) : classNames(classes.main, classes.mainRaised)}>
-                    <div>
-                        <div className={classes.section}>
-                            <div className={classes.container}>
-                                <GridContainer justify="center">
-                                    <GridItem xs={12} sm={12} md={4}>
-                                        <div><br></br></div>
-                                        <Card className={classes[cardAnimaton]}>
-                                            <form className={classes.form} noValidate onSubmit={handleSubmit}>
-                                                <cardBody>
-                                                    <GridItem xs={12} sm={12} md={12}>
-                                                        <TextField
-                                                            variant="filled"
-                                                            margin="normal"
-                                                            id="search"
-                                                            fullWidth
-                                                            label="Course Search Bar"
-                                                            name="search"
-                                                            autoComplete="search"
-                                                            InputProps={{
-                                                                endAdornment: (
-                                                                    <InputAdornment position="end">
-                                                                        <Search className={classes.searchIcon} />
-                                                                    </InputAdornment>
-                                                                )
-                                                            }}
-                                                            value={search}
-                                                            onChange={(e) => setSearch(e.target.value)}
-                                                            autoFocus
-                                                        />
-                                                    </GridItem>
-                                                    <div>
-                                                        <br></br>
-                                                    </div>
-                                                    <GridItem xs={12} sm={12} md={12}>
-                                                        <Button
-                                                            disabled={!isEnabled}
-                                                            type="submit"
-                                                            fullWidth
-                                                            variant="contained"
-                                                            color="info"
-                                                            className={classes.submit}
-                                                        >
-                                                            Submit Search
-                                                        </Button>
-                                                    </GridItem>
-                                                </cardBody>
-                                            </form>
-                                        </Card>
-                                        <GridItem xs={12} sm={12} md={12}>
-                                            <h4 className=
-                                                    {themeSelector.someProp === 'dark'? productDarkClasses.title : themeSelector.someProp === 'meme'? productMemeClasses.title : productClasses.title}>
-                                                Search Results Below:
-                                            </h4>
+                    <Parallax filter image=
+                        {themeSelector.someProp === 'dark' ? backgroundDark : themeSelector.someProp === 'meme' ? backgroundMeme : backgroundLight}
+                    >
+                        <div className={classes.container}>
+                            <GridContainer>
+                                <GridItem xs={12} sm={12} md={6}>
+                                    <h1 className={classes.title}>Search for Course</h1>
+                                    <h4>
+                                        Find a Course by using the Search Bar Below
+                                    </h4>
+                                    <br/>
+                                </GridItem>
+                            </GridContainer>
+                        </div>
+                    </Parallax>
+                    <div className=
+                             {themeSelector.someProp === 'dark' ? classNames(darkClasses.main, classes.mainRaised) : themeSelector.someProp === 'meme' ? classNames(memeClasses.main, classes.mainRaised) : classNames(classes.main, classes.mainRaised)}>
+                        <div>
+                            <div className={classes.section}>
+                                <div className={classes.container}>
+                                    <GridContainer justify="center">
+                                        <GridItem xs={12} sm={12} md={4}>
+                                            <div><br></br></div>
+                                            <Card className={classes[cardAnimaton]}>
+                                                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                                                    <cardBody>
+                                                        <GridItem xs={12} sm={12} md={12}>
+                                                            <TextField
+                                                                variant="filled"
+                                                                margin="normal"
+                                                                id="search"
+                                                                fullWidth
+                                                                label="Search By COURSE NUMBER"
+                                                                name="search"
+                                                                autoComplete="search"
+                                                                InputProps={{
+                                                                    endAdornment: (
+                                                                        <InputAdornment position="end">
+                                                                            <Search className={classes.searchIcon}/>
+                                                                        </InputAdornment>
+                                                                    )
+                                                                }}
+                                                                value={searchNumber}
+                                                                onChange={(e) => setSearchNumber(e.target.value)}
+                                                                autoFocus
+                                                            />
+                                                        </GridItem>
+                                                        <div>
+                                                            <br></br>
+                                                        </div>
+                                                        <GridItem xs={12} sm={12} md={12}>
+                                                            <Button
+                                                                disabled={!isEnabled}
+                                                                type="submit"
+                                                                fullWidth
+                                                                variant="contained"
+                                                                color="info"
+                                                                className={classes.submit}
+                                                            >
+                                                                Submit Search
+                                                            </Button>
+                                                        </GridItem>
+                                                    </cardBody>
+                                                </form>
+                                            </Card>
+                                            {/*<GridItem xs={12} sm={12} md={12}>*/}
+                                            {/*    <h4 className=*/}
+                                            {/*            {themeSelector.someProp === 'dark' ? productDarkClasses.title : themeSelector.someProp === 'meme' ? productMemeClasses.title : productClasses.title}>*/}
+                                            {/*        Search Results Below:*/}
+                                            {/*    </h4>*/}
+                                            {/*</GridItem>*/}
                                         </GridItem>
+                                    </GridContainer>
+                                    {/*<GridContainer justify={"center"}>*/}
 
-                                        <Button
-                                            fullWidth
-                                            variant="contained"
-                                            color="success"
-                                        >
-                                            {courseName}&nbsp;{courseNum}&nbsp;-&nbsp;{courseDescription}
-                                        </Button>
+                                    {/*    {courses.map(course =>*/}
+                                    {/*        <GridItem xs={12} sm={12} md={8}>*/}
 
-                                        <Button
-                                            fullWidth
-                                            variant="contained"
-                                            color="success"
-                                        >
-                                            SENG 471 - Software Requirements Engineering
-                                        </Button>
+                                    {/*            {search === course._course_name ?*/}
+                                    {/*                <Link to={"/class-page/" + course._course_id}>*/}
+                                    {/*                <Button*/}
+                                    {/*                    fullWidth*/}
+                                    {/*                    variant="contained"*/}
+                                    {/*                    color="success"*/}
+                                    {/*                >*/}
 
-                                        <Button
-                                            fullWidth
-                                            variant="contained"
-                                            color="success"
-                                        >
-                                            SENG 438 - Software Testing, Reliability, and Quality
-                                        </Button>
+                                    {/*                        {course._course_num}&nbsp;{course._course_name}&nbsp;-&nbsp;{course._course_description}*/}
 
-                                        <Button
-                                            fullWidth
-                                            variant="contained"
-                                            color="success"
-                                        >
-                                            ENCM 511 - Embedded System Interfacing
-                                        </Button>
+                                    {/*                </Button>*/}
+                                    {/*                </Link>:*/}
+                                    {/*                <Button*/}
+                                    {/*                    disabled*/}
+                                    {/*                    fullWidth*/}
+                                    {/*                    variant="contained"*/}
+                                    {/*                >*/}
+                                    {/*                    {course._course_num}&nbsp;{course._course_name}&nbsp;-&nbsp;{course._course_description}*/}
+                                    {/*                </Button>*/}
+                                    {/*            }*/}
 
-                                        <Button
-                                            fullWidth
-                                            variant="contained"
-                                            color="success"
-                                        >
-                                            CPSC 457 - Principles of Operating Systems
-                                        </Button>
+                                                {/*<GridItem xs={12} sm={12} md={11}>*/}
+                                                {/*    {search === course._course_name ?*/}
+                                                {/*        <Link to="/class-page">*/}
+                                                {/*            <h4 className=*/}
+                                                {/*                    {themeSelector.someProp === 'dark' ? productDarkClasses.title : themeSelector.someProp === 'meme' ? productMemeClasses.title : productClasses.title}>*/}
+                                                {/*                {course._course_name} {course._course_num}*/}
 
-                                        <Button
-                                            fullWidth
-                                            variant="contained"
-                                            color="success"
-                                        >
-                                            CPSC 441 - Computer Networks
-                                        </Button>
+                                                {/*            </h4>*/}
+                                                {/*        </Link> :*/}
 
-                                    </GridItem>
-                                </GridContainer>
-                                     <div>
-                                         <br></br>
-                                     </div>
+                                                {/*            <h4 className=*/}
+                                                {/*                    {themeSelector.someProp === 'dark' ? productDarkClasses.title : themeSelector.someProp === 'meme' ? productMemeClasses.title : productClasses.title}>*/}
+
+                                                {/*            </h4>*/}
+
+                                                {/*    }*/}
+
+
+                                                {/*    {courseDescription === course._course_description?*/}
+                                                {/*        <p className=*/}
+                                                {/*               {themeSelector.someProp === 'dark' ? productDarkClasses.description : themeSelector.someProp === 'meme' ? productMemeClasses.description : productClasses.description}>*/}
+                                                {/*            {course._course_description}*/}
+                                                {/*        </p> :*/}
+                                                {/*        <p className=*/}
+                                                {/*               {themeSelector.someProp === 'dark' ? productDarkClasses.description : themeSelector.someProp === 'meme' ? productMemeClasses.description : productClasses.description}>*/}
+
+                                                {/*        </p>*/}
+                                                {/*    }*/}
+                                                {/*</GridItem>*/}
+                                        {/*     </GridItem>*/}
+                                        {/*)}*/}
+
+                                        {/*    <Button*/}
+                                        {/*        fullWidth*/}
+                                        {/*        variant="contained"*/}
+                                        {/*        color="success"*/}
+                                        {/*    >*/}
+                                        {/*        {courseName}&nbsp;{courseNum}&nbsp;-&nbsp;{courseDescription}*/}
+                                        {/*    </Button>*/}
+
+                                        {/*    <Button*/}
+                                        {/*        fullWidth*/}
+                                        {/*        variant="contained"*/}
+                                        {/*        color="success"*/}
+                                        {/*    >*/}
+                                        {/*        SENG 471 - Software Requirements Engineering*/}
+                                        {/*    </Button>*/}
+
+                                        {/*    <Button*/}
+                                        {/*        fullWidth*/}
+                                        {/*        variant="contained"*/}
+                                        {/*        color="success"*/}
+                                        {/*    >*/}
+                                        {/*        SENG 438 - Software Testing, Reliability, and Quality*/}
+                                        {/*    </Button>*/}
+
+                                        {/*    <Button*/}
+                                        {/*        fullWidth*/}
+                                        {/*        variant="contained"*/}
+                                        {/*        color="success"*/}
+                                        {/*    >*/}
+                                        {/*        ENCM 511 - Embedded System Interfacing*/}
+                                        {/*    </Button>*/}
+
+                                        {/*    <Button*/}
+                                        {/*        fullWidth*/}
+                                        {/*        variant="contained"*/}
+                                        {/*        color="success"*/}
+                                        {/*    >*/}
+                                        {/*        CPSC 457 - Principles of Operating Systems*/}
+                                        {/*    </Button>*/}
+
+                                        {/*    <Button*/}
+                                        {/*        fullWidth*/}
+                                        {/*        variant="contained"*/}
+                                        {/*        color="success"*/}
+                                        {/*    >*/}
+                                        {/*        CPSC 441 - Computer Networks*/}
+                                        {/*    </Button>*/}
+
+                                        {/*</GridItem>*/}
+                                    {/*</GridContainer>*/}
+                                    <div>
+                                        <br></br>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <Footer/>
                 </div>
-                <Footer />
             </div>
-        </div>
-    );
+        );
+    }
 }
