@@ -27,6 +27,7 @@
     "mongodb": "^3.5.5",
     "nodemon": "^2.0.2",
     "promise": "latest",
-    "rabbitmq-event-manager": "^1.1.1"
+    "rabbitmq-event-manager": "^1.1.1",
+    "request": "^2.88.2"
   }
 }

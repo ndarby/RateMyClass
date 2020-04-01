@@ -4,7 +4,7 @@ const comment_routes = express.Router();
 
 comment_routes.post('/new', (req, res) => {
     let params = req.body;
-    comment_handler.commentEventStream.postNewComment(params.course_id, params.review_id, params.user_id, params.reply_id, params.comment_body)
+    comment_handler.commentEventStream.postNewComment(params.review_id, params.user_id, params.parent_id, params.comment_body)
         .then(result => res.json('comment with id ' + result + ' created successfully'))
         .catch(err => {
             res.status(500).json({err: 'unable to create comment'});

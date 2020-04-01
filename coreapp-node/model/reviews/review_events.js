@@ -1,7 +1,7 @@
 const es = require(global.PROJECT + '/model/es');
 const uuidv4 = require('uuid/v4');
 
-module.exports.reviewEventStream = {
+module.exports.reviewEventOutputStream = {
     postNewReview: function (course_id, user_id, prof_name, review_title, review_body, rating, tags) {
         return new Promise(function (resolve, reject) {
             const review_id = uuidv4();
