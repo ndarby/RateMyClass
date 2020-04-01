@@ -118,7 +118,7 @@ export default function ProductSection() {
                                 <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                                     <Link to={"/class-page/" + course._course_id}>
                                         <img src=
-                                                 {themeSelector.someProp === 'dark' ? course1D : themeSelector.someProp === 'meme' ? course1M : course1}
+                                                 {themeSelector.someProp === 'dark' ? course._course_img.dark : themeSelector.someProp === 'meme' ? course._course_img.meme  : course._course_img.light }
                                              alt="..." className={imageClasses} height={"300px"} width={"300px"}/>
 
                                     </Link>
