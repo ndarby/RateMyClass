@@ -18,6 +18,9 @@ import Rating from '@material-ui/lab/Rating';
 
 import classNames from "classnames";
 
+import ReviewSection from "./ReviewSection.js";
+
+
 // import course1 from "assets/img/RMC/sArchitecture.jpg";
 // import course2 from "assets/img/RMC/sRequirements.jpg";
 // import course3 from "assets/img/RMC/sTesting.jpg";
@@ -100,9 +103,11 @@ export default function ProductSection() {
                         IconContainerComponent={IconContainer}
                     >Current Course Rating</Rating>
 
-                    {/*display reviews and comments here*/}
+                    {/*display reviews*/}
+
 
                 </Box>
+                <ReviewSection/>
 
             </div>
         </div>

@@ -19,8 +19,8 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 
 // Sections for this page
 import ClassSection from "./Sections/ClassSection.js";
-import TeamSection from "../CompanyPage/Sections/TeamSection.js";
-import WorkSection from "../CompanyPage/Sections/WorkSection.js";
+
+
 
 
 const dashboardRoutes = [];
