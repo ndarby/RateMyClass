@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5e840a03d60f70002ae426d3"},"_attribute_id":"ee33129e-e9b9-47db-b6d2-d8e3d5fe44b1","_course_id":"7ad59885-4f58-4707-a640-91469612e658","_rating":"1","_total":1,"_tags":"[\"Bad\", \"EndMe\", \"ThanksIHateIt\", \"BadTest\", \"Confusion\"]"}
+{"_id":{"$oid":"5e840a05d60f70002ae426d4"},"_attribute_id":"9d593bec-776e-4693-b9a4-91f7d6c38302","_course_id":"a53cbbc5-0b6a-4c78-9c9b-060f4ed03160","_rating":"1","_total":1,"_tags":"[\"Bad\", \"EndMe\", \"ThanksIHateIt\", \"BadFinal\", \"Confusion\", \"BadLectures\"]"}
+{"_id":{"$oid":"5e840a07d60f70002ae426d5"},"_attribute_id":"975c82df-c358-4119-aa70-4a35ae09b04d","_course_id":"22dfbb4e-da28-46fb-886c-0d0ff4166f52","_rating":"10/10","_total":1,"_tags":"[\"Meme\", \"BigBrain\", \"GoodTime\"]"}
