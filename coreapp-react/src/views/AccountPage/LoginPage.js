@@ -115,7 +115,12 @@ export default function LoginPage(props) {
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
                   {/*form to use to login*/}
-                <form className={classes.form} noValidate onSubmit={handleSubmit} >
+                <form className={classes.form} noValidate onSubmit={handleSubmit}
+                      onKeyPress={event => {
+                            if (event.which === 13 /* Enter */) {
+                                event.preventDefault();
+                            }}}
+                >
                     {/*card title*/}
                     <CardHeader color="info" className={classes.cardHeader}>
                         <h3><b>RateMyClass</b></h3>

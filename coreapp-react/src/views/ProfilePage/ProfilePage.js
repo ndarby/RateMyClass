@@ -215,7 +215,12 @@ export default function ProfilePage(props) {
                                 <GridItem xs={12} sm={12} md={8}>
                                     <Card className={classes[cardAnimaton]}>
                                         {/*form to use for account*/}
-                                        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                                        <form className={classes.form} noValidate onSubmit={handleSubmit}
+                                              onKeyPress={event => {
+                                                  if (event.which === 13 /* Enter */) {
+                                                      event.preventDefault();
+                                                  }}}
+                                        >
                                             <CardHeader color="info" className={classes.cardHeader}>
                                                 <h3><b>RateMyClass</b></h3>
                                             </CardHeader>
