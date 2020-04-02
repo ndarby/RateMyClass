@@ -4,7 +4,6 @@ import React, {useState, useEffect} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import Chip from '@material-ui/core/Chip';
-import Paper from '@material-ui/core/Paper';
 
 //IMPORT STUFF HERE
 
@@ -23,38 +22,38 @@ export default function ReviewSection() {
 
     const [course, setCourse] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
-    // const [attrData, setAttrData] = useState({});
+    const [attrData, setAttrData] = useState({});
     //these need to be loaded in the form of:
     //{key: 0, label: 'tagTextHere'}, {key: 1, label: 'nextTagTextHere'}, and so on...
-    const [attrData, setAttrData] = useState([{key: 0, label: 'tag1'}, {key: 1, label: 'tag2'}]);
-    // let {course_id} = useParams();
-    //
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         //FIX THIS, NEEDS TO ASK FOR ATTRIBUTES
-    //         fetch("/api/courses/get/" + course_id, {
-    //             "method": "GET",
-    //             "headers": {}
-    //         }).then(response => response.json())
-    //             .then(response => {
-    //                 setIsLoaded(true);
-    //                 setCourse(response);
-    //             })
-    //             .catch(err => {
-    //                 console.log(err);
-    //             });
-    //
-    //     };
-    //     fetchData();
-    // }, []);
-    //
-    // if (!isLoaded) {
-    //     return (
-    //         <h1 className={classes.root}>
-    //             Unable to Load Tags
-    //         </h1>
-    //     );
-    // } else {
+
+    let {course_id} = useParams();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            //FIX THIS, NEEDS TO ASK FOR ATTRIBUTES
+            fetch("/api/courses/get/" + course_id, {
+                "method": "GET",
+                "headers": {}
+            }).then(response => response.json())
+                .then(response => {
+                    setIsLoaded(true);
+                    setCourse(response);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+
+        };
+        fetchData();
+    }, []);
+
+    if (!isLoaded) {
+        return (
+            <h1 className={classes.root}>
+                Unable to Load Tags
+            </h1>
+        );
+    } else {
 
         return (
 
@@ -66,24 +65,21 @@ export default function ReviewSection() {
                         <h2 className={classes.title}>
                             Related Tags:
                         </h2>
-                        <Paper className={classes.root}>
-                            {attrData.map((data) => {
-                                let icon;
+                        {attrData.map((data) => {
+                            let icon;
 
-                                return(
-                                    <Chip
-                                        key={data.key}
-                                        icon={icon}
-                                        label={data.label}
-                                        className={classes.root}
-                                    />
-                                );
-                            })}
-                        </Paper>
-
+                            return(
+                                <Chip
+                                    key={data.key}
+                                    icon={icon}
+                                    label={data.label}
+                                    className={classes.root}
+                                />
+                            );
+                        })}
                     </GridItem>
                 </GridContainer>
             </div>
         );
-    // }
+    }
 }
