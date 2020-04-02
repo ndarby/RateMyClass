@@ -25,29 +25,50 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import ReplyIcon from '@material-ui/icons/Reply';
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import TextField from "@material-ui/core/TextField";
+import Slider from "@material-ui/core/Slider";
+import ChipInput from "material-ui-chip-input";
+import DialogActions from "@material-ui/core/DialogActions";
+import CardHeader from "../../../components/Card/CardHeader";
 
 
 //IMPORT STUFF HERE
 
 const useStyles = makeStyles(styles);
 
-// adapted from https://coderrocketfuel.com/article/recursion-in-react-render-comments-with-nested-children
-function Comment({comment}) {
-    const [open, setOpen] = React.useState(true);
 
+
+export default function CommentSection(props) {
     const classes = useStyles();
+    const [comments, setComments] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [open, setOpen] = React.useState(false);
+    const [reviewIDReply, setReviewIDReply] = React.useState();
+    const [parentIDReply, setPrentIDReply] = React.useState();
 
-    const nestedComments = (comment.children || []).map(comment => {
-        return <Comment key={comment._comment_id} comment={comment} type="child"/>
-    });
+    const [comment_body, set_comment_body] = useState(undefined);
 
-    return (
+    // adapted from https://coderrocketfuel.com/article/recursion-in-react-render-comments-with-nested-children
+    function Comment({comment}) {
+        const [open, setOpen] = React.useState(true);
 
-        <span>
+        const classes = useStyles();
+
+        const nestedComments = (comment.children || []).map(comment => {
+            return <Comment key={comment._comment_id} comment={comment} type="child"/>
+        });
+
+        return (
+
+            <span>
             <ListItem button className={classes.nested}>
-                <ListItemText primary="Evan Krul" secondary={comment._comment_body}/>
+                <ListItemText primary={comment._account_credentials._first_name + " " +comment._account_credentials._last_name} secondary={comment._comment_body}/>
                 <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton style={isNotLoggedIn ? {display: "none"} : {}} onClick={() => handleClickOpen(props.review_id, comment._comment_id)} edge="end" aria-label="delete">
                         <ReplyIcon/>
                     </IconButton>
                 </ListItemSecondaryAction>
@@ -58,18 +79,60 @@ function Comment({comment}) {
                 </List>
             </Collapse>
         </span>
-    )
-}
+        )
+    }
 
-export default function CommentSection(props) {
-    const classes = useStyles();
-    const [comments, setComments] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [open, setOpen] = React.useState(true);
+    const account = JSON.parse(localStorage.getItem('account'));
+    const isNotLoggedIn = account === undefined || account === null;
+    /* nothing can be submitted if field is not filled out */
+    const isEnabled = comment_body !== undefined && comment_body !== '';
 
-    const handleClick = () => {
-        setOpen(!open);
+    /* submission of form information */
+    const handleSubmit = () => {
+        console.log(reviewIDReply);
+        console.log(parentIDReply);
+
+        const body = {
+            review_id: reviewIDReply,
+            user_id: account._account_id,
+            parent_id: parentIDReply,
+            comment_body: comment_body
+        }
+
+        console.log(body);
+
+        fetch("/api/comments/new", {
+            "method": "POST",
+            "headers": {
+                "content-type": "application/json"
+            },
+            "body": JSON.stringify(body)
+        })
+            .then(response => {
+                console.log(response);
+                setOpen(false);
+                //TODO use state instead
+                window.location.reload(false);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+
+
+    const handleClickOpen = (review_id, parent_id) => {
+        setReviewIDReply(review_id);
+        setPrentIDReply(parent_id);
+        setOpen(true);
     };
+
+    const handleClose = () => {
+        setOpen(false);
+        setReviewIDReply(undefined);
+        setPrentIDReply(undefined);
+    };
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -108,9 +171,40 @@ export default function CommentSection(props) {
     } else {
         return (
                 <Card>
+                    <div>
+                        <Dialog  fullWidth={true} maxWidth="400px" open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                            <DialogContent>
+                                <DialogContentText>
+
+                                </DialogContentText>
+                            <DialogTitle id="form-dialog-title">Comment</DialogTitle>
+                            <TextField
+                                id="comment_body"
+                                label="Comment"
+                                multiline
+                                fullWidth={true}
+                                rows="6"
+                                required
+                                placeholder="Remember, be kind!"
+                                variant="outlined"
+                                onChange={(e) => set_comment_body(e.target.value)}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleClose} color="primary">
+                                Cancel
+                            </Button>
+                            <Button disabled={!isEnabled} onClick={handleSubmit} color="primary">
+                                Reply
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                    </div>
+                    <CardActions>
+                        <Button style={isNotLoggedIn ? {display: "none"} : {}} variant="outlined" color="primary" size="small" onClick={() => handleClickOpen(props.review_id, null)}>Reply</Button>
+                    </CardActions>
                     <CardContent>
                         <GridContainer justify="center">
-
                             <GridItem xs={12} sm={12} md={8} lg={12}>
                                 <List
                                     component="nav"
@@ -128,6 +222,7 @@ export default function CommentSection(props) {
                             </GridItem>
                         </GridContainer>
                     </CardContent>
+
                 </Card>
         );
     }

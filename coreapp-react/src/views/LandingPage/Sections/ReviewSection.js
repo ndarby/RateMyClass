@@ -132,6 +132,8 @@ export default function ReviewSection() {
         })
             .then(response => {
                 handleClose();
+
+                //TODO use state instead
                 window.location.reload(false);
 
                 console.log(response);
@@ -310,8 +312,7 @@ export default function ReviewSection() {
                                             <Grid item xs={12} md={4} lg={4}>
                                                 <h6 style={{ marginTop: "0", textAlign: "right"}}>
                                                     <b style={{ marginTop: "0", textAlign: "right"}}>
-                                                        {/*TODO fill this out with json*/}
-                                                        Evan Krul
+                                                        {review._account_credentials._first_name + " " +review._account_credentials._last_name}
                                                     </b> <br/>
                                                     {review._date_posted.split('T')[0]}
 
@@ -350,9 +351,7 @@ export default function ReviewSection() {
                                             </p>
                                         </Typography>
                                     </CardContent>
-                                    <CardActions>
-                                        <Button size="small">Reply</Button>
-                                    </CardActions>
+
                                     {/*<h4>Comments</h4>*/}
                                     <CommentSection review_id={review._review_id}/>
 
