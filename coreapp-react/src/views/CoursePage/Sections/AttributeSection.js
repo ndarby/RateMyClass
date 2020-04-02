@@ -152,7 +152,7 @@ export default function ReviewSection() {
     if (!isLoaded) {
         return (
             <h5 className= {classes.title}>
-                Unable to Load Tags
+                Unable to Load Ratings and Tags
             </h5>
         );
     } else {
@@ -175,7 +175,7 @@ export default function ReviewSection() {
                         {themeSelector.someProp === 'dark' ?
                             <StyledDarkRating
                                 name="customized-icons"
-                                defaultValue={course.rating} //rating from backend
+                                defaultValue={course.rating == null ? 3 : course.rating} //rating from backend
                                 getLabelText={value => customIcons[value].label}
                                 IconContainerComponent={IconContainer}
                                 readOnly
@@ -184,7 +184,7 @@ export default function ReviewSection() {
                             themeSelector.someProp === 'meme' ?
                                 <StyledMemeRating
                                     name="customized-icons"
-                                    defaultValue={course.rating} //rating from backend
+                                    defaultValue={course.rating == null ? 3 : course.rating} //rating from backend
                                     getLabelText={value => customIcons[value].label}
                                     IconContainerComponent={IconContainer}
                                     readOnly
@@ -192,7 +192,7 @@ export default function ReviewSection() {
 
                                 <StyledRating
                                     name="customized-icons"
-                                    defaultValue={course.rating} //rating from backend
+                                    defaultValue={course.rating == null ? 3 : course.rating} //rating from backend
                                     getLabelText={value => customIcons[value].label}
                                     IconContainerComponent={IconContainer}
                                     readOnly
