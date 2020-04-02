@@ -15,6 +15,9 @@ import {useParams} from "react-router";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 
+import themeSelector from "../../SettingsPage/ThemeSelector";
+import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProductStyle.js";
+import memeStyles from "assets/jss/material-kit-react/views/RMC/memeProductStyle.js";
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
@@ -23,14 +26,41 @@ import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfie
 import Rating from "@material-ui/lab/Rating";
 
 const useStyles = makeStyles(styles);
+const useDarkStyles = makeStyles(darkStyles);
+const useMemeStyles = makeStyles(memeStyles);
 
 const StyledRating = withStyles({
     iconFilled: {
         color: '#033285',
     },
-    // iconHover: {
-    //     color: '#033285',
-    // },
+    iconHover: {
+        color: '#033285',
+    },
+
+})(Rating);
+
+const StyledDarkRating = withStyles({
+    iconFilled: {
+        color: '#00BFFF',
+    },
+    iconHover: {
+        color: '#00BFFF',
+    },
+    iconEmpty: {
+        color: '#007399'
+    }
+})(Rating);
+
+const StyledMemeRating = withStyles({
+    iconFilled: {
+        color: '#ff0000',
+    },
+    iconHover: {
+        color: '#ff0000',
+    },
+    iconEmpty: {
+        color: '#800000'
+    }
 })(Rating);
 
 function IconContainer(props) {
@@ -65,6 +95,8 @@ const customIcons = {
 
 export default function ReviewSection() {
     const classes = useStyles();
+    const darkClasses = useDarkStyles();
+    const memeClasses = useMemeStyles();
 
     //GET ATTRIBUTES FROM THE BACK END HERE
 
@@ -110,23 +142,60 @@ export default function ReviewSection() {
         <div className={classes.root}>
             <Box component="fieldset" mb={3} borderColor="transparent">
                 <Typography component="legend"> </Typography>
-                <StyledRating
-                    name="customized-icons"
-                    defaultValue={3}
-                    //{/*FIX JSON HERE*/}
-                    value={ () =>{
-                        if(course._rating < 6 && course._rating > 0){
-                            return course._rating;
-                        }else{
-                            return 3;
-                        }
-                    }
+                {themeSelector.someProp === 'dark' ?
+                    <StyledDarkRating
+                        name="customized-icons"
+                        defaultValue={3} //FIX GETTING VALUES BELOW
+                        // value={ () =>{
+                        //     if(course._rating < 6 && course._rating > 0){
+                        //         return course._rating;
+                        //     }else{
+                        //         return 3;
+                        //     }
+                        // }
+                        //
+                        // }
+                        getLabelText={value => customIcons[value].label}
+                        IconContainerComponent={IconContainer}
+                        readOnly
+                    >Current Course Rating</StyledDarkRating> :
 
-                    }
-                    // getLabelText={value => customIcons[value].label}
-                    IconContainerComponent={IconContainer}
-                    readOnly
-                >Current Course Rating</StyledRating>
+                    themeSelector.someProp === 'meme' ?
+                        <StyledMemeRating
+                            name="customized-icons"
+                            defaultValue={3} //FIX GETTING VALUES BELOW
+                            // value={ () =>{
+                            //     if(course._rating < 6 && course._rating > 0){
+                            //         return course._rating;
+                            //     }else{
+                            //         return 3;
+                            //     }
+                            // }
+                            //
+                            // }
+                            getLabelText={value => customIcons[value].label}
+                            IconContainerComponent={IconContainer}
+                            readOnly
+                        >Current Course Rating</StyledMemeRating> :
+
+                        <StyledRating
+                            name="customized-icons"
+                            defaultValue={3} //FIX GETTING VALUES BELOW
+                            // value={ () =>{
+                            //     if(course._rating < 6 && course._rating > 0){
+                            //         return course._rating;
+                            //     }else{
+                            //         return 3;
+                            //     }
+                            // }
+                            //
+                            // }
+                            getLabelText={value => customIcons[value].label}
+                            IconContainerComponent={IconContainer}
+                            readOnly
+                        >Current Course Rating</StyledRating>
+
+                }
             </Box>
 
             <GridContainer justify="center">
