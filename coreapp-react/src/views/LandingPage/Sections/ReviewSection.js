@@ -124,6 +124,7 @@ export default function ReviewSection() {
                                     <Grid item xs={12} md={4} lg={4}>
                                         <h6 style={{ marginTop: "0", textAlign: "right"}}>
                                             <b style={{ marginTop: "0", textAlign: "right"}}>
+                                                {/*TODO fill this out with json*/}
                                                 Evan Krul
                                             </b> <br/>
                                             {review._date_posted.split('T')[0]}
