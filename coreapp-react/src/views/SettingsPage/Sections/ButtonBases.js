@@ -1,16 +1,27 @@
+/*
+*  BUTTON BASES PAGE
+*  Section Included Under: CompanyPage
+*
+*  When users want to change the theme of RateMyClass for a different viewing experience.
+*  Users can choose from light (default), dark, and meme theme
+*
+* */
+
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 
+/* theme images */
 import theme1 from "assets/img/RMC/light.jpg";
 import theme2 from "assets/img/RMC/dark.jpg";
 import theme3 from "assets/img/RMC/meme.jpg";
 
 import {Link} from "react-router-dom";
+/* Selects which theme to use */
 import themeSelector from "../ThemeSelector";
 
-
+/* button for light theme */
 const image1 = [
     {
         url: theme1,
@@ -18,6 +29,7 @@ const image1 = [
         width: '33.33%',
     },
 ];
+/* button for dark theme */
 const image2 = [
     {
         url: theme2,
@@ -25,6 +37,7 @@ const image2 = [
         width: '33.33%',
     },
 ];
+/* button for meme theme */
 const image3 = [
     {
         url: theme3,
@@ -33,6 +46,7 @@ const image3 = [
     },
 ];
 
+/* style formatter */
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
@@ -107,19 +121,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ButtonBases(props) {
+    /* class style */
     const classes = useStyles();
     const { ...rest } = props;
 
+    /* select light theme */
     const themeLight = (evt) => {
         evt.preventDefault();
         themeSelector.someProp = 'light';
     };
 
+    /* select dark theme */
     const themeDark = (evt) => {
         evt.preventDefault();
         themeSelector.someProp = 'dark';
     };
 
+    /* select meme theme */
     const themeMeme = (evt) => {
         evt.preventDefault();
         themeSelector.someProp = 'meme';
@@ -129,6 +147,7 @@ export default function ButtonBases(props) {
         <div className={classes.section}>
             <div className={classes.root}>
                 {image1.map(image => (
+                    /* light theme button */
                     <ButtonBase
                         focusRipple
                         key={image.title}
@@ -147,9 +166,7 @@ export default function ButtonBases(props) {
                                 }}
                             />
                             <span className={classes.imageBackdrop} />
-
                             <span className={classes.imageButton}>
-
                                 <Typography
                                     component="span"
                                     variant="subtitle1"
@@ -164,6 +181,7 @@ export default function ButtonBases(props) {
                     </ButtonBase>
                 ))}
                 {image2.map(image => (
+                    /* dark theme button */
                     <ButtonBase
                         focusRipple
                         key={image.title}
@@ -182,9 +200,7 @@ export default function ButtonBases(props) {
                                 }}
                             />
                             <span className={classes.imageBackdrop} />
-
                             <span className={classes.imageButton}>
-
                                 <Typography
                                     component="span"
                                     variant="subtitle1"
@@ -199,6 +215,7 @@ export default function ButtonBases(props) {
                     </ButtonBase>
                 ))}
                 {image3.map(image => (
+                    /* meme theme button */
                     <ButtonBase
                         focusRipple
                         key={image.title}
@@ -217,9 +234,7 @@ export default function ButtonBases(props) {
                                 }}
                             />
                             <span className={classes.imageBackdrop} />
-
                             <span className={classes.imageButton}>
-
                                 <Typography
                                     component="span"
                                     variant="subtitle1"
