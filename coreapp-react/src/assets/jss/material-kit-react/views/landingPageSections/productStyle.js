@@ -15,6 +15,6 @@ const productStyle = {
   description: {
     color: "#999"
   }
-  };
+};
 
 export default productStyle;
