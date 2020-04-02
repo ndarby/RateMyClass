@@ -83,11 +83,65 @@ IconContainer.propTypes = {
 
 export default function ReviewSection() {
     const classes = useStyles();
+    let {course_id} = useParams();
+    const account = JSON.parse(localStorage.getItem('account'));
+    const isNotLoggedIn = account === undefined || account === null;
     //GET REVIEWS FROM THE BACK END HERE
 
     const [reviews, setReviews] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [open, setOpen] = React.useState(false);
+
+
+
+    //new review fields
+    /* constant variables */
+    const [review_title, set_review_title] = useState(undefined);
+    const [prof_name, set_prof_name] = useState(undefined);
+    const [rating, set_rating] = useState(3);
+    const [tags, set_tags] = useState([]);
+    const [review_body, set_review_body] = useState(undefined);
+
+    /* nothing can be submitted if field is not filled out */
+    const isEnabled = review_title !== undefined && prof_name !== undefined  && review_body !== undefined && review_title !== '' && prof_name !== ''  && review_body !== '';
+
+    /* submission of form information */
+    const handleSubmit = () => {
+        console.log(review_title);
+        console.log(prof_name);
+        console.log(rating);
+        console.log(tags);
+        console.log(review_body);
+
+        let body = {
+            course_id: course_id,
+            user_id: account._account_id,
+            prof_name: prof_name,
+            review_title: review_title,
+            review_body: review_body,
+            rating: rating,
+            tags: tags
+        };
+        console.log(body);
+        fetch("/api/reviews/new", {
+            "method": "POST",
+            "headers": {
+                "content-type": "application/json"
+            },
+            "body": JSON.stringify(body)
+        })
+            .then(response => {
+                handleClose();
+                window.location.reload(false);
+
+                console.log(response);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -99,7 +153,6 @@ export default function ReviewSection() {
 
 
 
-    let {course_id} = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -130,7 +183,7 @@ export default function ReviewSection() {
             // //THE REVIEWS MAY LOOK BETTER AS A LIST, GRID CONTAINER IS JUST USED AS A PLACEHOLDER FOR NOW
             <Card style={{background: "#abf4f51a"}}>
                 <CardContent>
-                    <Button variant="contained" color="primary" onClick={handleClickOpen}>
+                    <Button style={isNotLoggedIn ? {display: "none"} : {}} variant="contained" color="primary" onClick={handleClickOpen}>
                         New Review
                     </Button>
 
@@ -155,6 +208,7 @@ export default function ReviewSection() {
                                         variant="outlined"
                                         required
                                         fullWidth
+                                        onChange={(e) => set_review_title(e.target.value)}
                                     />
                                     <br/><br/>
 
@@ -167,6 +221,7 @@ export default function ReviewSection() {
                                         variant="outlined"
                                         required
                                         fullWidth
+                                        onChange={(e) => set_prof_name(e.target.value)}
                                     />
                                 </GridItem>
                                 <GridItem xs={12} sm={12} md={6} lg={6}>
@@ -183,6 +238,7 @@ export default function ReviewSection() {
                                         marks
                                         min={1}
                                         max={5}
+                                        onChange={(e, v) => set_rating(v)}
                                     />
                                     <br/><br/>
                                 </GridItem>
@@ -192,6 +248,7 @@ export default function ReviewSection() {
                                     </Typography>
                                     <ChipInput
                                         fullWidth={true}
+                                        onChange={(e) => set_tags(e)}
                                     />
                                     <br/><br/>
                                 </GridItem>
@@ -202,9 +259,11 @@ export default function ReviewSection() {
                                         label="Review"
                                         multiline
                                         fullWidth={true}
-                                        // rows="4"
+                                        rows="6"
+                                        required
                                         placeholder="Warn your peers to run, or praise an amazing class. It is your call."
                                         variant="outlined"
+                                        onChange={(e) => set_review_body(e.target.value)}
                                     />
                                 </GridItem>
 
@@ -215,7 +274,7 @@ export default function ReviewSection() {
                             <Button onClick={handleClose} color="primary">
                                 Cancel
                             </Button>
-                            <Button onClick={handleClose} color="primary">
+                            <Button disabled={!isEnabled} onClick={handleSubmit} color="primary">
                                 Add Review
                             </Button>
                         </DialogActions>
