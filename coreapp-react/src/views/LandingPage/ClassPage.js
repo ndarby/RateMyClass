@@ -17,20 +17,31 @@ import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 
-import styles from "assets/jss/material-kit-react/views/landingPage.js";
 
 // Sections for this page
 import ClassSection from "./Sections/ClassSection.js";
 
-
+/* Selects which theme to use */
+import themeSelector from '../SettingsPage/ThemeSelector'
+import styles from "assets/jss/material-kit-react/views/landingPage.js";
+import darkStyles from "assets/jss/material-kit-react/views/RMC/darkLandingPage.js";
+import memeStyles from "assets/jss/material-kit-react/views/RMC/memeLandingPage.js";
+import lightFiller from "assets/img/RMC/lightBackground.jpg";
+import darkFiller from "assets/img/RMC/darkBackground.jpg";
+import memeFiller from "assets/img/RMC/memeBackground.jpg";
+import courseImg from "assets/img/RMC/CourseImage.jpg";
 
 
 const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
+const useDarkStyles = makeStyles(darkStyles);
+const useMemeStyles = makeStyles(memeStyles);
 
 export default function LandingPage(props) {
   const classes = useStyles();
+  const darkClasses = useDarkStyles();
+  const memeClasses = useMemeStyles();
   const { ...rest } = props;
 
     const [course, setCourse] = useState({});
@@ -55,6 +66,15 @@ export default function LandingPage(props) {
         fetchData();
     }, []);
 
+    /* theme specific backgrounds */
+    let backgroundURL;
+    {themeSelector.someProp === 'dark'?
+        backgroundURL = darkFiller :
+        themeSelector.someProp === 'meme'?
+            backgroundURL = memeFiller :
+            backgroundURL = lightFiller
+    }
+
     if(!isLoaded) {
         return (
             <h1></h1>
@@ -64,50 +84,88 @@ export default function LandingPage(props) {
 
         return (
             <div>
-                <Header
-                    color="transparent"
-                    routes={dashboardRoutes}
-                    rightLinks={<HeaderLinks/>}
-                    fixed
-                    changeColorOnScroll={{
-                        height: 400,
-                        color: "info"
+                {/*theme specifics for header menu options*/}
+                {themeSelector.someProp === 'dark'?
+                    <Header
+                        color="transparent"
+                        routes={dashboardRoutes}
+                        rightLinks={<HeaderLinks />}
+                        fixed
+                        changeColorOnScroll={{
+                            height: 400,
+                            color: "dark"
+                        }}
+                        {...rest}
+                    /> :
+                    themeSelector.someProp === 'meme'?
+                        <Header
+                            color="transparent"
+                            routes={dashboardRoutes}
+                            rightLinks={<HeaderLinks />}
+                            fixed
+                            changeColorOnScroll={{
+                                height: 400,
+                                color: "primary"
+                            }}
+                            {...rest}
+                        /> :
+                        <Header
+                            color="transparent"
+                            routes={dashboardRoutes}
+                            rightLinks={<HeaderLinks />}
+                            fixed
+                            changeColorOnScroll={{
+                                height: 400,
+                                color: "info"
+                            }}
+                            {...rest}
+                        />
+                }
+                {/*background image coverage*/}
+                <div
+                    className={classes.pageHeader}
+                    style={{
+                        backgroundImage: "url(" + backgroundURL + ")",
+                        backgroundSize: "cover",
+                        backgroundPosition: "top center",
                     }}
-                    {...rest}
-                />
-                <Parallax filter image={require("assets/img/RMC/lightArchitecture.jpg")}>
-                    <div className={classes.container}>
-                        <GridContainer>
-                            <GridItem xs={12} sm={12} md={6}>
-                                <h1 className={classes.title}>{course._course_name} {course._course_num}</h1>
-                                <h4>
-                                    {course._course_description}
-                                </h4>
-                                <br/>
+                >
+                    <Parallax filter image={courseImg}>
+                        <div className={classes.container}>
+                            <GridContainer>
+                                <GridItem xs={12} sm={12} md={6}>
+                                    <h1 className={classes.title}>{course._course_name} {course._course_num}</h1>
+                                    <h4>
+                                        {course._course_description}
+                                    </h4>
+                                    <br/>
 
-                                {/*
-              <Button
-                color="danger"
-                size="lg"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-play" />
-                Watch video
-              </Button>
-              */}
+                                    {/*
+                  <Button
+                    color="danger"
+                    size="lg"
+                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fas fa-play" />
+                    Watch video
+                  </Button>
+                  */}
 
-                            </GridItem>
-                        </GridContainer>
+                                </GridItem>
+                            </GridContainer>
+                        </div>
+                    </Parallax>
+                    <div className=
+                             {themeSelector.someProp === 'dark'? classNames(darkClasses.main, classes.mainRaised) : themeSelector.someProp === 'meme'? classNames(memeClasses.main, classes.mainRaised) : classNames(classes.main, classes.mainRaised)}>
+                    >
+                        <div className={classes.container}>
+                            <ClassSection/>
+                        </div>
                     </div>
-                </Parallax>
-                <div className={classNames(classes.main, classes.mainRaised)}>
-                    <div className={classes.container}>
-                        <ClassSection/>
-                    </div>
+                    <Footer/>
                 </div>
-                <Footer/>
             </div>
         );
     }

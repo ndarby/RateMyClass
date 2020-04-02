@@ -8,7 +8,12 @@ import {withStyles} from "@material-ui/core/styles";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 
+/* Selects which theme to use */
+import themeSelector from "../../SettingsPage/ThemeSelector";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
+import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProductStyle.js";
+import memeStyles from "assets/jss/material-kit-react/views/RMC/memeProductStyle.js";
+
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
@@ -23,8 +28,10 @@ import classNames from "classnames";
 
 import ReviewSection from "./ReviewSection.js";
 
-
 const useStyles = makeStyles(styles);
+const useDarkStyles = makeStyles(darkStyles);
+const useMemeStyles = makeStyles(memeStyles);
+
 const customIcons = {
     1: {
         icon: <SentimentVeryDissatisfiedIcon/>,
@@ -76,12 +83,40 @@ const StyledRating = withStyles({
     iconHover: {
         color: '#033285',
     },
+
+})(Rating);
+
+const StyledDarkRating = withStyles({
+    iconFilled: {
+        color: '#00BFFF',
+    },
+    iconHover: {
+        color: '#00BFFF',
+    },
+    iconEmpty: {
+        color: '#007399'
+    }
+})(Rating);
+
+const StyledMemeRating = withStyles({
+    iconFilled: {
+        color: '#ff0000',
+    },
+    iconHover: {
+        color: '#ff0000',
+    },
+    iconEmpty: {
+        color: '#800000'
+    }
 })(Rating);
 
 // create function with a get request here to be used and displayed below
 
 export default function ProductSection() {
     const classes = useStyles();
+    const darkClasses = useDarkStyles();
+    const memeClasses = useMemeStyles();
+
     const imageClasses = classNames(
         classes.imgRaised,
         classes.imgRounded,
@@ -95,22 +130,43 @@ export default function ProductSection() {
         <div className={classes.section}>
             <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={8}>
-                    <h2 className={classes.title}>Course Information</h2>
-                    <h5 className={classes.description}>
+                    <h2 className=
+                            {themeSelector.someProp === 'dark' ? darkClasses.title : themeSelector.someProp === 'meme' ? memeClasses.title : classes.title}>
+                        Course Information
+                    </h2>
+                    <h5 className=
+                            {themeSelector.someProp === 'dark' ? darkClasses.description : themeSelector.someProp === 'meme' ? memeClasses.description : classes.description}>
                         View Current Ratings or Leave a Review Below!
                     </h5>
                 </GridItem>
             </GridContainer>
             <div>
-
                 <Box component="fieldset" mb={3} borderColor="transparent">
                     <Typography component="legend"> </Typography>
-                    <StyledRating
-                        name="customized-icons"
-                        defaultValue={3} //CHANGE VALUE TO VALUE FROM BACK END HERE
-                        getLabelText={value => customIcons[value].label}
-                        IconContainerComponent={IconContainer}
-                    >Current Course Rating</StyledRating>
+                    {themeSelector.someProp === 'dark' ?
+                        <StyledDarkRating
+                            name="customized-icons"
+                            defaultValue={3} //CHANGE VALUE TO VALUE FROM BACK END HERE
+                            getLabelText={value => customIcons[value].label}
+                            IconContainerComponent={IconContainer}
+                        >Current Course Rating</StyledDarkRating> :
+
+                        themeSelector.someProp === 'meme' ?
+                        <StyledMemeRating
+                            name="customized-icons"
+                            defaultValue={3} //CHANGE VALUE TO VALUE FROM BACK END HERE
+                            getLabelText={value => customIcons[value].label}
+                            IconContainerComponent={IconContainer}
+                        >Current Course Rating</StyledMemeRating> :
+
+                        <StyledRating
+                            name="customized-icons"
+                            defaultValue={3} //CHANGE VALUE TO VALUE FROM BACK END HERE
+                            getLabelText={value => customIcons[value].label}
+                            IconContainerComponent={IconContainer}
+                        >Current Course Rating</StyledRating>
+
+                    }
                 </Box>
                 {/*reviews displayed here*/}
                 <ReviewSection/>
