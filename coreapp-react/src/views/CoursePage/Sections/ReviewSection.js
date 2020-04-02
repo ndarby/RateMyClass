@@ -338,6 +338,7 @@ export default function ReviewSection() {
                                                             defaultValue={review._rating}
                                                             getLabelText={value => customIcons[value].label}
                                                             IconContainerComponent={IconContainer}
+                                                            readOnly
                                                         >Current Course Rating</StyledRating>
                                                     </Box>
 
