@@ -23,10 +23,10 @@ import image from "assets/img/RMC/login.jpg";
 import {Link} from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import themeSelector from "../SettingsPage/ThemeSelector";
+import themeSelector from "../Aesthetic/ThemeSelector";
 
 /* Selector for if the user has an account or not */
-import viewSelector from "../ViewSelector";
+import viewSelector from "../Aesthetic/ViewSelector";
 
 /* style formatter */
 import styles from "assets/jss/material-kit-react/views/loginPage.js";

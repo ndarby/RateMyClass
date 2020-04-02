@@ -22,7 +22,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 
 /* Selects which theme to use */
-import themeSelector from "../../SettingsPage/ThemeSelector";
+import themeSelector from "../../Aesthetic/ThemeSelector";
 /* Styles for the different themes */
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkTeamStyle.js";

@@ -25,7 +25,7 @@ import Parallax from "components/Parallax/Parallax.js";
 import AboutUs from "./Sections/AboutUs";
 
 /* Selects which theme to use */
-import themeSelector from "../SettingsPage/ThemeSelector";
+import themeSelector from "../Aesthetic/ThemeSelector";
 /* Styles for the different themes */
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkLandingPage.js";

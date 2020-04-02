@@ -6,15 +6,15 @@ import { Router, Route, Switch } from "react-router-dom";
 import "assets/scss/material-kit-react.scss?v=1.8.0";
 
 // pages for this product
-import Components from "views/Components/Components.js";
+import Components from "views/Aesthetic/Components/Components.js";
 import LandingPage from "views/LandingPage/LandingPage.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
-import LoginPage from "views/LoginPage/LoginPage.js";
+import LoginPage from "views/AccountPage/LoginPage.js";
 import CompanyPage from "views/CompanyPage/CompanyPage.js";
 import SettingsPage from "views/SettingsPage/SettingsPage.js";
-import ScrollToTop from "./views/ScrollToTop";
-import SignUpPage from "./views/LoginPage/SignUpPage";
-import ClassPage from "./views/LandingPage/ClassPage.js";
+import ScrollToTop from "./views/Aesthetic/ScrollToTop";
+import SignUpPage from "./views/AccountPage/SignUpPage";
+import ClassPage from "./views/CoursePage/ClassPage.js";
 
 var hist = createBrowserHistory();
 

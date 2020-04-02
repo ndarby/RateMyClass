@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Favorite from "@material-ui/icons/Favorite";
 
 import styles from "assets/jss/material-kit-react/components/footerStyle.js";
-import themeSelector from '../../views/SettingsPage/ThemeSelector'
+import themeSelector from '../../views/Aesthetic/ThemeSelector'
 
 
 import RMCLogo from "assets/img/RMC/RMC-Logo.png";

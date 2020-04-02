@@ -22,7 +22,7 @@ import Parallax from "components/Parallax/Parallax.js";
 import ClassSection from "./Sections/ClassSection.js";
 
 /* Selects which theme to use */
-import themeSelector from '../SettingsPage/ThemeSelector'
+import themeSelector from '../Aesthetic/ThemeSelector'
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkLandingPage.js";
 import memeStyles from "assets/jss/material-kit-react/views/RMC/memeLandingPage.js";

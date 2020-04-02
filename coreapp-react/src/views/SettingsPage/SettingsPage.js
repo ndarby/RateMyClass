@@ -27,7 +27,7 @@ import ButtonBases from "./Sections/ButtonBases";
 import ThemeOptionsBottom from "./Sections/ThemeOptionsBottom";
 
 /* Selects which theme to use */
-import themeSelector from './ThemeSelector.js'
+import themeSelector from '../Aesthetic/ThemeSelector.js'
 /* Styles for the different themes */
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkLandingPage.js";

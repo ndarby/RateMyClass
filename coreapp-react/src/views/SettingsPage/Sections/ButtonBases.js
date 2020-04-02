@@ -19,7 +19,7 @@ import theme3 from "assets/img/RMC/meme.jpg";
 
 import {Link} from "react-router-dom";
 /* Selects which theme to use */
-import themeSelector from "../ThemeSelector";
+import themeSelector from "../../Aesthetic/ThemeSelector";
 
 /* button for light theme */
 const image1 = [

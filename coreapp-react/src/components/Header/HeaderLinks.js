@@ -19,7 +19,7 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
-import viewSelector from "../../views/ViewSelector";
+import viewSelector from "../../views/Aesthetic/ViewSelector";
 
 const useStyles = makeStyles(styles);
 

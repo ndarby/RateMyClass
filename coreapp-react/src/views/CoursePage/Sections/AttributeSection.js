@@ -14,7 +14,7 @@ import {useParams} from "react-router";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 
-import themeSelector from "../../SettingsPage/ThemeSelector";
+import themeSelector from "../../Aesthetic/ThemeSelector";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProductStyle.js";
 import memeStyles from "assets/jss/material-kit-react/views/RMC/memeProductStyle.js";

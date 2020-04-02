@@ -16,7 +16,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 
 /* Selects which theme to use */
-import themeSelector from "../../SettingsPage/ThemeSelector";
+import themeSelector from "../../Aesthetic/ThemeSelector";
 /* Styles for the different themes */
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProductStyle.js";
