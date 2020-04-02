@@ -13,10 +13,10 @@ import GridItem from "../../../components/Grid/GridItem";
 
 const useStyles = makeStyles(styles);
 
+
 export default function ReviewSection(){
     const classes = useStyles();
     //GET REVIEWS FROM THE BACK END HERE
-
 
     return(
         //THE REVIEWS MAY LOOK BETTER AS A LIST, GRID CONTAINER IS JUST USED AS A PLACEHOLDER FOR NOW
