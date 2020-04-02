@@ -36,6 +36,7 @@ module.exports = {
             });
         });
     },
+
     getAccount: function (email, password_hash) {
         return new Promise(function (resolve, reject) {
             MongoClient.connect(url, function (err, db) {
@@ -53,6 +54,25 @@ module.exports = {
             });
         });
     },
+
+    getAccountByAccountId: function (account_id) {
+        return new Promise(function (resolve, reject) {
+            MongoClient.connect(url, function (err, db) {
+                if (err) {
+                    reject(err);
+                }
+                let dbo = db.db("RATE-MY-CLASS");
+                dbo.collection("ACCOUNTS").findOne({_account_id: account_id}, function (err, res) {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(res);
+                    db.close();
+                });
+            });
+        });
+    },
+
     addNewCourse: function (course) {
         return new Promise(function (resolve, reject) {
             MongoClient.connect(url, function (err, db) {
