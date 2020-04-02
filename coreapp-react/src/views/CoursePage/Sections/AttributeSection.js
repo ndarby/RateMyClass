@@ -1,10 +1,16 @@
+/*
+*  ATTRIBUTE SECTION PAGE
+*  Section Included Under: CoursePage/Sections
+*
+*  This page displays the Attributes of Ratings and Tags for the course
+*
+* */
+
 import React, {useState, useEffect} from "react";
 
 // @material-ui/core components
 import {makeStyles, withStyles} from "@material-ui/core/styles";
 import Chip from '@material-ui/core/Chip';
-import Paper from '@material-ui/core/Paper';
-
 
 
 import GridContainer from "../../../components/Grid/GridContainer";
@@ -13,10 +19,13 @@ import {useParams} from "react-router";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 
+// theme styles
 import themeSelector from "../../Aesthetic/ThemeSelector";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProductStyle.js";
 import memeStyles from "assets/jss/material-kit-react/views/RMC/memeProductStyle.js";
+
+// rating icons
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
@@ -27,10 +36,12 @@ import Card from "../../../components/Card/Card";
 import CardHeader from "../../../components/Card/CardHeader";
 import CardBody from "../../../components/Card/CardBody";
 
+// light, dark, and meme styles
 const useStyles = makeStyles(styles);
 const useDarkStyles = makeStyles(darkStyles);
 const useMemeStyles = makeStyles(memeStyles);
 
+// colors for the individual styles
 const StyledRating = withStyles({
     iconFilled: {
         color: '#033285',
@@ -65,6 +76,7 @@ const StyledMemeRating = withStyles({
     }
 })(Rating);
 
+//helpers for rating icons
 function IconContainer(props) {
     const {value, ...other} = props;
     return <span {...other}>{customIcons[value].icon}</span>;
@@ -96,6 +108,7 @@ const customIcons = {
 
 
 export default function ReviewSection() {
+    // constant variables
     const classes = useStyles();
     const darkClasses = useDarkStyles();
     const memeClasses = useMemeStyles();
@@ -106,13 +119,14 @@ export default function ReviewSection() {
         setCardAnimation("");
     }, 700);
 
-    //GET ATTRIBUTES FROM THE BACK END HERE
 
+    // variables for attributes retrieved from the back end
     const [course, setCourse] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
     const [attrData, setAttrData] = useState({});
     let {course_id} = useParams();
 
+    //get attributes from the back end
     useEffect(() => {
         const fetchData = async () => {
 
@@ -134,6 +148,7 @@ export default function ReviewSection() {
         fetchData();
     }, []);
 
+    //if attributes could not load from the backend
     if (!isLoaded) {
         return (
             <h5 className= {classes.title}>
@@ -141,9 +156,9 @@ export default function ReviewSection() {
             </h5>
         );
     } else {
-
+    // if attributes loaded properly from the back end
     return (
-
+        //theme specific rating layout
         <div className={classes.root}>
             <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={4}>
@@ -156,10 +171,11 @@ export default function ReviewSection() {
                     </Card>
                         <Box component="fieldset" mb={3} borderColor="transparent">
                         <Typography component="legend"> </Typography>
+                        {/* rating style dependant on theme, rating retrieved from backend*/}
                         {themeSelector.someProp === 'dark' ?
                             <StyledDarkRating
                                 name="customized-icons"
-                                defaultValue={course.rating}
+                                defaultValue={course.rating} //rating from backend
                                 getLabelText={value => customIcons[value].label}
                                 IconContainerComponent={IconContainer}
                                 readOnly
@@ -168,7 +184,7 @@ export default function ReviewSection() {
                             themeSelector.someProp === 'meme' ?
                                 <StyledMemeRating
                                     name="customized-icons"
-                                    defaultValue={course.rating}
+                                    defaultValue={course.rating} //rating from backend
                                     getLabelText={value => customIcons[value].label}
                                     IconContainerComponent={IconContainer}
                                     readOnly
@@ -176,7 +192,7 @@ export default function ReviewSection() {
 
                                 <StyledRating
                                     name="customized-icons"
-                                    defaultValue={course.rating}
+                                    defaultValue={course.rating} //rating from backend
                                     getLabelText={value => customIcons[value].label}
                                     IconContainerComponent={IconContainer}
                                     readOnly
@@ -185,6 +201,7 @@ export default function ReviewSection() {
                         }
                     </Box>
                 </GridItem>
+                {/*layout for tags retrieved from backend*/}
                 <GridItem xs={12} sm={12} md={4}>
                     <Card className={classes[cardAnimation]}>
                         <CardHeader color="info" className={classes.cardHeader}>
@@ -194,11 +211,13 @@ export default function ReviewSection() {
                         </CardHeader>
                     </Card>
                         <div className={classes.root}>
-                            {attrData.map((data) => {
+                            {/*lists all tags for the specified course, retrieved from the backend, with styling from specified theme*/}
+                            {attrData == null ? console.log("No attributes found") :
+                                attrData.map((data) => {
                                 let icon;
                                 return(
                                     <Chip
-                                        
+
                                         icon={icon}
                                         className={classes.root}
                                         color={themeSelector.someProp === 'dark' ? "inherit" : themeSelector.someProp === 'meme' ? "secondary" : "primary"}
@@ -210,7 +229,6 @@ export default function ReviewSection() {
                         </div>
                 </GridItem>
             </GridContainer>
-            {/*)}*/}
         </div>
     );
     }

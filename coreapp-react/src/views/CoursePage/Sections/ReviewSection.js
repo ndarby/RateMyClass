@@ -1,18 +1,21 @@
+/*
+*  REVIEW SECTION PAGE
+*  Section Included Under: CoursePage/Sections
+*
+*  This page displays the Course Reviews for the selected course
+*
+* */
+
 import React, {useState, useEffect} from 'react';
 import {useParams} from "react-router";
 
-// @material-ui/core components
+// @material-ui/core components and other imports
 import {makeStyles, withStyles} from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
@@ -21,12 +24,7 @@ import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfie
 import Chip from '@material-ui/core/Chip';
 import ChipInput from 'material-ui-chip-input'
 
-
-
-//IMPORT STUFF HERE
-
 import CommentSection from "./CommentSection.js";
-import AttributeSection from "./AttributeSection.js";
 import GridContainer from "../../../components/Grid/GridContainer";
 import Grid from '@material-ui/core/Grid';
 import GridItem from "../../../components/Grid/GridItem";
@@ -40,13 +38,11 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import Slider from "@material-ui/core/Slider";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import Input from "@material-ui/core/Input";
-import MenuItem from "@material-ui/core/MenuItem";
 
+//page styles
 const useStyles = makeStyles(styles);
 
+//rating styles and icons
 const StyledRating = withStyles({
     iconFilled: {
         color: '#033285',
@@ -91,12 +87,13 @@ IconContainer.propTypes = {
 
 
 export default function ReviewSection() {
+    //ensure the user is logged in
     const classes = useStyles();
     let {course_id} = useParams();
     const account = JSON.parse(localStorage.getItem('account'));
     const isNotLoggedIn = account === undefined || account === null;
-    //GET REVIEWS FROM THE BACK END HERE
 
+    //review variables for getting information from the back end
     const [reviews, setReviews] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [open, setOpen] = React.useState(false);
@@ -153,7 +150,7 @@ export default function ReviewSection() {
     }
 
 
-
+    //handle open and close
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -164,7 +161,7 @@ export default function ReviewSection() {
 
 
 
-
+    //get reviews from the backend for the current course
     useEffect(() => {
         const fetchData = async () => {
             fetch("/api/reviews_get/get/" + course_id, {
@@ -185,13 +182,16 @@ export default function ReviewSection() {
         fetchData();
     }, []);
 
+    /* if the courses could not load from the backend*/
     if (!isLoaded) {
         return (
             <h5 className={classes.title}>No reviews yet. How about making one?</h5>
         );
     } else {
+        /* if courses could load from the backend */
         return (
-            // //THE REVIEWS MAY LOOK BETTER AS A LIST, GRID CONTAINER IS JUST USED AS A PLACEHOLDER FOR NOW
+           //displays the new review button to logged in
+            //below displays the form for adding a new review
             <Card style={{background: "#abf4f51a"}}>
                 <CardContent>
                     <Button style={isNotLoggedIn ? {display: "none"} : {}} variant="contained" color="primary" onClick={handleClickOpen}>
@@ -297,6 +297,7 @@ export default function ReviewSection() {
 
 
                 </CardContent>
+                {/*displays a message if there is no reviews, otherwise displays class reviews*/}
                 <CardContent>
                     <GridContainer justify="center">
                         {reviews.length === 0 &&
@@ -361,8 +362,6 @@ export default function ReviewSection() {
                                             </p>
                                         </Typography>
                                     </CardContent>
-
-                                    {/*<h4>Comments</h4>*/}
                                     <CommentSection review_id={review._review_id}/>
 
                                 </Card>
