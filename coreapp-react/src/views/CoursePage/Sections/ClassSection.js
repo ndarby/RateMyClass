@@ -1,3 +1,12 @@
+/*
+*  CLASS SECTION PAGE
+*  Section Included Under: CoursePage/Sections
+*
+*  This page displays the main content of the class page, calling attribute and review sections to display
+* their content as well
+*
+* */
+
 import React, {useState, useEffect} from 'react';
 import { useParams } from "react-router";
 
@@ -26,15 +35,16 @@ import classNames from "classnames";
 import ReviewSection from "./ReviewSection.js";
 import AttributeSection from "./AttributeSection.js";
 
-
+//theme styles
 const useStyles = makeStyles(styles);
 const useDarkStyles = makeStyles(darkStyles);
 const useMemeStyles = makeStyles(memeStyles);
 
 
-// create function with a get request here to be used and displayed below
+
 
 export default function ProductSection() {
+    //variables for theme styles
     const classes = useStyles();
     const darkClasses = useDarkStyles();
     const memeClasses = useMemeStyles();
@@ -44,10 +54,10 @@ export default function ProductSection() {
         classes.imgRounded,
         classes.imgFluid
     );
-    // console.log(this.props.match.params.course_id);
+    //current course id
     let { course_id } = useParams();
     console.log(course_id);
-
+    //displays a title, with styling dependant on theme
     return (
         <div className={classes.section}>
             <GridContainer justify="center">
@@ -64,6 +74,7 @@ export default function ProductSection() {
                 </GridItem>
             </GridContainer>
             <div>
+                {/*Calls Attribute and Review pages, and displays their content*/}
                 <AttributeSection/>
                 <ReviewSection/>
             </div>

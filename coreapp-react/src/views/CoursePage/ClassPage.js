@@ -1,3 +1,12 @@
+/*
+*  CLASS PAGE
+*  Section Included Under: CoursePage
+*
+*  This page is the main page for any class, it retrieves data specific to the class selected
+* and calls classSection to fill the content of the webpage
+*
+* */
+
 import React, {useState, useEffect} from 'react';
 import { useParams } from "react-router";
 
@@ -33,21 +42,24 @@ import courseImg from "assets/img/RMC/CourseImage.jpg";
 
 
 const dashboardRoutes = [];
-
+//style themes
 const useStyles = makeStyles(styles);
 const useDarkStyles = makeStyles(darkStyles);
 const useMemeStyles = makeStyles(memeStyles);
 
 export default function LandingPage(props) {
+    //variables for handling theme styles
   const classes = useStyles();
   const darkClasses = useDarkStyles();
   const memeClasses = useMemeStyles();
   const { ...rest } = props;
 
+    //variables for course information retrieved from the backend
     const [course, setCourse] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
     let { course_id } = useParams();
 
+    //retrieve data from the backend
     useEffect(() => {
         const fetchData = async () => {
             fetch("/api/courses/get/"+course_id, {
@@ -74,14 +86,14 @@ export default function LandingPage(props) {
             backgroundURL = memeFiller :
             backgroundURL = lightFiller
     }
-
+    /* if the course could not load from the backend*/
     if(!isLoaded) {
         return (
             <h1></h1>
         );
     } else {
 
-
+        /* if course could load from the backend */
         return (
             <div>
                 {/*theme specifics for header menu options*/}
@@ -140,27 +152,16 @@ export default function LandingPage(props) {
                                     </h4>
                                     <br/>
 
-                                    {/*
-                  <Button
-                    color="danger"
-                    size="lg"
-                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fas fa-play" />
-                    Watch video
-                  </Button>
-                  */}
-
                                 </GridItem>
                             </GridContainer>
                         </div>
                     </Parallax>
+                    {/*Style choice based on theme*/}
                     <div className=
                              {themeSelector.someProp === 'dark'? classNames(darkClasses.main, classes.mainRaised) : themeSelector.someProp === 'meme'? classNames(memeClasses.main, classes.mainRaised) : classNames(classes.main, classes.mainRaised)}>
                     >
                         <div className={classes.container}>
+                            {/*Calls classSection to fill webpage*/}
                             <ClassSection/>
                         </div>
                     </div>
