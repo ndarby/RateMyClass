@@ -25,8 +25,8 @@ export default function ReviewSection(){
                 <h2 className={classes.title}>
                     Course Reviews to be added here
                 </h2>
-                <AttributeSection/>
-                <CommentSection/>
+                {/*<AttributeSection/>*/}
+                {/*<CommentSection/>*/}
             </GridItem>
         </GridContainer>
     );
