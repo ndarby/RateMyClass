@@ -5,7 +5,6 @@ import {makeStyles, withStyles} from "@material-ui/core/styles";
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
 
-//IMPORT STUFF HERE
 
 
 import GridContainer from "../../../components/Grid/GridContainer";
@@ -111,24 +110,21 @@ export default function ReviewSection() {
 
     const [course, setCourse] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
-    const [rating, set_rating] = useState(3);
-    // const [attrData, setAttrData] = useState({});
-    //these need to be loaded in the form of:
-    //{key: 0, label: 'tagTextHere'}, {key: 1, label: 'nextTagTextHere'}, and so on...
-    const [attrData, setAttrData] = useState([{key: 0, label: 'tag1'}, {key: 1, label: 'tag2'}]);
+    const [attrData, setAttrData] = useState({});
     let {course_id} = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
-            //FIX THIS, NEEDS TO ASK FOR ATTRIBUTES
-            fetch("/api/courses/get/" + course_id, {
+
+            fetch("/api/attributes_get/get/" + course_id, {
                 "method": "GET",
                 "headers": {}
             }).then(response => response.json())
                 .then(response => {
+
+                    setCourse(response);
+                    setAttrData(response.tags);
                     setIsLoaded(true);
-                    setCourse(response.body);
-                    setAttrData(response.body.tags);
                 })
                 .catch(err => {
                     console.log(err);
@@ -140,9 +136,9 @@ export default function ReviewSection() {
 
     if (!isLoaded) {
         return (
-            <h1 className={classes.root}>
+            <h5 className= {classes.title}>
                 Unable to Load Tags
-            </h1>
+            </h5>
         );
     } else {
 
@@ -163,16 +159,7 @@ export default function ReviewSection() {
                         {themeSelector.someProp === 'dark' ?
                             <StyledDarkRating
                                 name="customized-icons"
-                                defaultValue={3} //FIX GETTING VALUES BELOW
-                                // value={ () =>{
-                                //     if(course._rating < 6 && course._rating > 0){
-                                //         return course._rating;
-                                //     }else{
-                                //         return 3;
-                                //     }
-                                // }
-                                //
-                                // }
+                                defaultValue={course.rating}
                                 getLabelText={value => customIcons[value].label}
                                 IconContainerComponent={IconContainer}
                                 readOnly
@@ -181,16 +168,7 @@ export default function ReviewSection() {
                             themeSelector.someProp === 'meme' ?
                                 <StyledMemeRating
                                     name="customized-icons"
-                                    defaultValue={3} //FIX GETTING VALUES BELOW
-                                    // value={ () =>{
-                                    //     if(course._rating < 6 && course._rating > 0){
-                                    //         return course._rating;
-                                    //     }else{
-                                    //         return 3;
-                                    //     }
-                                    // }
-                                    //
-                                    // }
+                                    defaultValue={course.rating}
                                     getLabelText={value => customIcons[value].label}
                                     IconContainerComponent={IconContainer}
                                     readOnly
@@ -198,16 +176,7 @@ export default function ReviewSection() {
 
                                 <StyledRating
                                     name="customized-icons"
-                                    defaultValue={3} //FIX GETTING VALUES BELOW
-                                    // value={ () =>{
-                                    //     if(course._rating < 6 && course._rating > 0){
-                                    //         return course._rating;
-                                    //     }else{
-                                    //         return 3;
-                                    //     }
-                                    // }
-                                    //
-                                    // }
+                                    defaultValue={course.rating}
                                     getLabelText={value => customIcons[value].label}
                                     IconContainerComponent={IconContainer}
                                     readOnly
@@ -224,16 +193,16 @@ export default function ReviewSection() {
                             </h5>
                         </CardHeader>
                     </Card>
-                        <div className={classes.root} elevation={0}>
+                        <div className={classes.root}>
                             {attrData.map((data) => {
                                 let icon;
                                 return(
                                     <Chip
-                                        key={data.key}
+                                        
                                         icon={icon}
-                                        label={data.label}
                                         className={classes.root}
                                         color={themeSelector.someProp === 'dark' ? "inherit" : themeSelector.someProp === 'meme' ? "secondary" : "primary"}
+                                        label={data}
                                         variant={"default"}
                                     />
                                 );
@@ -241,6 +210,7 @@ export default function ReviewSection() {
                         </div>
                 </GridItem>
             </GridContainer>
+            {/*)}*/}
         </div>
     );
     }
