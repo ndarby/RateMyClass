@@ -21,17 +21,10 @@ module.exports = {
     },
 
     getCommentsByReviewId: function (review_id) {
-        // adapted from https://www.reddit.com/r/webdev/comments/95erzu/designing_a_reddit_like_comment_system/
-        const nest = (comments, id = null) =>
-            comments
-                .filter(comment => comment._parent_id === id)
-                .map(comment => ({...comment, children: nest(comments, comment._comment_id)}));
         return new Promise(function (resolve, reject) {
             db_retrieve.getCommentsByReviewId(review_id)
-                .then(comments => {
-                    resolve(nest(comments));
-                })
-                .catch(err => reject(err));
-        });
+                .then(result => resolve(result))
+                .catch(err => reject(err))
+        })
     }
 };

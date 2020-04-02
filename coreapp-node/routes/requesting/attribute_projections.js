@@ -4,7 +4,6 @@ const request = require("request");
 
 
 projection_routes.get('/get/:course_id', (req, res) => {
-
     let options = {
         method: 'GET',
         url: 'http://' + process.env.attribute_service_IP +':'+ process.env.attribute_service_PORT + '/api/projections/get/'+ req.params.course_id,
