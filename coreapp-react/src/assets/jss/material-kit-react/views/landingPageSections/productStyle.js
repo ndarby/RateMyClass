@@ -14,7 +14,10 @@ const productStyle = {
   },
   description: {
     color: "#999"
-  }
+  },
+  nested: {
+    paddingLeft: "40px",
+  },
   };
 
 export default productStyle;

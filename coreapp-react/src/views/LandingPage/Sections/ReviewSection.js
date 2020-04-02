@@ -80,11 +80,12 @@ export default function ReviewSection() {
             fetch("/api/reviews_get/get/" + course_id, {
                 "method": "GET",
                 "headers": {}
-            }).then(response => response.json())
+            }).then(r =>  r.json().then(data => ({status: r.status, body: data})))
                 .then(response => {
-                    setIsLoaded(true);
-                    setReviews(response);
-                    console.log(response)
+                    if(response.status === 200) {
+                        setReviews(response.body);
+                        setIsLoaded(true);
+                    }
                 })
                 .catch(err => {
                     console.log(err);
@@ -96,85 +97,90 @@ export default function ReviewSection() {
 
     if (!isLoaded) {
         return (
-            <h1></h1>
+            <h5 className={classes.title}>No reviews yet. How about making one?</h5>
         );
     } else {
         return (
             // //THE REVIEWS MAY LOOK BETTER AS A LIST, GRID CONTAINER IS JUST USED AS A PLACEHOLDER FOR NOW
-            <GridContainer justify="center">
-                {reviews.length === 0 &&
-                    <h5 className={classes.title}>No reviews yet. How about making one?</h5>
-                }
-                {reviews.map(review =>
-                    <GridItem xs={12} sm={12} md={12}>
-                        <Card className={classes.root}>
-                            <CardContent>
-                                <Grid  container className={classes.root} spacing={2}>
+            <Card style={{background: "#abf4f51a"}}>
+                <CardContent>
+                    <GridContainer justify="center">
+                        {reviews.length === 0 &&
+                        <h5 className={classes.title}>No reviews yet. How about making one?</h5>
+                        }
+                        {reviews.map(review =>
+                            <GridItem xs={12} sm={12} md={12}>
+                                <Card className={classes.root}>
+                                    <CardContent>
+                                        <Grid  container className={classes.root} spacing={2}>
 
-                                    <Grid item xs={12} md={4} lg={4}>
-                                        <h4 style={{ marginTop: "0", textAlign: "left"}}>
-                                            Taken with: <i>{review._prof_name}</i>
-                                        </h4>
-                                    </Grid>
-                                    <Grid item xs={12} md={4} lg={4}>
-                                        <h3 style={{ marginTop: "0", textAlign: "center"}}>
-                                            {review._review_title}
-                                        </h3>
-                                    </Grid>
-                                    <Grid item xs={12} md={4} lg={4}>
-                                        <h6 style={{ marginTop: "0", textAlign: "right"}}>
-                                            <b style={{ marginTop: "0", textAlign: "right"}}>
-                                                {/*TODO fill this out with json*/}
-                                                Evan Krul
-                                            </b> <br/>
-                                            {review._date_posted.split('T')[0]}
+                                            <Grid item xs={12} md={4} lg={4}>
+                                                <h4 style={{ marginTop: "0", textAlign: "left"}}>
+                                                    Taken with: <i>{review._prof_name}</i>
+                                                </h4>
+                                            </Grid>
+                                            <Grid item xs={12} md={4} lg={4}>
+                                                <h3 style={{ marginTop: "0", textAlign: "center"}}>
+                                                    {review._review_title}
+                                                </h3>
+                                            </Grid>
+                                            <Grid item xs={12} md={4} lg={4}>
+                                                <h6 style={{ marginTop: "0", textAlign: "right"}}>
+                                                    <b style={{ marginTop: "0", textAlign: "right"}}>
+                                                        {/*TODO fill this out with json*/}
+                                                        Evan Krul
+                                                    </b> <br/>
+                                                    {review._date_posted.split('T')[0]}
 
-                                        </h6>
-                                    </Grid>
-                                </Grid>
+                                                </h6>
+                                            </Grid>
+                                        </Grid>
 
-                                <Grid  container className={classes.root} spacing={2}>
-                                    <Grid item xs={12} md={6} lg={6}>
-                                        <Typography className={classes.pos} color="textSecondary">
-                                            <Box component="fieldset" mb={0} borderColor="transparent">
-                                                <Rating
-                                                    name="customized-icons"
-                                                    defaultValue={review._rating}
-                                                    getLabelText={value => customIcons[value].label}
-                                                    IconContainerComponent={IconContainer}
-                                                >Current Course Rating</Rating>
-                                            </Box>
+                                        <Grid  container className={classes.root} spacing={2}>
+                                            <Grid item xs={12} md={6} lg={6}>
+                                                <Typography className={classes.pos} color="textSecondary">
+                                                    <Box component="fieldset" mb={0} borderColor="transparent">
+                                                        <Rating
+                                                            name="customized-icons"
+                                                            defaultValue={review._rating}
+                                                            getLabelText={value => customIcons[value].label}
+                                                            IconContainerComponent={IconContainer}
+                                                        >Current Course Rating</Rating>
+                                                    </Box>
 
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12} md={6} lg={6}>
+                                                <Typography className={classes.pos} color="textSecondary">
+
+                                                    {review._tags.map(tag =>
+                                                        <Chip style={{ marginRight: "3px"}} label={tag} variant="outlined" />
+                                                    )}
+                                                </Typography>
+
+                                            </Grid>
+
+                                        </Grid>
+                                        <Typography variant="body2" component="p" >
+                                            <p style={{textAlign: "justify"}}>
+                                                {review._review_body}
+                                            </p>
                                         </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} md={6} lg={6}>
-                                        <Typography className={classes.pos} color="textSecondary">
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button size="small">Reply</Button>
+                                    </CardActions>
+                                    {/*<h4>Comments</h4>*/}
+                                    <CommentSection review_id={review._review_id}/>
 
-                                            {review._tags.map(tag =>
-                                                <Chip style={{ marginRight: "3px"}} label={tag} variant="outlined" />
-                                            )}
-                                        </Typography>
+                                </Card>
+                                <br/>
+                            </GridItem>
+                        )}
+                    </GridContainer>
 
-                                    </Grid>
-
-                                </Grid>
-                                <Typography variant="body2" component="p" >
-                                    <p style={{textAlign: "justify"}}>
-                                        {review._review_body}
-                                    </p>
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="small">Reply</Button>
-                            </CardActions>
-
-                            <CommentSection/>
-
-                        </Card>
-                        <br/>
-                    </GridItem>
-                )}
-            </GridContainer>
+                </CardContent>
+            </Card>
 
 
         );
