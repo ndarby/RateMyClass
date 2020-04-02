@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useParams} from "react-router";
 
 // @material-ui/core components
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles, withStyles} from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -46,6 +46,15 @@ import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles(styles);
+
+const StyledRating = withStyles({
+    iconFilled: {
+        color: '#033285',
+    },
+    iconHover: {
+        color: '#033285',
+    },
+})(Rating);
 
 function IconContainer(props) {
     const {value, ...other} = props;
@@ -323,12 +332,12 @@ export default function ReviewSection() {
                                             <Grid item xs={12} md={6} lg={6}>
                                                 <Typography className={classes.pos} color="textSecondary">
                                                     <Box component="fieldset" mb={0} borderColor="transparent">
-                                                        <Rating
+                                                        <StyledRating
                                                             name="customized-icons"
                                                             defaultValue={review._rating}
                                                             getLabelText={value => customIcons[value].label}
                                                             IconContainerComponent={IconContainer}
-                                                        >Current Course Rating</Rating>
+                                                        >Current Course Rating</StyledRating>
                                                     </Box>
 
                                                 </Typography>

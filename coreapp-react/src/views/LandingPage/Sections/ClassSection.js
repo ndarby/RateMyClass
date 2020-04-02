@@ -71,10 +71,10 @@ IconContainer.propTypes = {
 
 const StyledRating = withStyles({
     iconFilled: {
-        color: '#ffe600',
+        color: '#033285',
     },
     iconHover: {
-        color: '#ffe600',
+        color: '#033285',
     },
 })(Rating);
 
@@ -104,13 +104,13 @@ export default function ProductSection() {
             <div>
 
                 <Box component="fieldset" mb={3} borderColor="transparent">
-                    <Typography component="legend">Custom icon set</Typography>
-                    <Rating
+                    <Typography component="legend"> </Typography>
+                    <StyledRating
                         name="customized-icons"
                         defaultValue={3} //CHANGE VALUE TO VALUE FROM BACK END HERE
                         getLabelText={value => customIcons[value].label}
                         IconContainerComponent={IconContainer}
-                    >Current Course Rating</Rating>
+                    >Current Course Rating</StyledRating>
                 </Box>
                 {/*reviews displayed here*/}
                 <ReviewSection/>
