@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 
 // @material-ui/core components
 import {makeStyles} from "@material-ui/core/styles";
-import {withStyles} from "@material-ui/core/styles";
+import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -24,9 +24,12 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Rating from '@material-ui/lab/Rating';
 
+
 import classNames from "classnames";
 
 import ReviewSection from "./ReviewSection.js";
+import AttributeSection from "./AttributeSection.js";
+
 
 const useStyles = makeStyles(styles);
 const useDarkStyles = makeStyles(darkStyles);
@@ -110,6 +113,7 @@ const StyledMemeRating = withStyles({
     }
 })(Rating);
 
+
 // create function with a get request here to be used and displayed below
 
 export default function ProductSection() {
@@ -169,8 +173,8 @@ export default function ProductSection() {
                     }
                 </Box>
                 {/*reviews displayed here*/}
+                <AttributeSection/>
                 <ReviewSection/>
-
             </div>
         </div>
     );

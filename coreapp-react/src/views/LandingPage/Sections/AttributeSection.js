@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
 // @material-ui/core components
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles, withStyles} from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
@@ -12,61 +12,129 @@ import Paper from '@material-ui/core/Paper';
 import GridContainer from "../../../components/Grid/GridContainer";
 import GridItem from "../../../components/Grid/GridItem";
 import {useParams} from "react-router";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
+import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
+import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAltOutlined';
+import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
+import Rating from "@material-ui/lab/Rating";
 
 const useStyles = makeStyles(styles);
+
+const StyledRating = withStyles({
+    iconFilled: {
+        color: '#033285',
+    },
+    // iconHover: {
+    //     color: '#033285',
+    // },
+})(Rating);
+
+function IconContainer(props) {
+    const {value, ...other} = props;
+    return <span {...other}>{customIcons[value].icon}</span>;
+}
+
+const customIcons = {
+    1: {
+        icon: <SentimentVeryDissatisfiedIcon/>,
+        label: 'Very Dissatisfied',
+    },
+    2: {
+        icon: <SentimentDissatisfiedIcon/>,
+        label: 'Dissatisfied',
+    },
+    3: {
+        icon: <SentimentSatisfiedIcon/>,
+        label: 'Neutral',
+    },
+    4: {
+        icon: <SentimentSatisfiedAltIcon/>,
+        label: 'Satisfied',
+    },
+    5: {
+        icon: <SentimentVerySatisfiedIcon/>,
+        label: 'Very Satisfied',
+    },
+};
 
 
 
 export default function ReviewSection() {
     const classes = useStyles();
+
     //GET ATTRIBUTES FROM THE BACK END HERE
 
     const [course, setCourse] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
+    const [rating, set_rating] = useState(3);
     // const [attrData, setAttrData] = useState({});
     //these need to be loaded in the form of:
     //{key: 0, label: 'tagTextHere'}, {key: 1, label: 'nextTagTextHere'}, and so on...
     const [attrData, setAttrData] = useState([{key: 0, label: 'tag1'}, {key: 1, label: 'tag2'}]);
-    // let {course_id} = useParams();
-    //
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         //FIX THIS, NEEDS TO ASK FOR ATTRIBUTES
-    //         fetch("/api/courses/get/" + course_id, {
-    //             "method": "GET",
-    //             "headers": {}
-    //         }).then(response => response.json())
-    //             .then(response => {
-    //                 setIsLoaded(true);
-    //                 setCourse(response);
-    //             })
-    //             .catch(err => {
-    //                 console.log(err);
-    //             });
-    //
-    //     };
-    //     fetchData();
-    // }, []);
-    //
-    // if (!isLoaded) {
-    //     return (
-    //         <h1 className={classes.root}>
-    //             Unable to Load Tags
-    //         </h1>
-    //     );
-    // } else {
+    let {course_id} = useParams();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            //FIX THIS, NEEDS TO ASK FOR ATTRIBUTES
+            fetch("/api/courses/get/" + course_id, {
+                "method": "GET",
+                "headers": {}
+            }).then(response => response.json())
+                .then(response => {
+                    setIsLoaded(true);
+                    setCourse(response.body);
+                    setAttrData(response.body.tags);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+
+        };
+        fetchData();
+    }, []);
+
+    if (!isLoaded) {
+        return (
+            <h1 className={classes.root}>
+                Unable to Load Tags
+            </h1>
+        );
+    } else {
 
     return (
 
         <div className={classes.root}>
-            <Chip label="Basic" variant="outlined"/>
+            <Box component="fieldset" mb={3} borderColor="transparent">
+                <Typography component="legend"> </Typography>
+                <StyledRating
+                    name="customized-icons"
+                    defaultValue={3}
+                    //{/*FIX JSON HERE*/}
+                    value={ () =>{
+                        if(course._rating < 6 && course._rating > 0){
+                            return course._rating;
+                        }else{
+                            return 3;
+                        }
+                    }
+
+                    }
+                    // getLabelText={value => customIcons[value].label}
+                    IconContainerComponent={IconContainer}
+                    readOnly
+                >Current Course Rating</StyledRating>
+            </Box>
 
             <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={8}>
-                    <h2 className={classes.title}>
+                    <h5 className={classes.title}>
                         Related Tags:
-                    </h2>
-                    <Paper className={classes.root}>
+                    </h5>
+                    <Paper className={classes.root} elevation={0}>
                         {attrData.map((data) => {
                             let icon;
 
@@ -85,5 +153,5 @@ export default function ReviewSection() {
             </GridContainer>
         </div>
     );
-    // }
+    }
 }
