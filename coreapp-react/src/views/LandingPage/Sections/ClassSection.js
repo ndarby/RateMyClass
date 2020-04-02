@@ -60,6 +60,7 @@ export default function ProductSection() {
                             {themeSelector.someProp === 'dark' ? darkClasses.description : themeSelector.someProp === 'meme' ? memeClasses.description : classes.description}>
                         View Current Ratings or Leave a Review Below!
                     </h5>
+                    <br></br>
                 </GridItem>
             </GridContainer>
             <div>

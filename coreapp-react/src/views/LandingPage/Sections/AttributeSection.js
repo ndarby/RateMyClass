@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 
 // @material-ui/core components
 import {makeStyles, withStyles} from "@material-ui/core/styles";
-import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
 
@@ -16,6 +15,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 
 import themeSelector from "../../SettingsPage/ThemeSelector";
+import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProductStyle.js";
 import memeStyles from "assets/jss/material-kit-react/views/RMC/memeProductStyle.js";
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
@@ -24,6 +24,9 @@ import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAltOutlined';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
 import Rating from "@material-ui/lab/Rating";
+import Card from "../../../components/Card/Card";
+import CardHeader from "../../../components/Card/CardHeader";
+import CardBody from "../../../components/Card/CardBody";
 
 const useStyles = makeStyles(styles);
 const useDarkStyles = makeStyles(darkStyles);
@@ -98,6 +101,12 @@ export default function ReviewSection() {
     const darkClasses = useDarkStyles();
     const memeClasses = useMemeStyles();
 
+    /* card formatting */
+    const [cardAnimation, setCardAnimation] = React.useState("cardHidden");
+    setTimeout(function() {
+        setCardAnimation("");
+    }, 700);
+
     //GET ATTRIBUTES FROM THE BACK END HERE
 
     const [course, setCourse] = useState({});
@@ -140,85 +149,99 @@ export default function ReviewSection() {
     return (
 
         <div className={classes.root}>
-            <Box component="fieldset" mb={3} borderColor="transparent">
-                <Typography component="legend"> </Typography>
-                {themeSelector.someProp === 'dark' ?
-                    <StyledDarkRating
-                        name="customized-icons"
-                        defaultValue={3} //FIX GETTING VALUES BELOW
-                        // value={ () =>{
-                        //     if(course._rating < 6 && course._rating > 0){
-                        //         return course._rating;
-                        //     }else{
-                        //         return 3;
-                        //     }
-                        // }
-                        //
-                        // }
-                        getLabelText={value => customIcons[value].label}
-                        IconContainerComponent={IconContainer}
-                        readOnly
-                    >Current Course Rating</StyledDarkRating> :
-
-                    themeSelector.someProp === 'meme' ?
-                        <StyledMemeRating
-                            name="customized-icons"
-                            defaultValue={3} //FIX GETTING VALUES BELOW
-                            // value={ () =>{
-                            //     if(course._rating < 6 && course._rating > 0){
-                            //         return course._rating;
-                            //     }else{
-                            //         return 3;
-                            //     }
-                            // }
-                            //
-                            // }
-                            getLabelText={value => customIcons[value].label}
-                            IconContainerComponent={IconContainer}
-                            readOnly
-                        >Current Course Rating</StyledMemeRating> :
-
-                        <StyledRating
-                            name="customized-icons"
-                            defaultValue={3} //FIX GETTING VALUES BELOW
-                            // value={ () =>{
-                            //     if(course._rating < 6 && course._rating > 0){
-                            //         return course._rating;
-                            //     }else{
-                            //         return 3;
-                            //     }
-                            // }
-                            //
-                            // }
-                            getLabelText={value => customIcons[value].label}
-                            IconContainerComponent={IconContainer}
-                            readOnly
-                        >Current Course Rating</StyledRating>
-
-                }
-            </Box>
-
             <GridContainer justify="center">
-                <GridItem xs={12} sm={12} md={8}>
-                    <h5 className={classes.title}>
-                        Related Tags:
-                    </h5>
-                    <Paper className={classes.root} elevation={0}>
-                        {attrData.map((data) => {
-                            let icon;
+                <GridItem xs={12} sm={12} md={4}>
+                    <Card className={classes[cardAnimation]}>
+                        <CardHeader color="info" className={classes.cardHeader}>
+                            <h5 className= {classes.title}>
+                                Overall Rating:
+                            </h5>
+                        </CardHeader>
+                    </Card>
+                        <Box component="fieldset" mb={3} borderColor="transparent">
+                        <Typography component="legend"> </Typography>
+                        {themeSelector.someProp === 'dark' ?
+                            <StyledDarkRating
+                                name="customized-icons"
+                                defaultValue={3} //FIX GETTING VALUES BELOW
+                                // value={ () =>{
+                                //     if(course._rating < 6 && course._rating > 0){
+                                //         return course._rating;
+                                //     }else{
+                                //         return 3;
+                                //     }
+                                // }
+                                //
+                                // }
+                                getLabelText={value => customIcons[value].label}
+                                IconContainerComponent={IconContainer}
+                                readOnly
+                            >Current Course Rating</StyledDarkRating> :
 
-                            return(
-                                <Chip
-                                    key={data.key}
-                                    icon={icon}
-                                    label={data.label}
-                                    className={classes.root}
-                                />
-                            );
-                        })}
-                    </Paper>
+                            themeSelector.someProp === 'meme' ?
+                                <StyledMemeRating
+                                    name="customized-icons"
+                                    defaultValue={3} //FIX GETTING VALUES BELOW
+                                    // value={ () =>{
+                                    //     if(course._rating < 6 && course._rating > 0){
+                                    //         return course._rating;
+                                    //     }else{
+                                    //         return 3;
+                                    //     }
+                                    // }
+                                    //
+                                    // }
+                                    getLabelText={value => customIcons[value].label}
+                                    IconContainerComponent={IconContainer}
+                                    readOnly
+                                >Current Course Rating</StyledMemeRating> :
+
+                                <StyledRating
+                                    name="customized-icons"
+                                    defaultValue={3} //FIX GETTING VALUES BELOW
+                                    // value={ () =>{
+                                    //     if(course._rating < 6 && course._rating > 0){
+                                    //         return course._rating;
+                                    //     }else{
+                                    //         return 3;
+                                    //     }
+                                    // }
+                                    //
+                                    // }
+                                    getLabelText={value => customIcons[value].label}
+                                    IconContainerComponent={IconContainer}
+                                    readOnly
+                                >Current Course Rating</StyledRating>
+
+                        }
+                    </Box>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                    <Card className={classes[cardAnimation]}>
+                        <CardHeader color="info" className={classes.cardHeader}>
+                            <h5 className={classes.title}>
+                                Related Tags:
+                            </h5>
+                        </CardHeader>
+                    </Card>
+                        {/*<CardBody>*/}
+                            <div className={classes.root} elevation={0}>
+                                {attrData.map((data) => {
+                                    let icon;
+                                    return(
+                                        <Chip
+                                            key={data.key}
+                                            icon={icon}
+                                            label={data.label}
+                                            className={classes.root}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        {/*</CardBody>*/}
 
                 </GridItem>
+
             </GridContainer>
         </div>
     );
