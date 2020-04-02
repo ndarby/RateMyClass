@@ -40,7 +40,7 @@ export default function ProductSection() {
     const [isLoaded, setIsLoaded] = useState(false);
 
     /* constant variable for filtered courses using the search bar */
-    const filteredCourses = courses.filter(course => course._course_num === searchResults.toUpperCase() || course._course_name === searchResults.toUpperCase() || course._course_name + ' ' + course._course_num === searchResults.toUpperCase() || course._course_description.toUpperCase() === searchResults.toUpperCase());
+    const filteredCourses = courses.filter(course => course._course_num === searchResults || course._course_name === searchResults || course._course_name + ' ' + course._course_num === searchResults || course._course_description === searchResults);
 
     /* get courses from the backend */
     useEffect(() => {

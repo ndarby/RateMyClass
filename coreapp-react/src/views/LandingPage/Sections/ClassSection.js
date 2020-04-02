@@ -113,8 +113,6 @@ export default function ProductSection() {
                     >Current Course Rating</Rating>
                 </Box>
                 {/*reviews displayed here*/}
-                <h3 className={classes.title}>Reviews</h3>
-
                 <ReviewSection/>
 
             </div>
