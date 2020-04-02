@@ -18,6 +18,21 @@ const productStyle = {
   nested: {
     paddingLeft: "40px",
   },
+  formControl: {
+    margin: '1px',
+    minWidth: 120,
+    maxWidth: 300,
+  },
+  chips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    margin: 2,
+  },
+  noLabel: {
+    marginTop: '3px'
+  },
   };
 
 export default productStyle;

@@ -19,6 +19,8 @@ import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAltOutlined';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
 import Chip from '@material-ui/core/Chip';
+import ChipInput from 'material-ui-chip-input'
+
 
 
 //IMPORT STUFF HERE
@@ -31,6 +33,17 @@ import GridItem from "../../../components/Grid/GridItem";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import Rating from "@material-ui/lab/Rating";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
+import TextField from "@material-ui/core/TextField";
+import Slider from "@material-ui/core/Slider";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import Input from "@material-ui/core/Input";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles(styles);
 
@@ -62,6 +75,7 @@ const customIcons = {
     },
 };
 
+
 IconContainer.propTypes = {
     value: PropTypes.number.isRequired,
 };
@@ -73,6 +87,18 @@ export default function ReviewSection() {
 
     const [reviews, setReviews] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+
     let {course_id} = useParams();
 
     useEffect(() => {
@@ -103,6 +129,104 @@ export default function ReviewSection() {
         return (
             // //THE REVIEWS MAY LOOK BETTER AS A LIST, GRID CONTAINER IS JUST USED AS A PLACEHOLDER FOR NOW
             <Card style={{background: "#abf4f51a"}}>
+                <CardContent>
+                    <Button variant="contained" color="primary" onClick={handleClickOpen}>
+                        New Review
+                    </Button>
+
+
+
+
+
+
+                    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">New Review</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Please fill out the fields below:
+                            </DialogContentText>
+                            <GridContainer justify="center">
+                                <GridItem xs={12} sm={12} md={12} lg={12}>
+                                    <TextField
+                                        autoFocus
+                                        id="review_title"
+                                        label="Review Title"
+                                        type="text"
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                    />
+                                    <br/><br/>
+
+                                </GridItem>
+                                <GridItem xs={12} sm={12} md={6} lg={6}>
+                                    <TextField
+                                        id="prof_name"
+                                        label="Instructor Name"
+                                        type="text"
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={12} md={6} lg={6}>
+                                    <Typography id="discrete-slider" gutterBottom>
+                                        Rating
+                                    </Typography>
+                                    <Slider
+                                        defaultValue={3}
+                                        id="rating"
+                                        aria-labelledby="discrete-slider"
+                                        valueLabelDisplay="auto"
+                                        aria-required
+                                        step={1}
+                                        marks
+                                        min={1}
+                                        max={5}
+                                    />
+                                    <br/><br/>
+                                </GridItem>
+                                <GridItem xs={12} sm={12} md={12} lg={12}>
+                                    <Typography id="discrete-slider" gutterBottom>
+                                        Course Tags
+                                    </Typography>
+                                    <ChipInput
+                                        fullWidth={true}
+                                    />
+                                    <br/><br/>
+                                </GridItem>
+
+                                <GridItem xs={12} sm={12} md={12} lg={12}>
+                                    <TextField
+                                        id="review_body"
+                                        label="Review"
+                                        multiline
+                                        fullWidth={true}
+                                        // rows="4"
+                                        placeholder="Warn your peers to run, or praise an amazing class. It is your call."
+                                        variant="outlined"
+                                    />
+                                </GridItem>
+
+                            </GridContainer>
+
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleClose} color="primary">
+                                Cancel
+                            </Button>
+                            <Button onClick={handleClose} color="primary">
+                                Add Review
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+
+
+
+
+
+
+                </CardContent>
                 <CardContent>
                     <GridContainer justify="center">
                         {reviews.length === 0 &&
