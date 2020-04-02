@@ -224,24 +224,22 @@ export default function ReviewSection() {
                             </h5>
                         </CardHeader>
                     </Card>
-                        {/*<CardBody>*/}
-                            <div className={classes.root} elevation={0}>
-                                {attrData.map((data) => {
-                                    let icon;
-                                    return(
-                                        <Chip
-                                            key={data.key}
-                                            icon={icon}
-                                            label={data.label}
-                                            className={classes.root}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        {/*</CardBody>*/}
-
+                        <div className={classes.root} elevation={0}>
+                            {attrData.map((data) => {
+                                let icon;
+                                return(
+                                    <Chip
+                                        key={data.key}
+                                        icon={icon}
+                                        label={data.label}
+                                        className={classes.root}
+                                        color={themeSelector.someProp === 'dark' ? "inherit" : themeSelector.someProp === 'meme' ? "secondary" : "primary"}
+                                        variant={"default"}
+                                    />
+                                );
+                            })}
+                        </div>
                 </GridItem>
-
             </GridContainer>
         </div>
     );
