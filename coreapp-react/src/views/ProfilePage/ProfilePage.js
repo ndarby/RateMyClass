@@ -1,3 +1,11 @@
+/*
+*  PROFILE PAGE
+*
+*  When users want to edit/update their account for RateMyClass.
+*  Users can change their name, email, and password
+*
+* */
+
 import React, {useState} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -16,20 +24,21 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 
-import basicProfile from "assets/img/RMC/accountLogo.png";
-
-import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProfilePage.js";
-import memeStyles from "assets/jss/material-kit-react/views/RMC/memeProfilePage.js";
-
 import Card from "../../components/Card/Card";
 import CardHeader from "../../components/Card/CardHeader";
 import CardBody from "../../components/Card/CardBody";
-
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 
+/* account image */
+import basicProfile from "assets/img/RMC/accountLogo.png";
+
+/* Selects which theme to use */
 import themeSelector from "../SettingsPage/ThemeSelector";
+/* Styles for the different themes */
+import styles from "assets/jss/material-kit-react/views/profilePage.js";
+import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProfilePage.js";
+import memeStyles from "assets/jss/material-kit-react/views/RMC/memeProfilePage.js";
 import backgroundLight from "assets/img/RMC/lightAccount.jpg";
 import backgroundMeme from "assets/img/RMC/memeAccount.png";
 import backgroundDark from "assets/img/RMC/darkAccount.jpg";
@@ -37,31 +46,28 @@ import lightFiller from "assets/img/RMC/lightBackground.jpg";
 import darkFiller from "assets/img/RMC/darkBackground.jpg";
 import memeFiller from "assets/img/RMC/memeBackground.jpg";
 
-import accountInformation from "../AccountInformation";
-
+/* theme specific styles */
 const useStyles = makeStyles(styles);
 const useDarkStyles = makeStyles(darkStyles);
 const useMemeStyles = makeStyles(memeStyles);
 
-
 export default function ProfilePage(props) {
+    /* get the account information from current user */
     const account = JSON.parse(localStorage.getItem('account'));
 
+    /* constant variables */
     const [first, setFirst] = useState(account._first_name);
     const [last, setLast] = useState(account._last_name);
     const [mail, setMail] = useState(account._email);
     const [word, setWord] = useState('');
 
+    /* nothing can be submitted if field is not filled out */
     const isEnabled = mail !== '' && word !== '' && first !== '' && last !== '';
 
+    /* submission of form information */
     const handleSubmit = (evt) => {
         evt.preventDefault();
-
-        accountInformation.first = first;
-        accountInformation.last = last;
-        accountInformation.mail = mail;
-        accountInformation.word = word;
-        //TODO update
+        /* accounts credentials */
         let body = {
             account_id: account._account_id,
             data: {
@@ -72,12 +78,14 @@ export default function ProfilePage(props) {
             }
         };
 
+        /* set account credentials for form */
         account._first_name = first;
         account._last_name = last;
         account._email = mail;
         account._password_hash = word;
         localStorage.setItem('account', JSON.stringify(account));
 
+        /* send account credentials to the backend */
         fetch("/api/accounts/edit", {
             "method": "POST",
             "headers": {
@@ -92,14 +100,14 @@ export default function ProfilePage(props) {
             .catch(err => {
                 console.log(err);
             });
-
-
     };
 
-  const classes = useStyles();
-  const darkClasses = useDarkStyles();
-  const memeClasses = useMemeStyles();
+    /* theme specific classes */
+    const classes = useStyles();
+    const darkClasses = useDarkStyles();
+    const memeClasses = useMemeStyles();
 
+    /* theme specific backgrounds */
     let backgroundURL;
     {themeSelector.someProp === 'dark'?
         backgroundURL = darkFiller :
@@ -108,12 +116,14 @@ export default function ProfilePage(props) {
             backgroundURL = lightFiller
     }
 
+    /* card formatting */
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
     setTimeout(function() {
         setCardAnimation("");
     }, 700);
 
   const { ...rest } = props;
+    /* image formatting */
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
@@ -121,6 +131,7 @@ export default function ProfilePage(props) {
   );
   return (
     <div>
+        {/*theme specifics for header menu options*/}
         {themeSelector.someProp === 'dark'?
             <Header
                 color="transparent"
@@ -154,7 +165,7 @@ export default function ProfilePage(props) {
                     {...rest}
                 />
         }
-
+        {/*background image coverage*/}
         <div
             className={classes.pageHeader}
             style={{
@@ -163,6 +174,7 @@ export default function ProfilePage(props) {
                 backgroundPosition: "top center",
             }}
         >
+            {/*parallax background image*/}
             <Parallax small filter image=
                 {themeSelector.someProp === 'dark'? backgroundDark : themeSelector.someProp === 'meme'?  backgroundMeme : backgroundLight}
             />
@@ -173,10 +185,12 @@ export default function ProfilePage(props) {
                 <GridContainer justify="center">
                   <GridItem xs={12} sm={12} md={8}>
                     <div className={classes.profile}>
+                        {/*account image*/}
                       <div>
                           <img src={basicProfile} alt="..." className={imageClasses} />
                       </div>
                       <div className={classes.name}>
+                          {/*account name*/}
                         <h3 className=
                                 {themeSelector.someProp === 'dark'? darkClasses.title : themeSelector.someProp === 'meme'? memeClasses.title : classes.title}>
 
@@ -188,6 +202,7 @@ export default function ProfilePage(props) {
                 </GridContainer>
                 <GridContainer justify="center">
                   <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+                      {/*account information tab*/}
                     <NavPills
                       alignCenter
                       color="rose"
@@ -199,6 +214,7 @@ export default function ProfilePage(props) {
                             <GridContainer justify="center">
                                 <GridItem xs={12} sm={12} md={8}>
                                     <Card className={classes[cardAnimaton]}>
+                                        {/*form to use for account*/}
                                         <form className={classes.form} noValidate onSubmit={handleSubmit}>
                                             <CardHeader color="info" className={classes.cardHeader}>
                                                 <h3><b>RateMyClass</b></h3>
@@ -206,6 +222,7 @@ export default function ProfilePage(props) {
                                             <CardBody>
                                                 <Grid container spacing={2}>
                                                     <Grid item xs={12}>
+                                                        {/*first name field*/}
                                                         <TextField
                                                             autoComplete="fname"
                                                             name="firstName"
@@ -220,6 +237,7 @@ export default function ProfilePage(props) {
                                                         />
                                                     </Grid>
                                                     <Grid item xs={12}>
+                                                        {/*last name field*/}
                                                         <TextField
                                                             variant="outlined"
                                                             required
@@ -233,6 +251,7 @@ export default function ProfilePage(props) {
                                                         />
                                                     </Grid>
                                                     <Grid item xs={12}>
+                                                        {/*email field*/}
                                                         <TextField
                                                             variant="outlined"
                                                             required
@@ -246,6 +265,7 @@ export default function ProfilePage(props) {
                                                         />
                                                     </Grid>
                                                     <Grid item xs={12}>
+                                                        {/*password field*/}
                                                         <TextField
                                                             variant="outlined"
                                                             required
@@ -260,8 +280,9 @@ export default function ProfilePage(props) {
                                                         />
                                                     </Grid>
                                                 </Grid>
+                                                {/*aesthetic white space*/}
                                                 <div> <br></br></div>
-
+                                                {/*submit form*/}
                                                 <Button
                                                     disabled={!isEnabled}
                                                     type="submit"
@@ -286,6 +307,7 @@ export default function ProfilePage(props) {
               </div>
             </div>
           </div>
+            {/*company footer*/}
           <Footer />
         </div>
     </div>

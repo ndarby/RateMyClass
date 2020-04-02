@@ -1,3 +1,9 @@
+/*
+*  SCROLL TO TOP
+*  view shows each page from the top
+*
+* */
+
 import { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 

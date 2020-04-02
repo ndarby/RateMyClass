@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 
 // @material-ui/core components
 import {makeStyles} from "@material-ui/core/styles";
+import {withStyles} from "@material-ui/core/styles";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -68,6 +69,15 @@ IconContainer.propTypes = {
     value: PropTypes.number.isRequired,
 };
 
+const StyledRating = withStyles({
+    iconFilled: {
+        color: '#ffe600',
+    },
+    iconHover: {
+        color: '#ffe600',
+    },
+})(Rating);
+
 // create function with a get request here to be used and displayed below
 
 export default function ProductSection() {
@@ -97,12 +107,14 @@ export default function ProductSection() {
                     <Typography component="legend">Custom icon set</Typography>
                     <Rating
                         name="customized-icons"
-                        defaultValue={2}
+                        defaultValue={3} //CHANGE VALUE TO VALUE FROM BACK END HERE
                         getLabelText={value => customIcons[value].label}
                         IconContainerComponent={IconContainer}
                     >Current Course Rating</Rating>
                 </Box>
                 {/*reviews displayed here*/}
+                <h3 className={classes.title}>Reviews</h3>
+
                 <ReviewSection/>
 
             </div>
