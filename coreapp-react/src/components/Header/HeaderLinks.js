@@ -64,9 +64,6 @@ export default function HeaderLinks(props) {
                       <Link to="/landing-page" className={classes.dropdownLink}>
                           Course Catalogue
                       </Link>,
-                      <Link to="/search-page" className={classes.dropdownLink}>
-                          Search for Course
-                      </Link>,
                       <Link to="/settings-page" className={classes.dropdownLink}>
                           Theme Settings
                       </Link>,
