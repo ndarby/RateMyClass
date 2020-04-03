@@ -1,5 +1,6 @@
 const es = require(global.PROJECT + '/model/es');
 const uuidv4 = require('uuid/v4');
+const comment_helpers = require("./comment_helpers");
 
 module.exports.commentEventStream = {
     postNewComment: function (review_id, user_id, parent_id, comment_body) {
@@ -13,19 +14,32 @@ module.exports.commentEventStream = {
                 if (err) {
                     reject(err)
                 }
-                stream.addEvent({
-                    action: 'new_comment',
-                    data: {
-                        comment_id: comment_id,
-                        review_id: review_id,
-                        user_id: user_id,
-                        parent_id: parent_id,
-                        comment_body: comment_body,
-                        date_posted: new Date().toISOString()
-                    }
-                });
-                stream.commit();
-                resolve(comment_id);
+                let account = null;
+                comment_helpers.getCommentAccountByUserId(user_id)
+                    .then(result => {
+                        account = result;
+                        stream.addEvent({
+                            action: 'new_comment',
+                            data: {
+                                comment_id: comment_id,
+                                review_id: review_id,
+                                user_id: user_id,
+                                account_credentials: {
+                                    first_name: account._first_name,
+                                    last_name: account._last_name
+                                },
+                                parent_id: parent_id,
+                                comment_body: comment_body,
+                                date_posted: new Date().toISOString()
+                            }
+                        });
+                        stream.commit();
+                        resolve(comment_id);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        reject(err)
+                    });
             })
         })
     },

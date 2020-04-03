@@ -1,5 +1,6 @@
 const es = require(global.PROJECT + '/model/es');
 const uuidv4 = require('uuid/v4');
+const review_helpers = require("./review_helpers");
 
 module.exports.reviewEventOutputStream = {
     postNewReview: function (course_id, user_id, prof_name, review_title, review_body, rating, tags) {
@@ -13,22 +14,36 @@ module.exports.reviewEventOutputStream = {
                 if (err) {
                     reject(err);
                 }
-                stream.addEvent({
-                    action: 'new_review',
-                    data: {
-                        review_id: review_id,
-                        course_id: course_id,
-                        user_id: user_id,
-                        prof_name: prof_name,
-                        review_title: review_title,
-                        review_body: review_body,
-                        rating: rating,
-                        tags: tags,
-                        date_posted: new Date().toISOString(),
-                    }
-                });
-                stream.commit();
-                resolve(review_id);
+                let account = null;
+                review_helpers.getReviewAccountByUserId(user_id)
+                    .then(result => {
+                        account = result;
+                        stream.addEvent(
+                            {
+                                action: 'new_review',
+                                data: {
+                                    review_id: review_id,
+                                    course_id: course_id,
+                                    user_id: user_id,
+                                    prof_name: prof_name,
+                                    account_credentials: {
+                                        first_name: account._first_name,
+                                        last_name: account._last_name
+                                    },
+                                    review_title: review_title,
+                                    review_body: review_body,
+                                    rating: rating,
+                                    tags: tags,
+                                    date_posted: new Date().toISOString(),
+                                }
+                            });
+                        stream.commit();
+                        resolve(review_id);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        reject(err)
+                    });
             })
         })
     },

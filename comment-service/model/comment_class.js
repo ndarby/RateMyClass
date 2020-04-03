@@ -2,13 +2,22 @@
  * Model definition for Comments
  */
 class Comments {
-    constructor(comment_id, review_id, user_id, parent_id, comment_body, date_posted) {
+    constructor(comment_id, review_id, user_id, account_credentials, parent_id, comment_body, date_posted) {
         this._comment_id = comment_id;
         this._review_id = review_id;
         this._user_id = user_id;
         this._parent_id = parent_id;
         this._comment_body = comment_body;
         this._date_posted = date_posted;
+        this._account_credentials = account_credentials;
+    }
+
+    get account_credentials() {
+        return this._account_credentials;
+    }
+
+    set account_credentials(value) {
+        this._account_credentials = value;
     }
 
     get comment_id() {

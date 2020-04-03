@@ -8,7 +8,7 @@ const db_retrieve = require('../model/db/retrieve_projections');
 module.exports = {
     generateNewComment: function (comment_data) {
         let comment = new Comment(comment_data.comment_id, comment_data.review_id,
-            comment_data.user_id, comment_data.parent_id, comment_data.comment_body, comment_data.date_posted);
+            comment_data.user_id, comment_data.account_credentials, comment_data.parent_id, comment_data.comment_body, comment_data.date_posted);
         db_update.insertNewComment(comment);
     },
 
@@ -21,10 +21,15 @@ module.exports = {
     },
 
     getCommentsByReviewId: function (review_id) {
+        // adapted from https://www.reddit.com/r/webdev/comments/95erzu/designing_a_reddit_like_comment_system/
+        const nest = (comments, id = null) =>
+            comments
+                .filter(comment => comment._parent_id === id)
+                .map(comment => ({...comment, children: nest(comments, comment._comment_id)}));
         return new Promise(function (resolve, reject) {
             db_retrieve.getCommentsByReviewId(review_id)
-                .then(result => resolve(result))
-                .catch(err => reject(err))
-        })
+                .then(comments => resolve(nest(comments)))
+                .catch(err => reject(err));
+        });
     }
 };

@@ -7,7 +7,7 @@ const db_update = require('./db/update_projections');
 
 module.exports = {
     generateNewReview: function (review_data) {
-        let review = new Review(review_data.review_id, review_data.course_id, review_data.user_id,
+        let review = new Review(review_data.review_id, review_data.course_id, review_data.user_id, review_data.account_credentials,
             review_data.prof_name, review_data.review_title, review_data.review_body, review_data.rating,
             review_data.tags, review_data.date_posted);
         db_update.insertNewReview(review);

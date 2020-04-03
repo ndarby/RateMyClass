@@ -1,7 +1,9 @@
 class Review {
-    constructor(review_id, course_id, user_id, prof_name, review_title, review_body, rating, tags, date_posted) {
+
+    constructor(review_id, course_id, user_id, account_credentials, prof_name, review_title, review_body, rating, tags, date_posted, ) {
         this._review_id = review_id;
         this._course_id = course_id;
+        this._account_credentials = account_credentials;
         this._user_id = user_id;
         this._prof_name = prof_name;
         this._rating = rating;
@@ -9,6 +11,14 @@ class Review {
         this._review_body = review_body;
         this._tags = tags;
         this._date_posted = date_posted;
+    }
+
+    get account_credentials() {
+        return this._account_credentials;
+    }
+
+    set account_credentials(value) {
+        this._account_credentials = value;
     }
 
     get review_id() {
