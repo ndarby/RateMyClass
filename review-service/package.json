@@ -1,0 +1,17 @@
+{
+  "name": "commentservice",
+  "version": "1.0.0",
+  "description": "Microservice for comment service",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm install && nodemon index.js"
+  },
+  "author": "JJNELK",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.5.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.5",
+    "nodemon": "^2.0.2"
+  }
+}

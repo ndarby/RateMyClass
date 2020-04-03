@@ -18,9 +18,16 @@
   },
   "homepage": "https://github.com/ndarby/RateMyClass#readme",
   "dependencies": {
+    "Promise": "^1.0.5",
+    "amqp": "^0.2.7",
     "amqplib": "^0.5.5",
+    "body-parser": "^1.19.0",
     "eventstore": "^1.15.2",
     "express": "^4.17.1",
-    "nodemon": "^2.0.2"
+    "mongodb": "^3.5.5",
+    "nodemon": "^2.0.2",
+    "promise": "latest",
+    "rabbitmq-event-manager": "^1.1.1",
+    "request": "^2.88.2"
   }
 }
