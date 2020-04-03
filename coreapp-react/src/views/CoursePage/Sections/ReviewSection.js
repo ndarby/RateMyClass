@@ -303,7 +303,7 @@ export default function ReviewSection() {
                                             <Grid item xs={12} md={4} lg={4}>
                                                 <h6 style={{ marginTop: "0", textAlign: "right"}}>
                                                     <b style={{ marginTop: "0", textAlign: "right"}}>
-                                                        {review._account_credentials._first_name + " " +review._account_credentials._last_name}
+                                                        {review._account_credentials.first_name + " " +review._account_credentials.last_name}
                                                     </b> <br/>
                                                     {review._date_posted.split('T')[0]}
 

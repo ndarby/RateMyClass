@@ -58,7 +58,7 @@ export default function CommentSection(props) {
 
             <span>
             <ListItem button className={classes.nested}>
-                <ListItemText primary={comment._account_credentials._first_name + " " +comment._account_credentials._last_name} secondary={comment._comment_body}/>
+                <ListItemText primary={comment._account_credentials.first_name + " " +comment._account_credentials.last_name} secondary={comment._comment_body}/>
                 <ListItemSecondaryAction>
                     <IconButton style={isNotLoggedIn ? {display: "none"} : {}} onClick={() => handleClickOpen(props.review_id, comment._comment_id)} edge="end" aria-label="delete">
                         <ReplyIcon/>
