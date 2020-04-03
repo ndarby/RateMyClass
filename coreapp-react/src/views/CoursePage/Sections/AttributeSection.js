@@ -226,6 +226,7 @@ export default function ReviewSection() {
                         <div className={classes.root}>
 
                         </div>
+                    <br></br>
                 </GridItem>
             </GridContainer>
         </div>
