@@ -1,3 +1,11 @@
+/*
+*  COMMENT SECTION PAGE
+*  Section Included Under: CoursePage/Sections
+*
+*  This page displays the Comments for the course
+*
+* */
+
 import React, {useEffect, useState} from 'react';
 // @material-ui/core components
 import {makeStyles} from "@material-ui/core/styles";
@@ -6,22 +14,13 @@ import GridContainer from "../../../components/Grid/GridContainer";
 import GridItem from "../../../components/Grid/GridItem";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import Typography from '@material-ui/core/Typography';
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
 import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
 import ListSubheader from "@material-ui/core/ListSubheader";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import ReplyIcon from '@material-ui/icons/Reply';
@@ -30,17 +29,10 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
-import Slider from "@material-ui/core/Slider";
-import ChipInput from "material-ui-chip-input";
 import DialogActions from "@material-ui/core/DialogActions";
-import CardHeader from "../../../components/Card/CardHeader";
 
-
-//IMPORT STUFF HERE
 
 const useStyles = makeStyles(styles);
-
-
 
 export default function CommentSection(props) {
     const classes = useStyles();
@@ -120,7 +112,6 @@ export default function CommentSection(props) {
     }
 
 
-
     const handleClickOpen = (review_id, parent_id) => {
         setReviewIDReply(review_id);
         setPrentIDReply(parent_id);
@@ -132,7 +123,6 @@ export default function CommentSection(props) {
         setReviewIDReply(undefined);
         setPrentIDReply(undefined);
     };
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -156,8 +146,6 @@ export default function CommentSection(props) {
         fetchData();
     }, []);
 
-
-
     if (!isLoaded) {
         return (
             <GridContainer justify="center">
@@ -175,7 +163,6 @@ export default function CommentSection(props) {
                         <Dialog  fullWidth={true} maxWidth="400px" open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                             <DialogContent>
                                 <DialogContentText>
-
                                 </DialogContentText>
                             <DialogTitle id="form-dialog-title">Comment</DialogTitle>
                             <TextField
@@ -222,7 +209,6 @@ export default function CommentSection(props) {
                             </GridItem>
                         </GridContainer>
                     </CardContent>
-
                 </Card>
         );
     }

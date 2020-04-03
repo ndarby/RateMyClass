@@ -23,13 +23,6 @@ import styles from "assets/jss/material-kit-react/views/landingPageSections/prod
 import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProductStyle.js";
 import memeStyles from "assets/jss/material-kit-react/views/RMC/memeProductStyle.js";
 
-
-import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-
-
-
 import classNames from "classnames";
 
 import ReviewSection from "./ReviewSection.js";
@@ -39,8 +32,6 @@ import AttributeSection from "./AttributeSection.js";
 const useStyles = makeStyles(styles);
 const useDarkStyles = makeStyles(darkStyles);
 const useMemeStyles = makeStyles(memeStyles);
-
-
 
 
 export default function ProductSection() {

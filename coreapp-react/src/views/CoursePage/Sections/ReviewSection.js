@@ -98,8 +98,6 @@ export default function ReviewSection() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [open, setOpen] = React.useState(false);
 
-
-
     //new review fields
     /* constant variables */
     const [review_title, set_review_title] = useState(undefined);
@@ -149,7 +147,6 @@ export default function ReviewSection() {
             });
     }
 
-
     //handle open and close
     const handleClickOpen = () => {
         setOpen(true);
@@ -158,8 +155,6 @@ export default function ReviewSection() {
     const handleClose = () => {
         setOpen(false);
     };
-
-
 
     //get reviews from the backend for the current course
     useEffect(() => {
@@ -197,12 +192,6 @@ export default function ReviewSection() {
                     <Button style={isNotLoggedIn ? {display: "none"} : {}} variant="contained" color="primary" onClick={handleClickOpen}>
                         New Review
                     </Button>
-
-
-
-
-
-
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">New Review</DialogTitle>
                         <DialogContent>
@@ -277,9 +266,7 @@ export default function ReviewSection() {
                                         onChange={(e) => set_review_body(e.target.value)}
                                     />
                                 </GridItem>
-
                             </GridContainer>
-
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleClose} color="primary">
@@ -290,12 +277,6 @@ export default function ReviewSection() {
                             </Button>
                         </DialogActions>
                     </Dialog>
-
-
-
-
-
-
                 </CardContent>
                 {/*displays a message if there is no reviews, otherwise displays class reviews*/}
                 <CardContent>
@@ -329,7 +310,6 @@ export default function ReviewSection() {
                                                 </h6>
                                             </Grid>
                                         </Grid>
-
                                         <Grid  container className={classes.root} spacing={2}>
                                             <Grid item xs={12} md={6} lg={6}>
                                                 <Typography className={classes.pos} color="textSecondary">
@@ -342,7 +322,6 @@ export default function ReviewSection() {
                                                             readOnly
                                                         >Current Course Rating</StyledRating>
                                                     </Box>
-
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={12} md={6} lg={6}>
@@ -352,9 +331,7 @@ export default function ReviewSection() {
                                                         <Chip style={{ marginRight: "3px"}} label={tag} variant="outlined" />
                                                     )}
                                                 </Typography>
-
                                             </Grid>
-
                                         </Grid>
                                         <Typography variant="body2" component="p" >
                                             <p style={{textAlign: "justify"}}>
@@ -363,17 +340,13 @@ export default function ReviewSection() {
                                         </Typography>
                                     </CardContent>
                                     <CommentSection review_id={review._review_id}/>
-
                                 </Card>
                                 <br/>
                             </GridItem>
                         )}
                     </GridContainer>
-
                 </CardContent>
             </Card>
-
-
         );
     }
 }

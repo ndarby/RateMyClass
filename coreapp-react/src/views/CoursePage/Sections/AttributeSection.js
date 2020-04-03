@@ -22,8 +22,6 @@ import Typography from "@material-ui/core/Typography";
 // theme styles
 import themeSelector from "../../Aesthetic/ThemeSelector";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
-import darkStyles from "assets/jss/material-kit-react/views/RMC/darkProductStyle.js";
-import memeStyles from "assets/jss/material-kit-react/views/RMC/memeProductStyle.js";
 
 // rating icons
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
@@ -38,8 +36,6 @@ import CardBody from "../../../components/Card/CardBody";
 
 // light, dark, and meme styles
 const useStyles = makeStyles(styles);
-const useDarkStyles = makeStyles(darkStyles);
-const useMemeStyles = makeStyles(memeStyles);
 
 // colors for the individual styles
 const StyledRating = withStyles({
@@ -106,12 +102,9 @@ const customIcons = {
 };
 
 
-
 export default function ReviewSection() {
     // constant variables
     const classes = useStyles();
-    const darkClasses = useDarkStyles();
-    const memeClasses = useMemeStyles();
 
     /* card formatting */
     const [cardAnimation, setCardAnimation] = React.useState("cardHidden");
@@ -197,7 +190,6 @@ export default function ReviewSection() {
                                     IconContainerComponent={IconContainer}
                                     readOnly
                                 >Current Course Rating</StyledRating>
-
                         }
                     </Box>
                 </GridItem>
@@ -217,7 +209,6 @@ export default function ReviewSection() {
                                 let icon;
                                 return(
                                     <Chip
-
                                         icon={icon}
                                         className={classes.root}
                                         color={themeSelector.someProp === 'dark' ? "inherit" : themeSelector.someProp === 'meme' ? "secondary" : "primary"}
