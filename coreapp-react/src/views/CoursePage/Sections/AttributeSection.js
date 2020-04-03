@@ -218,6 +218,7 @@ export default function ReviewSection() {
                                 );
                             })}
                         </div>
+                    <br></br>
                 </GridItem>
             </GridContainer>
         </div>
