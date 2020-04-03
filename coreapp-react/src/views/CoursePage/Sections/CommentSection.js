@@ -43,6 +43,8 @@ export default function CommentSection(props) {
     const [parentIDReply, setPrentIDReply] = React.useState();
 
     const [comment_body, set_comment_body] = useState(undefined);
+    const [updates, set_updates] = useState(0);
+
 
     // adapted from https://coderrocketfuel.com/article/recursion-in-react-render-comments-with-nested-children
     function Comment({comment}) {
@@ -102,9 +104,8 @@ export default function CommentSection(props) {
         })
             .then(response => {
                 console.log(response);
+                set_updates(updates + 1);
                 setOpen(false);
-                //TODO use state instead
-                window.location.reload(false);
             })
             .catch(err => {
                 console.log(err);
@@ -126,25 +127,32 @@ export default function CommentSection(props) {
 
     useEffect(() => {
         const fetchData = async () => {
-            fetch("/api/comments_get/get/"+props.review_id, {
-                "method": "GET",
-                "headers": {}
-            }).then(r =>  r.json().then(data => ({status: r.status, body: data})))
-                .then(response => {
-                    if(response.status === 200) {
-                        setComments(response.body);
-                        setIsLoaded(true);
-                    }
-                })
-                .catch(err => {
-                    setIsLoaded(false);
+            function sleep (time) {
+                return new Promise((resolve) => setTimeout(resolve, time));
+            }
 
-                    console.log(err);
-                });
+// Usage!
+            sleep(500).then(() => {
 
+                fetch("/api/comments_get/get/" + props.review_id, {
+                    "method": "GET",
+                    "headers": {}
+                }).then(r => r.json().then(data => ({status: r.status, body: data})))
+                    .then(response => {
+                        if (response.status === 200) {
+                            setComments(response.body);
+                            setIsLoaded(true);
+                        }
+                    })
+                    .catch(err => {
+                        setIsLoaded(false);
+
+                        console.log(err);
+                    });
+            });
         };
         fetchData();
-    }, []);
+    }, [updates, props.updates]);
 
     if (!isLoaded) {
         return (
@@ -160,7 +168,7 @@ export default function CommentSection(props) {
         return (
                 <Card>
                     <div>
-                        <Dialog  fullWidth={true} maxWidth="400px" open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <Dialog maxWidth={"md"} fullWidth open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                             <DialogContent>
                                 <DialogContentText>
                                 </DialogContentText>
@@ -172,6 +180,7 @@ export default function CommentSection(props) {
                                 fullWidth={true}
                                 rows="6"
                                 required
+                                autoFocus
                                 placeholder="Remember, be kind!"
                                 variant="outlined"
                                 onChange={(e) => set_comment_body(e.target.value)}

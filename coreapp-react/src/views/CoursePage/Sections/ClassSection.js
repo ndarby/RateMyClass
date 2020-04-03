@@ -52,17 +52,17 @@ export default function ProductSection() {
     return (
         <div className={classes.section}>
             <GridContainer justify="center">
-                <GridItem xs={12} sm={12} md={8}>
-                    <h2 className=
-                            {themeSelector.someProp === 'dark' ? darkClasses.title : themeSelector.someProp === 'meme' ? memeClasses.title : classes.title}>
-                        Course Information
-                    </h2>
-                    <h5 className=
-                            {themeSelector.someProp === 'dark' ? darkClasses.description : themeSelector.someProp === 'meme' ? memeClasses.description : classes.description}>
-                        View Current Ratings or Leave a Review Below!
-                    </h5>
-                    <br></br>
-                </GridItem>
+                {/*<GridItem xs={12} sm={12} md={8}>*/}
+                {/*    <h2 className=*/}
+                {/*            {themeSelector.someProp === 'dark' ? darkClasses.title : themeSelector.someProp === 'meme' ? memeClasses.title : classes.title}>*/}
+                {/*        Course Information*/}
+                {/*    </h2>*/}
+                {/*    <h5 className=*/}
+                {/*            {themeSelector.someProp === 'dark' ? darkClasses.description : themeSelector.someProp === 'meme' ? memeClasses.description : classes.description}>*/}
+                {/*        View Current Ratings or Leave a Review Below!*/}
+                {/*    </h5>*/}
+                {/*    <br></br>*/}
+                {/*</GridItem>*/}
             </GridContainer>
             <div>
                 {/*Calls Attribute and Review pages, and displays their content*/}

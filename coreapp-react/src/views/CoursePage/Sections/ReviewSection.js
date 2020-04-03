@@ -105,6 +105,7 @@ export default function ReviewSection() {
     const [rating, set_rating] = useState(3);
     const [tags, set_tags] = useState([]);
     const [review_body, set_review_body] = useState(undefined);
+    const [updates, set_updates] = useState(0);
 
     /* nothing can be submitted if field is not filled out */
     const isEnabled = review_title !== undefined && prof_name !== undefined  && review_body !== undefined && review_title !== '' && prof_name !== ''  && review_body !== '';
@@ -135,10 +136,10 @@ export default function ReviewSection() {
             "body": JSON.stringify(body)
         })
             .then(response => {
+                set_updates(updates + 1);
                 handleClose();
 
-                //TODO use state instead
-                window.location.reload(false);
+                window.location.reload();
 
                 console.log(response);
             })
@@ -159,6 +160,14 @@ export default function ReviewSection() {
     //get reviews from the backend for the current course
     useEffect(() => {
         const fetchData = async () => {
+            // sleep time expects milliseconds
+            function sleep (time) {
+                return new Promise((resolve) => setTimeout(resolve, time));
+            }
+
+// Usage!
+            sleep(1000).then(() => {
+
             fetch("/api/reviews_get/get/" + course_id, {
                 "method": "GET",
                 "headers": {}
@@ -172,10 +181,14 @@ export default function ReviewSection() {
                 .catch(err => {
                     console.log(err);
                 });
-
+            });
         };
-        fetchData();
-    }, []);
+        fetchData().then(
+            () => {
+                console.log(reviews);
+            }
+        );
+    }, [updates]);
 
     /* if the courses could not load from the backend*/
     if (!isLoaded) {
@@ -339,7 +352,7 @@ export default function ReviewSection() {
                                             </p>
                                         </Typography>
                                     </CardContent>
-                                    <CommentSection review_id={review._review_id}/>
+                                    <CommentSection updates= {updates} review_id={review._review_id}/>
                                 </Card>
                                 <br/>
                             </GridItem>

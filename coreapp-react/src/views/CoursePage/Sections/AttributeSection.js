@@ -33,6 +33,7 @@ import Rating from "@material-ui/lab/Rating";
 import Card from "../../../components/Card/Card";
 import CardHeader from "../../../components/Card/CardHeader";
 import CardBody from "../../../components/Card/CardBody";
+import CardContent from "@material-ui/core/CardContent";
 
 // light, dark, and meme styles
 const useStyles = makeStyles(styles);
@@ -156,67 +157,74 @@ export default function ReviewSection() {
             <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={4}>
                     <Card className={classes[cardAnimation]}>
-                        <CardHeader color="info" className={classes.cardHeader}>
-                            <h5 className= {classes.title}>
-                                Overall Rating:
-                            </h5>
+                        <CardHeader color="primary">
+                            <h3>
+                                Overall Rating
+                            </h3>
                         </CardHeader>
+                        <CardContent>
+                            <Box style={{transform: "scale(2.6)", marginTop: "23px", marginBottom: "0px"}} component="fieldset" mb={3} borderColor="transparent">
+                                <Typography component="legend"> </Typography>
+                                {/* rating style dependant on theme, rating retrieved from backend*/}
+                                {themeSelector.someProp === 'dark' ?
+                                    <StyledDarkRating
+                                        name="customized-icons"
+                                        defaultValue={course.rating == null ? 3 : course.rating} //rating from backend
+                                        getLabelText={value => customIcons[value].label}
+                                        IconContainerComponent={IconContainer}
+                                        readOnly
+                                    >Current Course Rating</StyledDarkRating> :
+
+                                    themeSelector.someProp === 'meme' ?
+                                        <StyledMemeRating
+                                            name="customized-icons"
+                                            defaultValue={course.rating == null ? 3 : course.rating} //rating from backend
+                                            getLabelText={value => customIcons[value].label}
+                                            IconContainerComponent={IconContainer}
+                                            readOnly
+                                        >Current Course Rating</StyledMemeRating> :
+
+                                        <StyledRating
+                                            name="customized-icons"
+                                            defaultValue={course.rating == null ? 3 : course.rating} //rating from backend
+                                            getLabelText={value => customIcons[value].label}
+                                            IconContainerComponent={IconContainer}
+                                            readOnly
+                                        >Current Course Rating</StyledRating>
+                                }
+                            </Box>
+                        </CardContent>
                     </Card>
-                        <Box component="fieldset" mb={3} borderColor="transparent">
-                        <Typography component="legend"> </Typography>
-                        {/* rating style dependant on theme, rating retrieved from backend*/}
-                        {themeSelector.someProp === 'dark' ?
-                            <StyledDarkRating
-                                name="customized-icons"
-                                defaultValue={course.rating == null ? 3 : course.rating} //rating from backend
-                                getLabelText={value => customIcons[value].label}
-                                IconContainerComponent={IconContainer}
-                                readOnly
-                            >Current Course Rating</StyledDarkRating> :
 
-                            themeSelector.someProp === 'meme' ?
-                                <StyledMemeRating
-                                    name="customized-icons"
-                                    defaultValue={course.rating == null ? 3 : course.rating} //rating from backend
-                                    getLabelText={value => customIcons[value].label}
-                                    IconContainerComponent={IconContainer}
-                                    readOnly
-                                >Current Course Rating</StyledMemeRating> :
-
-                                <StyledRating
-                                    name="customized-icons"
-                                    defaultValue={course.rating == null ? 3 : course.rating} //rating from backend
-                                    getLabelText={value => customIcons[value].label}
-                                    IconContainerComponent={IconContainer}
-                                    readOnly
-                                >Current Course Rating</StyledRating>
-                        }
-                    </Box>
                 </GridItem>
                 {/*layout for tags retrieved from backend*/}
-                <GridItem xs={12} sm={12} md={4}>
+                <GridItem xs={12} sm={12} md={8}>
                     <Card className={classes[cardAnimation]}>
-                        <CardHeader color="info" className={classes.cardHeader}>
-                            <h5 className={classes.title}>
-                                Related Tags:
-                            </h5>
+                        <CardHeader color="primary" >
+                            <h3 >
+                                Related Tags
+                            </h3>
                         </CardHeader>
-                    </Card>
-                        <div className={classes.root}>
+                        <CardContent>
                             {/*lists all tags for the specified course, retrieved from the backend, with styling from specified theme*/}
                             {attrData == null ? console.log("No attributes found") :
                                 attrData.map((data) => {
-                                let icon;
-                                return(
-                                    <Chip
-                                        icon={icon}
-                                        className={classes.root}
-                                        color={themeSelector.someProp === 'dark' ? "inherit" : themeSelector.someProp === 'meme' ? "secondary" : "primary"}
-                                        label={data}
-                                        variant={"default"}
-                                    />
-                                );
-                            })}
+                                    let icon;
+                                    return(
+                                        <Chip
+                                            icon={icon}
+                                            className={classes.root}
+                                            color={themeSelector.someProp === 'dark' ? "inherit" : themeSelector.someProp === 'meme' ? "secondary" : "primary"}
+                                            label={data}
+                                            // variant={"outlined"}
+                                            style={{margin: "2px"}}
+                                        />
+                                    );
+                                })}
+                        </CardContent>
+                    </Card>
+                        <div className={classes.root}>
+
                         </div>
                 </GridItem>
             </GridContainer>
