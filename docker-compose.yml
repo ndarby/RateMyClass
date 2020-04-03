@@ -44,13 +44,13 @@ services:
             RateMyClass:
                 ipv4_address: "${coreapp_node_IP}"
 
-    post-service:
+    review-service:
         image: "node:latest"
         working_dir: /home/node/app
         env_file: .env
         volumes:
         - /home/node/app/node_modules
-        - ./post-service:/home/node/app
+        - ./review-service:/home/node/app
         ports:
         - 8001:8081
         command: "npm start"
